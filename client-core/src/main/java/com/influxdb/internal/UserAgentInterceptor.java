@@ -23,9 +23,7 @@ package com.influxdb.internal;
 
 import java.io.IOException;
 import javax.annotation.Nonnull;
-
 import com.influxdb.utils.Arguments;
-
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -41,22 +39,15 @@ public class UserAgentInterceptor implements Interceptor {
      * @param clientType type of client - java, scala, kotlin
      */
     public UserAgentInterceptor(final String clientType) {
-
         Arguments.checkNonEmpty(clientType, "clientType");
-
         Package mainPackage = UserAgentInterceptor.class.getPackage();
         String version = null != mainPackage ? mainPackage.getImplementationVersion() : null;
-
         userAgent = String.format("influxdb-client-%s/%s", clientType, version != null ? version : "unknown");
     }
 
     @Nonnull
     @Override
     public Response intercept(final Chain chain) throws IOException {
-
-        Request request = chain.request();
-        Request.Builder builder = request.newBuilder().header("User-Agent", userAgent);
-
-        return chain.proceed(builder.build());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

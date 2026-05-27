@@ -28,10 +28,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.InfluxDBClientOptions;
 import com.influxdb.utils.Arguments;
-
 import okhttp3.Call;
 import okhttp3.Credentials;
 import okhttp3.HttpUrl;
@@ -48,59 +46,25 @@ class AuthenticateInterceptor implements Interceptor {
 
     private static final Logger LOG = Logger.getLogger(InfluxDBClientImpl.class.getName());
 
-    private static final List<String> NO_AUTH_ROUTE = Arrays.asList("/api/v2/signin", "/api/v2/signout",
-            "/api/v2/setup");
+    private static final List<String> NO_AUTH_ROUTE = Arrays.asList("/api/v2/signin", "/api/v2/signout", "/api/v2/setup");
 
     private final InfluxDBClientOptions influxDBClientOptions;
 
     private OkHttpClient okHttpClient;
 
     private char[] sessionCookies;
+
     private final AtomicBoolean signout = new AtomicBoolean(false);
 
     AuthenticateInterceptor(@Nonnull final InfluxDBClientOptions influxDBClientOptions) {
-
         Arguments.checkNotNull(influxDBClientOptions, "InfluxDBClientOptions");
-
         this.influxDBClientOptions = influxDBClientOptions;
     }
 
     @Override
     @Nonnull
     public Response intercept(@Nonnull final Chain chain) throws IOException {
-
-        Request request = chain.request();
-        final String requestPath = request.url().encodedPath();
-
-        // Is no authentication path?
-        if (NO_AUTH_ROUTE.stream().anyMatch(requestPath::endsWith)) {
-            return chain.proceed(request);
-        }
-
-        if (signout.get()) {
-            LOG.log(Level.WARNING, "Authorization interception failed. Already signed out.");
-            // Still make the request in order to maintain backward compatibility.
-            return chain.proceed(request);
-        }
-
-        if (InfluxDBClientOptions.AuthScheme.TOKEN.equals(influxDBClientOptions.getAuthScheme())) {
-
-            request = request.newBuilder()
-                    .header("Authorization", "Token " + string(influxDBClientOptions.getToken()))
-                    .build();
-
-        } else if (InfluxDBClientOptions.AuthScheme.SESSION.equals(influxDBClientOptions.getAuthScheme())) {
-
-            initToken(this.okHttpClient);
-
-            if (sessionCookies != null) {
-                request = request.newBuilder()
-                        .header("Cookie", string(sessionCookies))
-                        .build();
-            }
-        }
-
-        return chain.proceed(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -108,36 +72,7 @@ class AuthenticateInterceptor implements Interceptor {
      * @param okHttpClient the client for signin and signout requests
      */
     void initToken(@Nonnull final OkHttpClient okHttpClient) {
-
-        Arguments.checkNotNull(okHttpClient, "okHttpClient");
-
-        this.okHttpClient = okHttpClient;
-
-        if (!InfluxDBClientOptions.AuthScheme.SESSION.equals(influxDBClientOptions.getAuthScheme()) || signout.get()) {
-            return;
-        }
-
-        if (sessionCookies == null) {
-
-            String credentials = Credentials
-                    .basic(influxDBClientOptions.getUsername(), string(influxDBClientOptions.getPassword()));
-
-            Request authRequest = new Request.Builder()
-                    .url(buildPath("api/v2/signin"))
-                    .addHeader("Authorization", credentials)
-                    .post(RequestBody.create("application/json", null))
-                    .build();
-
-            try (Response authResponse = this.okHttpClient.newCall(authRequest).execute()) {
-                String cookieHeader = authResponse.headers().get("Set-Cookie");
-
-                if (cookieHeader != null) {
-                    sessionCookies = cookieHeader.toCharArray();
-                }
-            } catch (IOException e) {
-                LOG.log(Level.WARNING, "Cannot retrieve the Session token!", e);
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -147,38 +82,12 @@ class AuthenticateInterceptor implements Interceptor {
      * @see Call#execute()
      */
     void signout() throws IOException {
-
-        if (!InfluxDBClientOptions.AuthScheme.SESSION.equals(influxDBClientOptions.getAuthScheme()) || signout.get()) {
-            signout.set(true);
-            return;
-        }
-
-        Request.Builder authRequest = new Request.Builder()
-                .url(buildPath("api/v2/signout"))
-                .post(RequestBody.create("application/json", null));
-
-        if (sessionCookies != null) {
-            authRequest.addHeader("Cookie", string(sessionCookies));
-        }
-
-        signout.set(true);
-        sessionCookies = null;
-
-        Response response = okHttpClient.newCall(authRequest.build()).execute();
-        response.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     String buildPath(final String buildPath) {
-
-        Arguments.checkNotNull(buildPath, "buildPath");
-
-        return HttpUrl
-                .parse(influxDBClientOptions.getUrl())
-                .newBuilder()
-                .addEncodedPathSegments(buildPath)
-                .build()
-                .toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull

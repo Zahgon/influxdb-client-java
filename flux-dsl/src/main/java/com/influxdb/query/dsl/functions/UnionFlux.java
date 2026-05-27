@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.query.dsl.VariableAssignment;
 import com.influxdb.utils.Arguments;
@@ -41,18 +40,13 @@ public final class UnionFlux extends AbstractParametrizedFlux {
 
     public UnionFlux() {
         super();
-        withPropertyValue("tables", (Supplier<String>) () -> tables
-                .stream().map(table -> table instanceof VariableAssignment
-                        ? ((VariableAssignment) table).getVariableName()
-                        : table.toString())
-                .collect(Collectors.joining(",", "[", "]")));
+        withPropertyValue("tables", (Supplier<String>) () -> tables.stream().map(table -> table instanceof VariableAssignment ? ((VariableAssignment) table).getVariableName() : table.toString()).collect(Collectors.joining(",", "[", "]")));
     }
-
 
     @Nonnull
     @Override
     protected String operatorName() {
-        return "union";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -61,10 +55,6 @@ public final class UnionFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public UnionFlux withTables(@Nonnull final Flux... tables) {
-        Arguments.checkNotNull(tables, "tables");
-        this.tables.addAll(Arrays.asList(tables));
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
-
 }

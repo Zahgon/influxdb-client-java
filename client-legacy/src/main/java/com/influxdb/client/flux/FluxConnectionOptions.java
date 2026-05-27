@@ -30,10 +30,8 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
-
 import com.influxdb.exceptions.InfluxException;
 import com.influxdb.utils.Arguments;
-
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
@@ -47,13 +45,13 @@ import okhttp3.Protocol;
 public final class FluxConnectionOptions {
 
     private final String url;
+
     private OkHttpClient.Builder okHttpClient;
+
     private Map<String, String> parameters;
 
     private FluxConnectionOptions(@Nonnull final Builder builder) {
-
         Arguments.checkNotNull(builder, "FluxConnectionOptions.Builder");
-
         url = builder.url;
         okHttpClient = builder.okHttpClient;
         parameters = builder.parameters;
@@ -66,29 +64,11 @@ public final class FluxConnectionOptions {
      */
     @Nonnull
     public static FluxConnectionOptions.Builder builder() {
-        return new FluxConnectionOptions.Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public static Builder builder(final String connectionString) {
-        Builder builder = new Builder();
-
-        HttpUrl parse = HttpUrl.parse(connectionString);
-        if (parse == null) {
-            throw new InfluxException("Unable to parse connection string " + connectionString);
-        }
-
-        HttpUrl url = parse.newBuilder().build();
-
-        String urlWithoutParams = url.scheme() + "://" + url.host() + ":" + url.port() + url.encodedPath();
-        if (!urlWithoutParams.endsWith("/")) {
-            urlWithoutParams += "/";
-        }
-        builder.url(urlWithoutParams);
-
-        Set<String> parameters = url.queryParameterNames();
-        parameters.forEach(paramName -> builder.withParam(paramName, url.queryParameter(paramName)));
-
-        return builder;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -97,7 +77,7 @@ public final class FluxConnectionOptions {
      */
     @Nonnull
     public String getUrl() {
-        return url;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,14 +86,14 @@ public final class FluxConnectionOptions {
      */
     @Nonnull
     public OkHttpClient.Builder getOkHttpClient() {
-        return okHttpClient;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return returns the map with connection string parameters
      */
     public Map<String, String> getParameters() {
-        return parameters;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -123,8 +103,9 @@ public final class FluxConnectionOptions {
     public static class Builder {
 
         private String url;
-        private OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder()
-                .protocols(Collections.singletonList(Protocol.HTTP_1_1));
+
+        private OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder().protocols(Collections.singletonList(Protocol.HTTP_1_1));
+
         private Map<String, String> parameters = new HashMap<>();
 
         /**
@@ -135,18 +116,11 @@ public final class FluxConnectionOptions {
          */
         @Nonnull
         public Builder url(@Nonnull final String url) {
-            Arguments.checkNonEmpty(url, "url");
-            this.url = url;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public Builder withParam(@Nonnull final String paramName, @Nullable final String value) {
-            Arguments.checkNotNull(paramName, "paramName");
-            Arguments.checkNotNull(value, "value");
-
-            parameters.put(paramName, value);
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -157,9 +131,7 @@ public final class FluxConnectionOptions {
          */
         @Nonnull
         public Builder okHttpClient(@Nonnull final OkHttpClient.Builder okHttpClient) {
-            Arguments.checkNotNull(okHttpClient, "OkHttpClient.Builder");
-            this.okHttpClient = okHttpClient;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -169,34 +141,7 @@ public final class FluxConnectionOptions {
          */
         @Nonnull
         public FluxConnectionOptions build() {
-
-            if (url == null) {
-                throw new IllegalStateException("The url to connect to Flux has to be defined.");
-            }
-
-            //apply parameters from connection string
-            parameters.forEach((key, value) -> {
-                switch (key) {
-                    case "readTimeout":
-                        okHttpClient.readTimeout(Long.parseLong(value), TimeUnit.MILLISECONDS);
-                        break;
-
-                    case "writeTimeout":
-                        okHttpClient.writeTimeout(Long.parseLong(value), TimeUnit.MILLISECONDS);
-                        break;
-
-                    case "connectTimeout":
-                        okHttpClient.connectTimeout(Long.parseLong(value), TimeUnit.MILLISECONDS);
-                        break;
-                    case "logLevel":
-                        //this parameter is handled after instance in client instance constructor
-                        break;
-                    default:
-                        throw new InfluxException("Invalid connection string parameter: " + key);
-                }
-            });
-
-            return new FluxConnectionOptions(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

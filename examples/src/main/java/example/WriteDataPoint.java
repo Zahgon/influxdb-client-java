@@ -22,7 +22,6 @@
 package example;
 
 import java.time.Instant;
-
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;
 import com.influxdb.client.WriteApi;
@@ -33,28 +32,12 @@ import com.influxdb.client.write.Point;
 public class WriteDataPoint {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
+
     private static String bucket = "my-bucket";
 
     public static void main(final String[] args) {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org, bucket);
-
-        //
-        // Write data
-        //
-        WriteApiBlocking writeApi = influxDBClient.getWriteApiBlocking();
-
-        //
-        // Write by Data Point
-        //
-        Point point = Point.measurement("temperature")
-                .addTag("location", "west")
-                .addField("value", 55D)
-                .time(Instant.now().toEpochMilli(), WritePrecision.MS);
-
-        writeApi.writePoint(point);
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

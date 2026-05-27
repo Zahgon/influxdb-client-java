@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.query.dsl.functions.restriction.Restrictions;
 import com.influxdb.utils.Arguments;
@@ -68,7 +67,7 @@ public final class FilterFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "filter";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -77,11 +76,6 @@ public final class FilterFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public FilterFlux withRestrictions(@Nonnull final Restrictions restrictions) {
-
-        Arguments.checkNotNull(restrictions, "Restrictions are required");
-
-        this.withFunction("fn: (r)", restrictions);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

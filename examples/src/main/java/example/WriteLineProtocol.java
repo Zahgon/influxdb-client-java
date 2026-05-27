@@ -30,25 +30,12 @@ import com.influxdb.client.domain.WritePrecision;
 public class WriteLineProtocol {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
+
     private static String bucket = "my-bucket";
 
     public static void main(final String[] args) {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org, bucket);
-
-        //
-        // Write data
-        //
-        WriteApiBlocking writeApi = influxDBClient.getWriteApiBlocking();
-
-        //
-        // Write by LineProtocol
-        //
-        String record = "temperature,location=north value=60.0";
-
-        writeApi.writeRecord(WritePrecision.NS, record);
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -74,7 +73,7 @@ public final class MapFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "map";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,11 +82,6 @@ public final class MapFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public MapFlux withFunction(@Nonnull final String function) {
-
-        Arguments.checkNonEmpty(function, "Function");
-
-        this.withFunction("fn: (r)", function);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

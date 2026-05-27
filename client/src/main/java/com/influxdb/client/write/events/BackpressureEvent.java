@@ -27,7 +27,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.utils.Arguments;
 
 /**
@@ -38,18 +37,19 @@ import com.influxdb.utils.Arguments;
 public final class BackpressureEvent extends AbstractWriteEvent {
 
     private final BackpressureReason reason;
+
     private final List<String> droppedLineProtocol;
 
     public enum BackpressureReason {
+
         /**
          * DataPoint are emitted to fast.
          */
         FAST_EMITTING,
-
         /**
          * Server is not able to process batches fast enough.
          */
-        TOO_MUCH_BATCHES,
+        TOO_MUCH_BATCHES
     }
 
     private static final Logger LOG = Logger.getLogger(BackpressureEvent.class.getName());
@@ -58,26 +58,15 @@ public final class BackpressureEvent extends AbstractWriteEvent {
         this(reason, null);
     }
 
-    public BackpressureEvent(@Nonnull final BackpressureReason reason,
-            @Nullable final List<String> droppedLineProtocol) {
-
+    public BackpressureEvent(@Nonnull final BackpressureReason reason, @Nullable final List<String> droppedLineProtocol) {
         Arguments.checkNotNull(reason, "reason");
-
         this.reason = reason;
-        this.droppedLineProtocol = droppedLineProtocol != null
-                ? Collections.unmodifiableList(droppedLineProtocol)
-                : Collections.emptyList();
+        this.droppedLineProtocol = droppedLineProtocol != null ? Collections.unmodifiableList(droppedLineProtocol) : Collections.emptyList();
     }
 
     @Override
     public void logEvent() {
-        String message = String.format("Backpressure[%s] applied, try increase WriteOptions.bufferLimit.", reason);
-
-        if (!droppedLineProtocol.isEmpty()) {
-            message += String.format(" Buffer contains %d line protocol points.", droppedLineProtocol.size());
-        }
-
-        LOG.log(Level.WARNING, message);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -85,7 +74,7 @@ public final class BackpressureEvent extends AbstractWriteEvent {
      */
     @Nonnull
     public BackpressureReason getReason() {
-        return reason;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -94,6 +83,6 @@ public final class BackpressureEvent extends AbstractWriteEvent {
      */
     @Nonnull
     public List<String> getDroppedLineProtocol() {
-        return droppedLineProtocol;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

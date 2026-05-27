@@ -25,7 +25,6 @@ import java.io.IOException;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
-
 import okhttp3.Interceptor;
 import okhttp3.MediaType;
 import okhttp3.Request;
@@ -41,6 +40,7 @@ import okio.Okio;
 public class GzipInterceptor implements Interceptor {
 
     private static final Pattern CONTENT_PATTERN = Pattern.compile(".*/write", Pattern.CASE_INSENSITIVE);
+
     private static final Pattern ACCEPT_PATTERN = Pattern.compile(".*/query", Pattern.CASE_INSENSITIVE);
 
     private AtomicBoolean enabled = new AtomicBoolean(false);
@@ -48,93 +48,47 @@ public class GzipInterceptor implements Interceptor {
     @Nonnull
     @Override
     public Response intercept(@Nonnull final Chain chain) throws IOException {
-
-        Request request = chain.request();
-        RequestBody body = request.body();
-
-        Request enhancedRequest;
-        if (!enabled.get()) {
-            //
-            // Disabled
-            //
-            Request.Builder builder = request.newBuilder();
-            builder = addHeader(request, builder, "Accept-Encoding", "identity");
-            enhancedRequest = builder.build();
-        } else if (CONTENT_PATTERN.matcher(request.url().encodedPath()).matches()) {
-            //
-            // GZIP content
-            //
-            Request.Builder builder = request.newBuilder();
-            if (body == null || request.header("Content-Encoding") != null) {
-                enhancedRequest = builder.build();
-            } else {
-                builder = addHeader(request, builder, "Content-Encoding", "gzip");
-                builder = addHeader(request, builder, "Accept-Encoding", "identity");
-                enhancedRequest = builder.method(request.method(), gzip(body)).build();
-            }
-        } else if (ACCEPT_PATTERN.matcher(request.url().encodedPath()).matches()) {
-            //
-            // GZIP response
-            //
-            // The okhttp3.internal.http.BridgeInterceptor add gzip accept
-            //
-            enhancedRequest = request;
-        } else {
-            //
-            // DISABLED
-            //
-            Request.Builder builder = request.newBuilder();
-            builder = addHeader(request, builder, "Accept-Encoding", "identity");
-            enhancedRequest = builder.build();
-        }
-
-        return chain.proceed(enhancedRequest);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void enableGzip() {
-        enabled.set(true);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isEnabledGzip() {
-        return enabled.get();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void disableGzip() {
-        enabled.set(false);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
-    private Request.Builder addHeader(@Nonnull final Request request,
-                                      @Nonnull final Request.Builder builder,
-                                      @Nonnull final String headerName,
-                                      @Nonnull final String headerValue) {
-
+    private Request.Builder addHeader(@Nonnull final Request request, @Nonnull final Request.Builder builder, @Nonnull final String headerName, @Nonnull final String headerValue) {
         // do not override specified headers
         if (request.header(headerName) != null) {
             return builder;
         }
-
         return builder.header(headerName, headerValue);
     }
 
     @Nonnull
     private RequestBody gzip(@Nonnull final RequestBody body) {
         return new RequestBody() {
+
             @Override
             public MediaType contentType() {
-                return body.contentType();
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public long contentLength() {
-                return -1;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             @Override
             public void writeTo(@Nonnull final BufferedSink sink) throws IOException {
-                BufferedSink gzipSink = Okio.buffer(new GzipSink(sink));
-                body.writeTo(gzipSink);
-                gzipSink.close();
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         };
     }

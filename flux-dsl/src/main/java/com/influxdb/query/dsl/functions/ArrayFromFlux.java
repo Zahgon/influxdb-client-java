@@ -36,9 +36,8 @@ public final class ArrayFromFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "array.from";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * @param rows Array of records to construct a table with.
@@ -47,7 +46,6 @@ public final class ArrayFromFlux extends AbstractParametrizedFlux {
     @Nonnull
     @SafeVarargs
     public final ArrayFromFlux withRow(@Nonnull final Map<String, Object>... rows) {
-        withPropertyValue("rows", rows);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

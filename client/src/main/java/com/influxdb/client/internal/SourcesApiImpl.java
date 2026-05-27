@@ -26,7 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.SourcesApi;
 import com.influxdb.client.domain.Bucket;
 import com.influxdb.client.domain.Buckets;
@@ -36,7 +35,6 @@ import com.influxdb.client.domain.Sources;
 import com.influxdb.client.service.SourcesService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -47,14 +45,12 @@ final class SourcesApiImpl extends AbstractRestClient implements SourcesApi {
     private static final Logger LOG = Logger.getLogger(SourcesApiImpl.class.getName());
 
     private final InfluxDBClientImpl influxDBClient;
+
     private final SourcesService service;
 
-    SourcesApiImpl(@Nonnull final SourcesService service,
-                   @Nonnull final InfluxDBClientImpl influxDBClient) {
-
+    SourcesApiImpl(@Nonnull final SourcesService service, @Nonnull final InfluxDBClientImpl influxDBClient) {
         Arguments.checkNotNull(service, "service");
         Arguments.checkNotNull(influxDBClient, "influxDBClient");
-
         this.service = service;
         this.influxDBClient = influxDBClient;
     }
@@ -62,134 +58,70 @@ final class SourcesApiImpl extends AbstractRestClient implements SourcesApi {
     @Nonnull
     @Override
     public Source createSource(@Nonnull final Source source) {
-
-        Arguments.checkNotNull(source, "Source is required");
-
-        Call<Source> call = service.postSources(source, null);
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Source updateSource(@Nonnull final Source source) {
-
-        Arguments.checkNotNull(source, "Source is required");
-
-        Call<Source> call = service.patchSourcesID(source.getId(), source, null);
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteSource(@Nonnull final Source source) {
-
-        Arguments.checkNotNull(source, "Source is required");
-
-        deleteSource(source.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteSource(@Nonnull final String sourceID) {
-
-        Arguments.checkNonEmpty(sourceID, "sourceID");
-
-        Call<Void> call = service.deleteSourcesID(sourceID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Source cloneSource(@Nonnull final String clonedName, @Nonnull final String sourceID) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNonEmpty(sourceID, "sourceID");
-
-        Source source = findSourceByID(sourceID);
-
-        return cloneSource(clonedName, source);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Source cloneSource(@Nonnull final String clonedName, @Nonnull final Source source) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNotNull(source, "source");
-
-        Source cloned = new Source();
-        cloned.setName(clonedName);
-        cloned.setOrgID(source.getOrgID());
-        cloned.setDefault(source.getDefault());
-        cloned.setType(source.getType());
-        cloned.setUrl(source.getUrl());
-        cloned.setInsecureSkipVerify(source.getInsecureSkipVerify());
-        cloned.setTelegraf(source.getTelegraf());
-        cloned.setToken(source.getToken());
-        cloned.setUsername(source.getUsername());
-        cloned.setPassword(source.getPassword());
-        cloned.setSharedSecret(source.getSharedSecret());
-        cloned.setMetaUrl(source.getMetaUrl());
-        cloned.setDefaultRP(source.getDefaultRP());
-
-        return createSource(cloned);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Source findSourceByID(@Nonnull final String sourceID) {
-
-        Arguments.checkNonEmpty(sourceID, "sourceID");
-
-        Call<Source> call = service.getSourcesID(sourceID, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Source> findSources() {
-        Call<Sources> sourcesCall = service.getSources(null, null);
-
-        Sources sources = execute(sourcesCall);
-        LOG.log(Level.FINEST, "findSources found: {0}", sources);
-
-        return sources.getSources();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     @Override
     public List<Bucket> findBucketsBySource(@Nonnull final Source source) {
-
-        Arguments.checkNotNull(source, "Source is required");
-
-        return findBucketsBySourceID(source.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Bucket> findBucketsBySourceID(@Nonnull final String sourceID) {
-
-        Arguments.checkNonEmpty(sourceID, "sourceID");
-
-        Call<Buckets> call = service.getSourcesIDBuckets(sourceID, null, null);
-
-        return execute(call).getBuckets();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public HealthCheck health(@Nonnull final Source source) {
-
-        Arguments.checkNotNull(source, "Source is required");
-
-        return health(source.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public HealthCheck health(@Nonnull final String sourceID) {
-
-        Arguments.checkNonEmpty(sourceID, "sourceID");
-
-        return influxDBClient.health(service.getSourcesIDHealth(sourceID, null));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -55,7 +54,7 @@ public final class YieldFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "yield";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -64,10 +63,6 @@ public final class YieldFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public final YieldFlux withName(@Nonnull final String name) {
-        Arguments.checkNonEmpty(name, "Result name");
-
-        withPropertyValueEscaped("name", name);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

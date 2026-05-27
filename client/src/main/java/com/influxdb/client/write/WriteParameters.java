@@ -24,7 +24,6 @@ package com.influxdb.client.write;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.ThreadSafe;
-
 import com.influxdb.client.InfluxDBClientOptions;
 import com.influxdb.client.domain.WriteConsistency;
 import com.influxdb.client.domain.WritePrecision;
@@ -55,8 +54,11 @@ public final class WriteParameters {
     public static final WritePrecision DEFAULT_WRITE_PRECISION = WritePrecision.NS;
 
     private final String bucket;
+
     private final String org;
+
     private final WritePrecision precision;
+
     private final WriteConsistency consistency;
 
     /**
@@ -70,10 +72,7 @@ public final class WriteParameters {
      *                    If it is not specified then use {@link WritePrecision#NS}.
      * @param consistency The write consistency for the point. For more info see {@link WriteParameters}.
      */
-    public WriteParameters(@Nullable final String bucket,
-                           @Nullable final String org,
-                           @Nullable final WritePrecision precision,
-                           @Nullable final WriteConsistency consistency) {
+    public WriteParameters(@Nullable final String bucket, @Nullable final String org, @Nullable final WritePrecision precision, @Nullable final WriteConsistency consistency) {
         this.bucket = bucket;
         this.org = org;
         this.precision = precision;
@@ -87,8 +86,7 @@ public final class WriteParameters {
      *                    If it is not specified then use {@link WritePrecision#NS}.
      * @param consistency The write consistency for the point. For more info see {@link WriteParameters}.
      */
-    public WriteParameters(@Nullable final WritePrecision precision,
-                           @Nullable final WriteConsistency consistency) {
+    public WriteParameters(@Nullable final WritePrecision precision, @Nullable final WriteConsistency consistency) {
         this(null, null, precision, consistency);
     }
 
@@ -100,14 +98,10 @@ public final class WriteParameters {
      * @param org       The destination organization for writes.
      * @param precision Precision for unix timestamps in the line protocol of the request payload.
      */
-    public WriteParameters(@Nonnull final String bucket,
-                           @Nonnull final String org,
-                           @Nonnull final WritePrecision precision) {
-
+    public WriteParameters(@Nonnull final String bucket, @Nonnull final String org, @Nonnull final WritePrecision precision) {
         Arguments.checkNonEmpty(bucket, "bucket");
         Arguments.checkNonEmpty(org, "org");
         Arguments.checkNotNull(precision, "WritePrecision");
-
         this.bucket = bucket;
         this.org = org;
         this.precision = precision;
@@ -120,8 +114,7 @@ public final class WriteParameters {
      */
     @Nonnull
     public String orgSafe(@Nonnull final InfluxDBClientOptions options) {
-        Arguments.checkNotNull(options, "options");
-        return isNotDefined(org) ? options.getOrg() : org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -130,8 +123,7 @@ public final class WriteParameters {
      */
     @Nonnull
     public String bucketSafe(@Nonnull final InfluxDBClientOptions options) {
-        Arguments.checkNotNull(options, "options");
-        return isNotDefined(bucket) ? options.getBucket() : bucket;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -140,8 +132,7 @@ public final class WriteParameters {
      */
     @Nonnull
     public WritePrecision precisionSafe(@Nonnull final InfluxDBClientOptions options) {
-        Arguments.checkNotNull(options, "options");
-        return precision == null ? options.getPrecision() : precision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -150,8 +141,7 @@ public final class WriteParameters {
      */
     @Nullable
     public WriteConsistency consistencySafe(@Nonnull final InfluxDBClientOptions options) {
-        Arguments.checkNotNull(options, "options");
-        return consistency == null ? options.getConsistency() : consistency;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -161,19 +151,7 @@ public final class WriteParameters {
      * @throws IllegalArgumentException if the bucket or organization is not defined
      */
     public void check(@Nonnull final InfluxDBClientOptions options) {
-        Arguments.checkNotNull(options, "options");
-
-        if (isNotDefined(bucket) && isNotDefined(options.getBucket())) {
-            throw new IllegalArgumentException("Expecting a non-empty string for destination bucket. "
-                    + "Please specify the bucket as a method parameter or use default configuration "
-                    + "at 'InfluxDBClientOptions.Bucket'.");
-        }
-
-        if (isNotDefined(org) && isNotDefined(options.getOrg())) {
-            throw new IllegalArgumentException("Expecting a non-empty string for destination organization. "
-                    + "Please specify the organization as a method parameter or use default configuration "
-                    + "at 'InfluxDBClientOptions.Organization'.");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -184,50 +162,19 @@ public final class WriteParameters {
      * @return copied parameters
      */
     @Nonnull
-    public WriteParameters copy(@Nonnull final WritePrecision precision,
-                                @Nonnull final InfluxDBClientOptions options) {
-
-        Arguments.checkNotNull(precision, "precision");
-        Arguments.checkNotNull(options, "options");
-
-        return new WriteParameters(
-                bucketSafe(options),
-                orgSafe(options),
-                precision,
-                consistencySafe(options));
+    public WriteParameters copy(@Nonnull final WritePrecision precision, @Nonnull final InfluxDBClientOptions options) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof WriteParameters)) {
-            return false;
-        }
-
-        WriteParameters that = (WriteParameters) o;
-
-        if (!bucket.equals(that.bucket)) {
-            return false;
-        }
-        if (!org.equals(that.org)) {
-            return false;
-        }
-        if (precision != that.precision) {
-            return false;
-        }
-        return consistency == that.consistency;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @SuppressWarnings("MagicNumber")
     public int hashCode() {
-        int result = bucket != null ? bucket.hashCode() : 0;
-        result = 31 * result + (org != null ? org.hashCode() : 0);
-        result = 31 * result + (precision != null ? precision.hashCode() : 0);
-        result = 31 * result + (consistency != null ? consistency.hashCode() : 0);
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private boolean isNotDefined(final String option) {

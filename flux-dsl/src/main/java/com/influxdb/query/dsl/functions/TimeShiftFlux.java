@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.functions;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -63,7 +62,7 @@ public final class TimeShiftFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "timeShift";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -73,12 +72,7 @@ public final class TimeShiftFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public TimeShiftFlux withDuration(@Nonnull final Long amount, @Nonnull final ChronoUnit unit) {
-        Arguments.checkNotNull(amount, "Amount is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        this.withPropertyValue("duration", amount, unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -87,11 +81,7 @@ public final class TimeShiftFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public TimeShiftFlux withDuration(@Nonnull final String amount) {
-        Arguments.checkDuration(amount, "Amount");
-
-        this.withPropertyValue("duration", amount);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,12 +90,7 @@ public final class TimeShiftFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public TimeShiftFlux withColumns(@Nonnull final String[] columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -114,11 +99,6 @@ public final class TimeShiftFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public TimeShiftFlux withColumns(@Nonnull final Collection<String> columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

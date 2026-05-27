@@ -22,7 +22,6 @@
 package com.influxdb.client.flux;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.flux.internal.FluxApiImpl;
 import com.influxdb.utils.Arguments;
 
@@ -45,12 +44,7 @@ public final class FluxClientFactory {
      */
     @Nonnull
     public static FluxClient create(@Nonnull final String connectionString) {
-
-        FluxConnectionOptions options = FluxConnectionOptions
-                .builder(connectionString)
-                .build();
-
-        return create(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -61,9 +55,6 @@ public final class FluxClientFactory {
      */
     @Nonnull
     public static FluxClient create(@Nonnull final FluxConnectionOptions options) {
-
-        Arguments.checkNotNull(options, "FluxConnectionOptions");
-
-        return new FluxApiImpl(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

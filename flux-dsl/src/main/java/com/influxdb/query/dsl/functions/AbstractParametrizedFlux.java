@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.functions;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.query.dsl.Flux;
 
 /**
@@ -42,37 +41,7 @@ public abstract class AbstractParametrizedFlux extends AbstractFluxWithUpstream 
 
     @Override
     public void appendActual(@Nonnull final Map<String, Object> parameters, @Nonnull final StringBuilder builder) {
-
-        super.appendActual(parameters, builder);
-
-        StringBuilder operator = new StringBuilder();
-        //
-        // see JoinFlux
-        beforeAppendOperatorName(operator, parameters);
-        //
-
-        //
-        // function(
-        //
-        operator.append(operatorName()).append("(");
-        //
-        //
-        // parameters: false
-        boolean wasAppended = false;
-
-        for (String name : functionsParameters.keys()) {
-
-            String propertyValue = functionsParameters.get(name, parameters);
-
-            wasAppended = appendParameterTo(name, propertyValue, operator, wasAppended);
-        }
-        //
-        // )
-        //
-        operator.append(")");
-
-        appendDelimiter(builder);
-        builder.append(operator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -88,33 +57,23 @@ public abstract class AbstractParametrizedFlux extends AbstractFluxWithUpstream 
      * @param parameters parameters
      * @see JoinFlux
      */
-    protected void beforeAppendOperatorName(@Nonnull final StringBuilder operator,
-                                            @Nonnull final Map<String, Object> parameters) {
+    protected void beforeAppendOperatorName(@Nonnull final StringBuilder operator, @Nonnull final Map<String, Object> parameters) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return {@link Boolean#TRUE} if was appended parameter
      */
-    private boolean appendParameterTo(@Nonnull final String operatorName,
-                                      @Nullable final String propertyValue,
-                                      @Nonnull final StringBuilder operator,
-                                      final boolean wasAppendProperty) {
-
+    private boolean appendParameterTo(@Nonnull final String operatorName, @Nullable final String propertyValue, @Nonnull final StringBuilder operator, final boolean wasAppendProperty) {
         if (propertyValue == null) {
             return wasAppendProperty;
         }
-
         // delimit previously appended parameter
         if (wasAppendProperty) {
             operator.append(", ");
         }
-
         // n: 5
-        operator
-                .append(operatorName)
-                .append(functionsParameters.getDelimiter(operatorName))
-                .append(propertyValue);
-
+        operator.append(operatorName).append(functionsParameters.getDelimiter(operatorName)).append(propertyValue);
         return true;
     }
 }

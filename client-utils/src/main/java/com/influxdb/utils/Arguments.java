@@ -34,16 +34,14 @@ import javax.annotation.Nullable;
  */
 public final class Arguments {
 
-    private static final Pattern DURATION_PATTERN = Pattern.compile("([-+]?)([0-9]+(\\.[0-9]*)?[a-z]+)+|inf|-inf",
-            Pattern.CASE_INSENSITIVE);
+    private static final Pattern DURATION_PATTERN = Pattern.compile("([-+]?)([0-9]+(\\.[0-9]*)?[a-z]+)+|inf|-inf", Pattern.CASE_INSENSITIVE);
 
     private static final String DURATION_MESSAGE = "Expecting a duration string for %s. But got: %s";
 
     /**
      * The precisions that are allowed to use in the write.
      */
-    private static final EnumSet<ChronoUnit> ALLOWED_PRECISION = EnumSet.of(ChronoUnit.NANOS,
-            ChronoUnit.MICROS, ChronoUnit.MILLIS, ChronoUnit.SECONDS);
+    private static final EnumSet<ChronoUnit> ALLOWED_PRECISION = EnumSet.of(ChronoUnit.NANOS, ChronoUnit.MICROS, ChronoUnit.MILLIS, ChronoUnit.SECONDS);
 
     private Arguments() {
     }
@@ -57,10 +55,7 @@ public final class Arguments {
      * @throws IllegalArgumentException if the string is empty
      */
     public static String checkNonEmpty(final String string, final String name) throws IllegalArgumentException {
-        if (string == null || string.isEmpty()) {
-            throw new IllegalArgumentException("Expecting a non-empty string for " + name);
-        }
-        return string;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -72,10 +67,7 @@ public final class Arguments {
      * @throws IllegalArgumentException if the string has not one char
      */
     public static String checkOneCharString(final String string, final String name) throws IllegalArgumentException {
-        if (string == null || string.length() != 1) {
-            throw new IllegalArgumentException("Expecting a one char string for " + name);
-        }
-        return string;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -87,11 +79,7 @@ public final class Arguments {
      * @throws IllegalArgumentException if the string is not duration literal
      */
     public static String checkDuration(final String string, final String name) throws IllegalArgumentException {
-        if (string == null || string.isEmpty() || !DURATION_PATTERN.matcher(string).matches()) {
-            throw new IllegalArgumentException(String.format(DURATION_MESSAGE, name, string));
-        }
-
-        return string;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -102,13 +90,8 @@ public final class Arguments {
      * @return {@code string}
      * @throws IllegalArgumentException if the string is not duration literal
      */
-    public static String checkDurationNotRequired(final String string, final String name)
-            throws IllegalArgumentException {
-        if (string != null && !string.isEmpty() && !DURATION_PATTERN.matcher(string).matches()) {
-            throw new IllegalArgumentException(String.format(DURATION_MESSAGE, name, string));
-        }
-
-        return string;
+    public static String checkDurationNotRequired(final String string, final String name) throws IllegalArgumentException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -119,9 +102,7 @@ public final class Arguments {
      * @throws IllegalArgumentException if the number is less or equal to 0
      */
     public static void checkPositiveNumber(final Number number, final String name) throws IllegalArgumentException {
-        if (number == null || number.doubleValue() <= 0) {
-            throw new IllegalArgumentException("Expecting a positive number for " + name);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -132,9 +113,7 @@ public final class Arguments {
      * @throws IllegalArgumentException if the number is less or equal to 0
      */
     public static void checkNotNegativeNumber(final Number number, final String name) throws IllegalArgumentException {
-        if (number == null || number.doubleValue() < 0) {
-            throw new IllegalArgumentException("Expecting a positive or zero number for " + name);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -146,8 +125,7 @@ public final class Arguments {
      * @see Objects#requireNonNull(Object, String)
      */
     public static void checkNotNull(final Object obj, final String name) throws NullPointerException {
-
-        Objects.requireNonNull(obj, () -> "Expecting a not null reference for " + name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -156,9 +134,6 @@ public final class Arguments {
      * @throws IllegalArgumentException if the object is not one of {@link Arguments#ALLOWED_PRECISION}
      */
     public static void checkPrecision(@Nullable final ChronoUnit precision) throws IllegalArgumentException {
-
-        if (!ALLOWED_PRECISION.contains(precision)) {
-            throw new IllegalArgumentException("Precision must be one of: " + ALLOWED_PRECISION);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

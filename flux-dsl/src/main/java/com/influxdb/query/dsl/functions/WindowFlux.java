@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.functions;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -69,11 +68,10 @@ public final class WindowFlux extends AbstractParametrizedFlux {
         super(flux);
     }
 
-
     @Nonnull
     @Override
     protected String operatorName() {
-        return "window";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,13 +81,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withEvery(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit) {
-
-        Arguments.checkNotNull(every, "Every is required");
-        Arguments.checkNotNull(everyUnit, "Every ChronoUnit is required");
-
-        this.withPropertyValue("every", every, everyUnit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -98,12 +90,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withEvery(@Nonnull final String every) {
-
-        Arguments.checkDuration(every, "Every");
-
-        this.withPropertyValue("every", every);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -113,13 +100,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withPeriod(@Nonnull final Long period, @Nonnull final ChronoUnit periodUnit) {
-
-        Arguments.checkNotNull(period, "Period is required");
-        Arguments.checkNotNull(periodUnit, "Period ChronoUnit is required");
-
-        this.withPropertyValue("period", period, periodUnit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -128,12 +109,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withPeriod(@Nonnull final String period) {
-
-        Arguments.checkDuration(period, "Period");
-
-        this.withPropertyValue("period", period);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -143,13 +119,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withOffset(@Nonnull final Long offset, @Nonnull final ChronoUnit offsetUnit) {
-
-        Arguments.checkNotNull(offset, "Offset is required");
-        Arguments.checkNotNull(offsetUnit, "Offset ChronoUnit is required");
-
-        this.withPropertyValue("offset", offset, offsetUnit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -158,12 +128,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withOffset(@Nonnull final Instant offset) {
-
-        Arguments.checkNotNull(offset, "Offset is required");
-
-        this.withPropertyValue("offset", offset);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -172,12 +137,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withOffset(@Nonnull final String offset) {
-
-        Arguments.checkDuration(offset, "offset");
-
-        this.withPropertyValue("offset", offset);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -186,12 +146,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withTimeColumn(@Nonnull final String timeColumn) {
-
-        Arguments.checkNonEmpty(timeColumn, "Time column");
-
-        this.withPropertyValueEscaped("timeColumn", timeColumn);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -200,12 +155,7 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withStartColumn(@Nonnull final String startColumn) {
-
-        Arguments.checkNonEmpty(startColumn, "Start column");
-
-        this.withPropertyValueEscaped("startColumn", startColumn);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -214,11 +164,6 @@ public final class WindowFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public WindowFlux withStopCol(@Nonnull final String stopColumn) {
-
-        Arguments.checkNonEmpty(stopColumn, "Strop column");
-
-        this.withPropertyValueEscaped("stopColumn", stopColumn);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

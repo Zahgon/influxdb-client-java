@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.functions;
 import java.time.Instant;
 import java.time.temporal.ChronoUnit;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -61,7 +60,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "range";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,12 +69,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStart(@Nonnull final Instant start) {
-
-        Arguments.checkNotNull(start, "Start is required");
-
-        this.withPropertyValue("start", start);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -85,13 +79,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStart(@Nonnull final Long start, @Nonnull final ChronoUnit unit) {
-
-        Arguments.checkNotNull(start, "Start is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        this.withPropertyValue("start", start, unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,12 +88,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStart(@Nonnull final String start) {
-
-        Arguments.checkDuration(start, "Start");
-
-        this.withPropertyValue("start", start);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -114,10 +97,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStart(final Long start) {
-
-        this.withPropertyValue("start", start);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -126,12 +106,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStop(@Nonnull final Instant stop) {
-
-        Arguments.checkNotNull(stop, "Stop is required");
-
-        this.withPropertyValue("stop", stop);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -141,13 +116,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStop(@Nonnull final Long stop, @Nonnull final ChronoUnit unit) {
-
-        Arguments.checkNotNull(stop, "Stop is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        this.withPropertyValue("stop", stop, unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -156,12 +125,7 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStop(@Nonnull final String stop) {
-
-        Arguments.checkDuration(stop, "Stop");
-
-        this.withPropertyValue("stop", stop);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -170,10 +134,6 @@ public final class RangeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RangeFlux withStop(final Long stop) {
-
-        this.withPropertyValue("stop", stop);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

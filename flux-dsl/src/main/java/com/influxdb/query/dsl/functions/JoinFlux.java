@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.query.dsl.VariableAssignment;
 import com.influxdb.utils.Arguments;
@@ -68,20 +67,16 @@ import com.influxdb.utils.Arguments;
 public final class JoinFlux extends AbstractParametrizedFlux {
 
     private final Map<String, Flux> tables = new LinkedHashMap<>();
+
     private String assignToVariable;
 
     public JoinFlux() {
         super();
-
         // add tables: property
-        withPropertyValue("tables", (Supplier<String>) () -> tables
-                .entrySet().stream().map(e -> {
-                    String var = e.getValue() instanceof VariableAssignment
-                            ? ((VariableAssignment) e.getValue()).getVariableName()
-                            : e.getKey();
-                    return e.getKey() + ":" + var;
-                })
-                .collect(Collectors.joining(", ", "{", "}")));
+        withPropertyValue("tables", (Supplier<String>) () -> tables.entrySet().stream().map(e -> {
+            String var = e.getValue() instanceof VariableAssignment ? ((VariableAssignment) e.getValue()).getVariableName() : e.getKey();
+            return e.getKey() + ":" + var;
+        }).collect(Collectors.joining(", ", "{", "}")));
     }
 
     public enum MethodType {
@@ -90,22 +85,18 @@ public final class JoinFlux extends AbstractParametrizedFlux {
          * inner join.
          */
         INNER,
-
         /**
          * cross product.
          */
         CROSS,
-
         /**
          * left outer join.
          */
         LEFT,
-
         /**
          * right outer join.
          */
         RIGHT,
-
         /**
          * full outer join.
          */
@@ -115,24 +106,12 @@ public final class JoinFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "join";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    protected void beforeAppendOperatorName(@Nonnull final StringBuilder operator,
-                                            @Nonnull final Map<String, Object> parameters) {
-
-        // add tables Flux scripts
-        tables.forEach((key, flux) -> {
-            if (flux instanceof JoinFlux) {
-                operator.append(flux.toString(parameters)).append("\n");
-            } else if (!(flux instanceof VariableAssignment)) {
-                operator.append(key).append(" = ").append(flux.toString(parameters)).append("\n");
-            }
-        });
-        if (assignToVariable != null) {
-            operator.append(assignToVariable).append(" = ");
-        }
+    protected void beforeAppendOperatorName(@Nonnull final StringBuilder operator, @Nonnull final Map<String, Object> parameters) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -144,15 +123,7 @@ public final class JoinFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public JoinFlux withTable(@Nonnull final String name, @Nonnull final Flux table) {
-
-        Arguments.checkNonEmpty(name, "FluxTable name");
-        Arguments.checkNotNull(table, "Flux script to map table");
-
-        tables.put(name, table);
-        if (table instanceof JoinFlux) {
-            ((JoinFlux) table).assignToVariable = name;
-        }
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -161,10 +132,7 @@ public final class JoinFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public JoinFlux withOn(@Nonnull final String tag) {
-
-        Arguments.checkNonEmpty(tag, "Tag name");
-
-        return withOn(new String[]{tag});
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -173,12 +141,7 @@ public final class JoinFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public JoinFlux withOn(@Nonnull final String[] tags) {
-
-        Arguments.checkNotNull(tags, "Tags are required");
-
-        withPropertyValue("on", tags);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -187,12 +150,7 @@ public final class JoinFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public JoinFlux withOn(@Nonnull final Collection<String> tags) {
-
-        Arguments.checkNotNull(tags, "Tags are required");
-
-        withPropertyValue("on", tags);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -201,12 +159,7 @@ public final class JoinFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public JoinFlux withMethod(@Nonnull final String method) {
-
-        Arguments.checkNonEmpty(method, "Method");
-
-        this.withPropertyValueEscaped("method", method);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -215,11 +168,6 @@ public final class JoinFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public JoinFlux withMethod(@Nonnull final MethodType method) {
-
-        Arguments.checkNotNull(method, "Method");
-
-        this.withPropertyValueEscaped("method", method.toString().toLowerCase());
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -63,7 +62,7 @@ public final class PivotFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "pivot";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -72,12 +71,7 @@ public final class PivotFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public PivotFlux withRowKey(@Nonnull final String[] rowKey) {
-
-        Arguments.checkNotNull(rowKey, "rowKey");
-
-        this.withPropertyValue("rowKey", rowKey);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -86,12 +80,7 @@ public final class PivotFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public PivotFlux withRowKey(@Nonnull final Collection<String> rowKey) {
-
-        Arguments.checkNotNull(rowKey, "rowKey");
-
-        this.withPropertyValue("rowKey", rowKey);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,12 +89,7 @@ public final class PivotFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public PivotFlux withColumnKey(@Nonnull final String[] columnKey) {
-
-        Arguments.checkNotNull(columnKey, "columnKey");
-
-        this.withPropertyValue("columnKey", columnKey);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -114,12 +98,7 @@ public final class PivotFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public PivotFlux withColumnKey(@Nonnull final Collection<String> columnKey) {
-
-        Arguments.checkNotNull(columnKey, "columnKey");
-
-        this.withPropertyValue("columnKey", columnKey);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -128,11 +107,6 @@ public final class PivotFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public PivotFlux withValueColumn(@Nonnull final String valueColumn) {
-
-        Arguments.checkNonEmpty(valueColumn, "valueColumn");
-
-        this.withPropertyValueEscaped("valueColumn", valueColumn);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

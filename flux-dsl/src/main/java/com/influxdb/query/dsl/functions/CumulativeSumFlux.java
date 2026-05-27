@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -57,7 +56,7 @@ public final class CumulativeSumFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "cumulativeSum";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,12 +65,7 @@ public final class CumulativeSumFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public CumulativeSumFlux withColumns(@Nonnull final String[] columns) {
-
-        Arguments.checkNotNull(columns, "columns");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -80,12 +74,6 @@ public final class CumulativeSumFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public CumulativeSumFlux withColumns(@Nonnull final Collection<String> columns) {
-
-        Arguments.checkNotNull(columns, "columns");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

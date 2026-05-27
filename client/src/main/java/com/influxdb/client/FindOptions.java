@@ -24,7 +24,6 @@ package com.influxdb.client;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import okhttp3.HttpUrl;
 
 /**
@@ -35,102 +34,67 @@ import okhttp3.HttpUrl;
 public final class FindOptions {
 
     public static final String LIMIT_KEY = "limit";
+
     public static final String OFFSET_KEY = "offset";
+
     public static final String SORT_BY_KEY = "sortBy";
+
     public static final String DESCENDING_KEY = "descending";
+
     public static final String AFTER_KEY = "after";
 
     private Integer limit;
+
     private Integer offset;
+
     private String sortBy;
+
     private Boolean descending;
+
     private String after;
 
     @Nonnull
     public static FindOptions create(@Nullable final String link) {
-
-        FindOptions options = new FindOptions();
-        if (link == null) {
-            return options;
-        }
-
-        HttpUrl httpUrl = HttpUrl.parse("https://influxdb" + link);
-        if (httpUrl == null) {
-            return options;
-        }
-
-        Set<String> qp = httpUrl.queryParameterNames();
-        if (!qp.contains(LIMIT_KEY) && !qp.contains(OFFSET_KEY) && !qp.contains(SORT_BY_KEY)
-                && !qp.contains(DESCENDING_KEY) && !qp.contains(AFTER_KEY)) {
-
-            return options;
-        }
-
-        String limit = httpUrl.queryParameter(LIMIT_KEY);
-        if (limit != null) {
-            options.setLimit(Integer.valueOf(limit));
-        }
-
-        String offset = httpUrl.queryParameter(OFFSET_KEY);
-        if (offset != null) {
-            options.setOffset(Integer.valueOf(offset));
-        }
-
-        String sortBy = httpUrl.queryParameter(SORT_BY_KEY);
-        if (sortBy != null) {
-            options.setSortBy(sortBy);
-        }
-
-        String descending = httpUrl.queryParameter(DESCENDING_KEY);
-        if (descending != null) {
-            options.setDescending(Boolean.valueOf(descending));
-        }
-
-        String after = httpUrl.queryParameter(AFTER_KEY);
-        if (after != null) {
-            options.setAfter(after);
-        }
-
-        return options;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Integer getLimit() {
-        return limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLimit(final Integer limit) {
-        this.limit = limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Integer getOffset() {
-        return offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOffset(final Integer offset) {
-        this.offset = offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getSortBy() {
-        return sortBy;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setSortBy(final String sortBy) {
-        this.sortBy = sortBy;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Boolean getDescending() {
-        return descending;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDescending(final Boolean descending) {
-        this.descending = descending;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getAfter() {
-        return after;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setAfter(final String after) {
-        this.after = after;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

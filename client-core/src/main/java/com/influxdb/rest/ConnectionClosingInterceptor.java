@@ -27,7 +27,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
-
 import okhttp3.Call;
 import okhttp3.Connection;
 import okhttp3.EventListener;
@@ -49,6 +48,7 @@ public class ConnectionClosingInterceptor extends EventListener implements Inter
     private static final Logger LOG = Logger.getLogger(ConnectionClosingInterceptor.class.getName());
 
     private final ConcurrentMap<Connection, Long> connectionTimes = new ConcurrentHashMap<>();
+
     private final long connectionMaxAgeMillis;
 
     /**
@@ -63,27 +63,12 @@ public class ConnectionClosingInterceptor extends EventListener implements Inter
     @Override
     @Nonnull
     public Response intercept(@Nonnull final Chain chain) throws IOException {
-        Connection connection = chain.connection();
-
-        //
-        // If the connection is old, mark it to not be reused.
-        //
-        if (connection != null && isConnectionOld(connection)) {
-            if (connection instanceof RealConnection) {
-                LOG.fine("Marking connection to not be reused: " + connection);
-                ((RealConnection) connection).noNewExchanges$okhttp();
-                connectionTimes.remove(connection);
-            } else {
-                LOG.warning("Unable to mark connection to not be reused: " + connection);
-            }
-        }
-
-        return chain.proceed(chain.request());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void connectionAcquired(@Nonnull final Call call, @Nonnull final Connection connection) {
-        connectionTimes.putIfAbsent(connection, System.currentTimeMillis());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**

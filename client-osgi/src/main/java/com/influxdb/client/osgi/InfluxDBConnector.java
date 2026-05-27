@@ -23,10 +23,8 @@ package com.influxdb.client.osgi;
 
 import java.util.Dictionary;
 import java.util.Hashtable;
-
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;
-
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.service.component.annotations.Activate;
@@ -58,16 +56,19 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
 public class InfluxDBConnector {
 
     static final String URL = "url";
+
     static final String ORGANIZATION = "organization";
+
     static final String BUCKET = "bucket";
+
     static final String DATABASE = "database";
+
     static final String ALIAS = "alias";
 
     /**
      * Configuration for InfluxDB connector.
      */
-    @ObjectClassDefinition(name = "InfluxDB connector",
-            description = "InfluxDB connector configuration options")
+    @ObjectClassDefinition(name = "InfluxDB connector", description = "InfluxDB connector configuration options")
     public @interface Config {
 
         /**
@@ -130,6 +131,7 @@ public class InfluxDBConnector {
     private Config config;
 
     InfluxDBClient client;
+
     ServiceRegistration<InfluxDBClient> clientServiceRegistration;
 
     /**
@@ -140,37 +142,7 @@ public class InfluxDBConnector {
      */
     @Activate
     void start(final BundleContext bundleContext, final Config config) {
-        this.config = config;
-
-        if (config.token() != null) {
-            client = InfluxDBClientFactory.create(
-                    config.url(),
-                    config.token().toCharArray(),
-                    config.organization(),
-                    config.bucket());
-        } else if (config.database() != null) {
-            client = InfluxDBClientFactory.createV1(
-                    config.url(),
-                    config.username(),
-                    config.password().toCharArray(),
-                    config.database(),
-                    config.retentionPolicy());
-        } else {
-            client = InfluxDBClientFactory.create(
-                    config.url(),
-                    config.username(),
-                    config.password().toCharArray());
-        }
-
-        try {
-            clientServiceRegistration = bundleContext.registerService(
-                    InfluxDBClient.class,
-                    client,
-                    getServiceProperties());
-        } catch (RuntimeException ex) {
-            client.close();
-            throw ex;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -178,18 +150,11 @@ public class InfluxDBConnector {
      */
     @Deactivate
     void stop() {
-        try {
-            clientServiceRegistration.unregister();
-            client.close();
-        } finally {
-            clientServiceRegistration = null;
-            client = null;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private Dictionary<String, Object> getServiceProperties() {
         final Dictionary<String, Object> props = new Hashtable<>();
-
         props.put(URL, config.url());
         if (config.organization() != null) {
             props.put(ORGANIZATION, config.organization());
@@ -203,7 +168,6 @@ public class InfluxDBConnector {
         if (config.alias() != null) {
             props.put(ALIAS, config.alias());
         }
-
         return props;
     }
 }

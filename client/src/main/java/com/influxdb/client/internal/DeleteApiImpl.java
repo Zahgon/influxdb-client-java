@@ -25,7 +25,6 @@ import java.time.OffsetDateTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.DeleteApi;
 import com.influxdb.client.domain.Bucket;
 import com.influxdb.client.domain.DeletePredicateRequest;
@@ -33,7 +32,6 @@ import com.influxdb.client.domain.Organization;
 import com.influxdb.client.service.DeleteService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -46,68 +44,22 @@ public class DeleteApiImpl extends AbstractRestClient implements DeleteApi {
     private final DeleteService service;
 
     DeleteApiImpl(@Nonnull final DeleteService service) {
-
         Arguments.checkNotNull(service, "service");
-
         this.service = service;
     }
 
     @Override
-    public void delete(final @Nonnull OffsetDateTime start,
-                       final @Nonnull OffsetDateTime stop,
-                       final @Nonnull String predicate,
-                       final @Nonnull Bucket bucket,
-                       final @Nonnull Organization org) {
-
-        Arguments.checkNotNull(start, "Start is required");
-        Arguments.checkNotNull(stop, "Stop is required");
-        Arguments.checkNotNull(predicate, "Predicate is required");
-        Arguments.checkNotNull(bucket, "Bucket is required");
-        Arguments.checkNotNull(org, "Organization is required");
-
-        delete(start, stop, predicate, bucket.getId(), org.getId());
+    public void delete(@Nonnull final OffsetDateTime start, @Nonnull final OffsetDateTime stop, @Nonnull final String predicate, @Nonnull final Bucket bucket, @Nonnull final Organization org) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void delete(final @Nonnull OffsetDateTime start,
-                       final @Nonnull OffsetDateTime stop,
-                       final @Nonnull String predicate,
-                       final @Nonnull String bucket,
-                       final @Nonnull String org) {
-
-        Arguments.checkNotNull(start, "Start is required");
-        Arguments.checkNotNull(stop, "Stop is required");
-        Arguments.checkNotNull(predicate, "Predicate is required");
-        Arguments.checkNonEmpty(bucket, "Bucket is required");
-        Arguments.checkNonEmpty(org, "Organization is required");
-
-        DeletePredicateRequest request = new DeletePredicateRequest();
-        request.setStart(start);
-        request.setStop(stop);
-        request.setPredicate(predicate);
-
-        delete(request, bucket, org);
+    public void delete(@Nonnull final OffsetDateTime start, @Nonnull final OffsetDateTime stop, @Nonnull final String predicate, @Nonnull final String bucket, @Nonnull final String org) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void delete(final @Nonnull DeletePredicateRequest predicate,
-                       final @Nonnull String bucket,
-                       final @Nonnull String org) {
-
-        Arguments.checkNotNull(predicate, "Predicate is required");
-        Arguments.checkNonEmpty(bucket, "Bucket is required");
-        Arguments.checkNonEmpty(org, "Organization is required");
-
-        LOG.log(Level.FINEST,
-                "Deleting time-series data from InfluxDB (org={0}, bucket={1})...",
-                new Object[]{org, bucket});
-
-        Call<Void> call = service.postDelete(predicate, null, org, bucket,
-                null, null);
-
-        execute(call);
-
-        LOG.log(Level.FINEST, "Data was deleted from InfluxDB: (org={0}, bucket={1})",
-                new Object[]{org, bucket});
+    public void delete(@Nonnull final DeletePredicateRequest predicate, @Nonnull final String bucket, @Nonnull final String org) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

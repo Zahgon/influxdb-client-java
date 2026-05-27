@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Map;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -72,7 +71,7 @@ public final class RenameFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "rename";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -81,12 +80,7 @@ public final class RenameFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RenameFlux withColumns(@Nonnull final Map<String, String> columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,11 +90,6 @@ public final class RenameFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public RenameFlux withFunction(@Nonnull final String function) {
-
-        Arguments.checkNonEmpty(function, "Function");
-
-        this.withFunction("fn: (column)", function);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

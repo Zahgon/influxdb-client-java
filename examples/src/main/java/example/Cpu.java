@@ -22,9 +22,7 @@
 package example;
 
 import java.time.Instant;
-
 import com.influxdb.annotations.Column;
-
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
 public class Cpu {
@@ -39,6 +37,6 @@ public class Cpu {
 
     @Override
     public String toString() {
-        return ReflectionToStringBuilder.toString(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

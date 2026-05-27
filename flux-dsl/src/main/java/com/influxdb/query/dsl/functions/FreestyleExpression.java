@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Map;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Expression;
 import com.influxdb.query.dsl.HasImports;
 import com.influxdb.query.dsl.utils.ImportUtils;
@@ -40,27 +39,18 @@ public final class FreestyleExpression extends AbstractParametrizedFlux implemen
      * @param expression the string representation of th expression to encapsulate.
      */
     public FreestyleExpression(@Nonnull final String expression) {
-
         Arguments.checkNonEmpty(expression, "Expression");
-
         this.expression = expression;
     }
 
     @Override
     public String toString(@Nonnull final Map<String, Object> parameters, final boolean prependImports) {
-        StringBuilder builder = new StringBuilder();
-
-        if (prependImports) {
-            builder.append(ImportUtils.getImportsString(this));
-        }
-        builder.append(expression);
-
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     protected String operatorName() {
-        return "";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

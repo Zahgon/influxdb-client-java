@@ -23,7 +23,6 @@ package com.influxdb.client;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.domain.OnboardingRequest;
 import com.influxdb.client.domain.OnboardingResponse;
 import com.influxdb.client.domain.WriteConsistency;
@@ -48,12 +47,7 @@ public final class InfluxDBClientFactory {
      */
     @Nonnull
     public static InfluxDBClient create() {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .loadProperties()
-                .build();
-
-        return create(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,12 +60,7 @@ public final class InfluxDBClientFactory {
      */
     @Nonnull
     public static InfluxDBClient create(@Nonnull final String connectionString) {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .connectionString(connectionString)
-                .build();
-
-        return create(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -96,16 +85,8 @@ public final class InfluxDBClientFactory {
      * @see InfluxDBClientOptions.Builder#url(String)
      */
     @Nonnull
-    public static InfluxDBClient create(@Nonnull final String url,
-                                        @Nonnull final String username,
-                                        @Nonnull final char[] password) {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .url(url)
-                .authenticate(username, password)
-                .build();
-
-        return create(options);
+    public static InfluxDBClient create(@Nonnull final String url, @Nonnull final String username, @Nonnull final char[] password) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -123,8 +104,7 @@ public final class InfluxDBClientFactory {
      */
     @Nonnull
     public static InfluxDBClient create(@Nonnull final String url, @Nonnull final char[] token) {
-
-        return create(url, token, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -142,11 +122,8 @@ public final class InfluxDBClientFactory {
      * @see InfluxDBClientOptions.Builder#url(String)
      */
     @Nonnull
-    public static InfluxDBClient create(@Nonnull final String url,
-                                        @Nonnull final char[] token,
-                                        @Nullable final String org) {
-
-        return create(url, token, org, null);
+    public static InfluxDBClient create(@Nonnull final String url, @Nonnull final char[] token, @Nullable final String org) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -165,19 +142,8 @@ public final class InfluxDBClientFactory {
      * @see InfluxDBClientOptions.Builder#url(String)
      */
     @Nonnull
-    public static InfluxDBClient create(@Nonnull final String url,
-                                        @Nonnull final char[] token,
-                                        @Nullable final String org,
-                                        @Nullable final String bucket) {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .url(url)
-                .authenticateToken(token)
-                .org(org)
-                .bucket(bucket)
-                .build();
-
-        return create(options);
+    public static InfluxDBClient create(@Nonnull final String url, @Nonnull final char[] token, @Nullable final String org, @Nullable final String bucket) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -196,12 +162,8 @@ public final class InfluxDBClientFactory {
      * @return client
      */
     @Nonnull
-    public static InfluxDBClient createV1(@Nonnull final String url,
-                                          @Nullable final String username,
-                                          final char[] password,
-                                          @Nonnull final String database,
-                                          @Nullable final String retentionPolicy) {
-        return createV1(url, username, password, database, retentionPolicy, null);
+    public static InfluxDBClient createV1(@Nonnull final String url, @Nullable final String username, final char[] password, @Nonnull final String database, @Nullable final String retentionPolicy) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -225,26 +187,8 @@ public final class InfluxDBClientFactory {
      * @return client
      */
     @Nonnull
-    public static InfluxDBClient createV1(@Nonnull final String url,
-                                          @Nullable final String username,
-                                          final char[] password,
-                                          @Nonnull final String database,
-                                          @Nullable final String retentionPolicy,
-                                          @Nullable final WriteConsistency consistency) {
-
-        Arguments.checkNonEmpty(database, "database");
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .url(url)
-                .org("-")
-                .authenticateToken(String.format("%s:%s",
-                        username == null ? "" : username,
-                        password == null ? "" : String.valueOf(password)).toCharArray())
-                .bucket(String.format("%s/%s", database, retentionPolicy == null ? "" : retentionPolicy))
-                .consistency(consistency)
-                .build();
-
-        return create(options);
+    public static InfluxDBClient createV1(@Nonnull final String url, @Nullable final String username, final char[] password, @Nonnull final String database, @Nullable final String retentionPolicy, @Nullable final WriteConsistency consistency) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -255,10 +199,7 @@ public final class InfluxDBClientFactory {
      */
     @Nonnull
     public static InfluxDBClient create(@Nonnull final InfluxDBClientOptions options) {
-
-        Arguments.checkNotNull(options, "InfluxDBClientOptions");
-
-        return new InfluxDBClientImpl(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -272,27 +213,9 @@ public final class InfluxDBClientFactory {
      * @return Created default user, bucket, org.
      */
     @Nonnull
-    public static OnboardingResponse onBoarding(@Nonnull final String url,
-                                                @Nonnull final String username,
-                                                @Nonnull final String password,
-                                                @Nonnull final String org,
-                                                @Nonnull final String bucket) {
-
-        Arguments.checkNonEmpty(url, "url");
-        Arguments.checkNonEmpty(username, "username");
-        Arguments.checkNonEmpty(password, "password");
-        Arguments.checkNonEmpty(org, "org");
-        Arguments.checkNonEmpty(bucket, "bucket");
-
-        OnboardingRequest onboarding = new OnboardingRequest();
-        onboarding.setUsername(username);
-        onboarding.setPassword(password);
-        onboarding.setOrg(org);
-        onboarding.setBucket(bucket);
-
-        return onBoarding(url, onboarding);
+    public static OnboardingResponse onBoarding(@Nonnull final String url, @Nonnull final String username, @Nonnull final String password, @Nonnull final String org, @Nonnull final String bucket) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * Post onboarding request, to setup initial user, org and bucket.
@@ -302,14 +225,7 @@ public final class InfluxDBClientFactory {
      * @return Created default user, bucket, org.
      */
     @Nonnull
-    public static OnboardingResponse onBoarding(@Nonnull final String url,
-                                                @Nonnull final OnboardingRequest onboarding) {
-        Arguments.checkNonEmpty(url, "url");
-        Arguments.checkNotNull(onboarding, "onboarding");
-
-        try (InfluxDBClientImpl client = new InfluxDBClientImpl(InfluxDBClientOptions.builder().url(url).build())) {
-
-            return client.onBoarding(onboarding);
-        }
+    public static OnboardingResponse onBoarding(@Nonnull final String url, @Nonnull final OnboardingRequest onboarding) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

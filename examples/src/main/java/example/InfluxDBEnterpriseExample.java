@@ -30,42 +30,31 @@ import com.influxdb.client.write.WriteParameters;
 
 /**
  * How to use `consistency` parameter for InfluxDB Enterprise.
- * 
+ *
  * @author Jakub Bednar (12/04/2022 11:00)
  */
 public class InfluxDBEnterpriseExample {
 
     private static final String URL = "http://ec2-13-57-181-120.us-west-1.compute.amazonaws.com:8086";
+
     /**
      * Credentials
      */
     private static final String USERNAME = "username";
+
     private static final String PASSWORD = "password";
+
     /**
      * Database name
      */
     private static final String DB = "benchmark_db";
+
     /**
      * Retention policy name
      */
     private static final String RP = "autogen";
 
     public static void main(final String[] args) {
-
-        try (InfluxDBClient client = InfluxDBClientFactory.createV1(URL, USERNAME, PASSWORD.toCharArray(), DB, RP)) {
-
-            System.out.println("--- Write Record ---");
-
-            // Initialize Blocking API
-            WriteApiBlocking writeApi = client.getWriteApiBlocking();
-
-            // Configure precision and consistency
-            WriteParameters parameters = new WriteParameters(WritePrecision.NS, WriteConsistency.ALL);
-
-            // Write record
-            writeApi.writeRecord("cpu_load_short,host=server02 value=0.67", parameters);
-
-            System.out.println("--- Written data with consistency set to: ALL ---");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

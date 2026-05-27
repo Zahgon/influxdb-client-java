@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.time.temporal.ChronoUnit;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -49,18 +48,16 @@ public class InterpolateLinearFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "interpolate.linear";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     *
      * @param duration Time duration to use when computing the interpolation
      * @param unit The unit of the <code>duration</code>
      * @return this
      */
     public InterpolateLinearFlux withEvery(final long duration, final ChronoUnit unit) {
-        this.withPropertyValue("every", duration, unit);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,11 +66,6 @@ public class InterpolateLinearFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public InterpolateLinearFlux withEvery(@Nonnull final String every) {
-
-        Arguments.checkDuration(every, "every");
-
-        this.withPropertyValue("every", every);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

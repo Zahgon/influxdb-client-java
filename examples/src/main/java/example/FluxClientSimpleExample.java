@@ -22,7 +22,6 @@
 package example;
 
 import java.util.List;
-
 import com.influxdb.client.flux.FluxClient;
 import com.influxdb.client.flux.FluxClientFactory;
 import com.influxdb.client.flux.FluxConnectionOptions;
@@ -33,28 +32,6 @@ import com.influxdb.query.FluxTable;
 public class FluxClientSimpleExample {
 
     public static void main(final String[] args) {
-
-        FluxConnectionOptions options = FluxConnectionOptions.builder()
-            .url("http://localhost:8086/")
-            .build();
-
-        FluxClient fluxClient = FluxClientFactory.create(options);
-
-        String fluxQuery = "from(bucket: \"telegraf\")\n"
-            + " |> range(start: -1d)"
-            + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" and r[\"_field\"] == \"usage_system\"))"
-            + " |> sample(n: 5, pos: 1)";
-
-        List<FluxTable> tables = fluxClient.query(fluxQuery);
-
-        for (FluxTable fluxTable : tables) {
-            List<FluxRecord> records = fluxTable.getRecords();
-            for (FluxRecord fluxRecord : records) {
-                System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-            }
-        }
-
-        fluxClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

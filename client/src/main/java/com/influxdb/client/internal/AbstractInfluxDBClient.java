@@ -30,7 +30,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.InfluxDBClientOptions;
 import com.influxdb.client.JSON;
 import com.influxdb.client.domain.Dialect;
@@ -41,7 +40,6 @@ import com.influxdb.exceptions.InfluxException;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.internal.UserAgentInterceptor;
 import com.influxdb.utils.Arguments;
-
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -59,128 +57,68 @@ public abstract class AbstractInfluxDBClient extends AbstractRestClient {
 
     private static final Logger LOG = Logger.getLogger(AbstractInfluxDBClient.class.getName());
 
-    public static final Dialect DEFAULT_DIALECT = new Dialect().header(true)
-            .delimiter(",")
-            .commentPrefix("#")
-            .addAnnotationsItem(Dialect.AnnotationsEnum.DATATYPE)
-            .addAnnotationsItem(Dialect.AnnotationsEnum.GROUP).addAnnotationsItem(Dialect.AnnotationsEnum.DEFAULT);
+    public static final Dialect DEFAULT_DIALECT = new Dialect().header(true).delimiter(",").commentPrefix("#").addAnnotationsItem(Dialect.AnnotationsEnum.DATATYPE).addAnnotationsItem(Dialect.AnnotationsEnum.GROUP).addAnnotationsItem(Dialect.AnnotationsEnum.DEFAULT);
 
     public final HealthService healthService;
+
     public final PingService pingService;
 
     protected final Retrofit retrofit;
+
     protected final InfluxDBClientOptions options;
 
     protected final HttpLoggingInterceptor loggingInterceptor;
+
     protected final GzipInterceptor gzipInterceptor;
+
     private final AuthenticateInterceptor authenticateInterceptor;
+
     private final OkHttpClient okHttpClient;
+
     protected final Collection<AutoCloseable> autoCloseables = new CopyOnWriteArrayList<>();
 
     public AbstractInfluxDBClient(@Nonnull final InfluxDBClientOptions options, @Nonnull final String clientType) {
         this(options, clientType, Collections.singletonList(RxJava3CallAdapterFactory.createSynchronous()));
     }
 
-    public AbstractInfluxDBClient(@Nonnull final InfluxDBClientOptions options,
-                                  @Nonnull final String clientType,
-                                  @Nonnull final Collection<CallAdapter.Factory> factories) {
-
+    public AbstractInfluxDBClient(@Nonnull final InfluxDBClientOptions options, @Nonnull final String clientType, @Nonnull final Collection<CallAdapter.Factory> factories) {
         Arguments.checkNotNull(options, "InfluxDBClientOptions");
         Arguments.checkNotNull(factories, "factories");
         Arguments.checkNonEmpty(clientType, "clientType");
-
         this.options = options;
         this.loggingInterceptor = new HttpLoggingInterceptor();
         this.loggingInterceptor.redactHeader("Authorization");
         setLogLevel(loggingInterceptor, options.getLogLevel());
         this.authenticateInterceptor = new AuthenticateInterceptor(options);
         this.gzipInterceptor = new GzipInterceptor();
-
         // These Interceptors are the default for OkHttpClient. It must be unique for every OkHttpClient
-        List<Class<? extends Interceptor>> excludeInterceptorClasses = List.of(
-                UserAgentInterceptor.class,
-                AuthenticateInterceptor.class,
-                HttpLoggingInterceptor.class,
-                GzipInterceptor.class
-        );
-        options.getOkHttpClient()
-                .interceptors()
-                .removeIf(interceptor -> excludeInterceptorClasses.contains(interceptor.getClass()));
-
+        List<Class<? extends Interceptor>> excludeInterceptorClasses = List.of(UserAgentInterceptor.class, AuthenticateInterceptor.class, HttpLoggingInterceptor.class, GzipInterceptor.class);
+        options.getOkHttpClient().interceptors().removeIf(interceptor -> excludeInterceptorClasses.contains(interceptor.getClass()));
         String customClientType = options.getClientType() != null ? options.getClientType() : clientType;
-        this.okHttpClient = options.getOkHttpClient()
-                //
-                // We don't need to disable the `retryOnConnectionFailure`. The retry logic
-                // in the OkHttp is not in a collision with our "exponential backoff strategy"
-                // for writes. OkHttp logic uses the possibility of routing to another "routes"
-                // - e.g. network loopback or multiple proxies.
-                //
-                //.retryOnConnectionFailure(false)
-                .addInterceptor(new UserAgentInterceptor(customClientType))
-                .addInterceptor(this.authenticateInterceptor)
-                .addInterceptor(this.loggingInterceptor)
-                .addInterceptor(this.gzipInterceptor)
-                .build();
-
+        this.okHttpClient = options.getOkHttpClient().//
+        // We don't need to disable the `retryOnConnectionFailure`. The retry logic
+        // in the OkHttp is not in a collision with our "exponential backoff strategy"
+        // for writes. OkHttp logic uses the possibility of routing to another "routes"
+        // - e.g. network loopback or multiple proxies.
+        //
+        //.retryOnConnectionFailure(false)
+        addInterceptor(new UserAgentInterceptor(customClientType)).addInterceptor(this.authenticateInterceptor).addInterceptor(this.loggingInterceptor).addInterceptor(this.gzipInterceptor).build();
         this.authenticateInterceptor.initToken(okHttpClient);
-
-        Retrofit.Builder retrofitBuilder = new Retrofit.Builder()
-                .baseUrl(options.getUrl())
-                .client(okHttpClient)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(new JSON().getGson()));
-
+        Retrofit.Builder retrofitBuilder = new Retrofit.Builder().baseUrl(options.getUrl()).client(okHttpClient).addConverterFactory(ScalarsConverterFactory.create()).addConverterFactory(GsonConverterFactory.create(new JSON().getGson()));
         for (CallAdapter.Factory factory : factories) {
             retrofitBuilder.addCallAdapterFactory(factory);
         }
-
         this.retrofit = retrofitBuilder.build();
-
         this.healthService = retrofit.create(HealthService.class);
         this.pingService = retrofit.create(PingService.class);
     }
 
     public void close() {
-
-        autoCloseables.stream().filter(Objects::nonNull).forEach(resource -> {
-            try {
-                resource.close();
-            } catch (Exception e) {
-                LOG.log(Level.WARNING, String.format("Exception was thrown while closing: %s", resource), e);
-            }
-        });
-        autoCloseables.clear();
-
-        //
-        // signout
-        //
-        try {
-            this.authenticateInterceptor.signout();
-        } catch (IOException e) {
-            LOG.log(Level.FINEST, "The signout exception", e);
-        }
-
-        //
-        // Shutdown OkHttp
-        //
-        okHttpClient.connectionPool().evictAll();
-        okHttpClient.dispatcher().executorService().shutdown();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     protected HealthCheck health(final Call<HealthCheck> healthCall) {
-
-        Arguments.checkNotNull(healthCall, "health call");
-
-        try {
-            return execute(healthCall);
-        } catch (InfluxException e) {
-            HealthCheck health = new HealthCheck();
-            health.setName("influxdb");
-            health.setStatus(HealthCheck.StatusEnum.FAIL);
-            health.setMessage(e.getMessage());
-
-            return health;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

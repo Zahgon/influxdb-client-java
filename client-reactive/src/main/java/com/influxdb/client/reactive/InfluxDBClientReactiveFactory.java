@@ -23,7 +23,6 @@ package com.influxdb.client.reactive;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.InfluxDBClientOptions;
 import com.influxdb.client.reactive.internal.InfluxDBClientReactiveImpl;
 import com.influxdb.utils.Arguments;
@@ -46,12 +45,7 @@ public final class InfluxDBClientReactiveFactory {
      */
     @Nonnull
     public static InfluxDBClientReactive create() {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .loadProperties()
-                .build();
-
-        return create(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,12 +61,7 @@ public final class InfluxDBClientReactiveFactory {
      */
     @Nonnull
     public static InfluxDBClientReactive create(@Nonnull final String connectionString) {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .url(connectionString)
-                .build();
-
-        return create(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -97,16 +86,8 @@ public final class InfluxDBClientReactiveFactory {
      * @see InfluxDBClientOptions.Builder#url(String)
      */
     @Nonnull
-    public static InfluxDBClientReactive create(@Nonnull final String url,
-                                                @Nonnull final String username,
-                                                @Nonnull final char[] password) {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .url(url)
-                .authenticate(username, password)
-                .build();
-
-        return create(options);
+    public static InfluxDBClientReactive create(@Nonnull final String url, @Nonnull final String username, @Nonnull final char[] password) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -124,8 +105,7 @@ public final class InfluxDBClientReactiveFactory {
      */
     @Nonnull
     public static InfluxDBClientReactive create(@Nonnull final String url, @Nonnull final char[] token) {
-
-        return create(url, token, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -143,11 +123,8 @@ public final class InfluxDBClientReactiveFactory {
      * @see InfluxDBClientOptions.Builder#url(String)
      */
     @Nonnull
-    public static InfluxDBClientReactive create(@Nonnull final String url,
-                                                @Nonnull final char[] token,
-                                                @Nullable final String org) {
-
-        return create(url, token, org, null);
+    public static InfluxDBClientReactive create(@Nonnull final String url, @Nonnull final char[] token, @Nullable final String org) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -166,19 +143,8 @@ public final class InfluxDBClientReactiveFactory {
      * @see InfluxDBClientOptions.Builder#url(String)
      */
     @Nonnull
-    public static InfluxDBClientReactive create(@Nonnull final String url,
-                                                @Nonnull final char[] token,
-                                                @Nullable final String org,
-                                                @Nullable final String bucket) {
-
-        InfluxDBClientOptions options = InfluxDBClientOptions.builder()
-                .url(url)
-                .authenticateToken(token)
-                .org(org)
-                .bucket(bucket)
-                .build();
-
-        return create(options);
+    public static InfluxDBClientReactive create(@Nonnull final String url, @Nonnull final char[] token, @Nullable final String org, @Nullable final String bucket) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -189,9 +155,6 @@ public final class InfluxDBClientReactiveFactory {
      */
     @Nonnull
     public static InfluxDBClientReactive create(@Nonnull final InfluxDBClientOptions options) {
-
-        Arguments.checkNotNull(options, "InfluxDBClientOptions");
-
-        return new InfluxDBClientReactiveImpl(options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

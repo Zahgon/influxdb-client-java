@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -56,7 +55,7 @@ public final class LimitFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "limit";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -65,12 +64,7 @@ public final class LimitFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public LimitFlux withN(final int numberOfResults) {
-
-        Arguments.checkPositiveNumber(numberOfResults, "Number of results");
-
-        this.withPropertyValue("n", numberOfResults);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -79,11 +73,6 @@ public final class LimitFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public LimitFlux withOffset(final int offset) {
-
-        Arguments.checkNotNegativeNumber(offset, "The number of records to skip");
-
-        this.withPropertyValue("offset", offset);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -69,7 +68,7 @@ public final class KeepFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "keep";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,12 +77,7 @@ public final class KeepFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public KeepFlux withColumns(@Nonnull final String[] columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -92,14 +86,8 @@ public final class KeepFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public KeepFlux withColumns(@Nonnull final Collection<String> columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * @param function The function which takes a column name as a parameter and returns a boolean indicating whether
@@ -108,11 +96,6 @@ public final class KeepFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public KeepFlux withFunction(@Nonnull final String function) {
-
-        Arguments.checkNonEmpty(function, "Function");
-
-        this.withFunction("fn: (column)", function);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

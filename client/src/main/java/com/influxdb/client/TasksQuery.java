@@ -75,73 +75,73 @@ public class TasksQuery {
 
     @Nullable
     public String getName() {
-        return name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setName(@Nullable final String name) {
-        this.name = name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getAfter() {
-        return after;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setAfter(@Nullable final String after) {
-        this.after = after;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getUser() {
-        return user;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setUser(@Nullable final String user) {
-        this.user = user;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getOrg() {
-        return org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOrg(@Nullable final String org) {
-        this.org = org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getOrgID() {
-        return orgID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOrgID(@Nullable final String orgID) {
-        this.orgID = orgID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getStatus() {
-        return status;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setStatus(@Nullable final String status) {
-        this.status = status;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public Integer getLimit() {
-        return limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLimit(@Nullable final Integer limit) {
-        this.limit = limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getType() {
-        return type;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setType(@Nullable final String type) {
-        this.type = type;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

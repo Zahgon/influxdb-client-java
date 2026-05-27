@@ -32,9 +32,13 @@ import javax.annotation.Nullable;
 public class InfluxQLQuery {
 
     private final String command;
+
     private final String database;
+
     private String retentionPolicy;
+
     private InfluxQLPrecision precision;
+
     private AcceptHeader acceptHeader;
 
     /**
@@ -52,9 +56,7 @@ public class InfluxQLQuery {
      * @param database the database to run this query against
      * @param acceptHeader the <code>Accept</code> header to use in the request
      */
-    public InfluxQLQuery(@Nonnull final String command,
-                         @Nonnull final String database,
-                         @Nonnull final AcceptHeader acceptHeader) {
+    public InfluxQLQuery(@Nonnull final String command, @Nonnull final String database, @Nonnull final AcceptHeader acceptHeader) {
         this.command = command;
         this.database = database;
         this.acceptHeader = acceptHeader;
@@ -65,7 +67,7 @@ public class InfluxQLQuery {
      */
     @Nonnull
     public String getCommand() {
-        return command;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -73,7 +75,7 @@ public class InfluxQLQuery {
      */
     @Nonnull
     public String getDatabase() {
-        return database;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -81,7 +83,7 @@ public class InfluxQLQuery {
      */
     @Nullable
     public String getRetentionPolicy() {
-        return retentionPolicy;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -90,8 +92,7 @@ public class InfluxQLQuery {
      */
     @Nonnull
     public InfluxQLQuery setRetentionPolicy(@Nullable final String retentionPolicy) {
-        this.retentionPolicy = retentionPolicy;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -99,47 +100,45 @@ public class InfluxQLQuery {
      */
     @Nullable
     public InfluxQLPrecision getPrecision() {
-        return precision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
-     *
      * @param precision The precision used for the timestamps returned by the query
      * @return this
      */
     @Nonnull
     public InfluxQLQuery setPrecision(@Nullable final InfluxQLPrecision precision) {
-        this.precision = precision;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the current AcceptHeader used when making queries.
      */
     public AcceptHeader getAcceptHeader() {
-        return acceptHeader;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    /***
+    /**
      * @param acceptHeader the AcceptHeader to be used when making queries.
      * @return this
      */
     public InfluxQLQuery setAcceptHeader(final AcceptHeader acceptHeader) {
-        this.acceptHeader = acceptHeader;
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return the string value of the AcceptHeader used when making queries.
      */
     public String getAcceptHeaderVal() {
-        return acceptHeader != null ? acceptHeader.getVal() : AcceptHeader.CSV.getVal();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * The precision used for the timestamps returned by InfluxQL queries.
      */
     public enum InfluxQLPrecision {
+
         HOURS("h"),
         MINUTES("m"),
         SECONDS("s"),
@@ -158,28 +157,12 @@ public class InfluxQLQuery {
          */
         @Nonnull
         public String getSymbol() {
-            return symbol;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
         public static InfluxQLPrecision toTimePrecision(final TimeUnit t) {
-            switch (t) {
-                case HOURS:
-                    return HOURS;
-                case MINUTES:
-                    return MINUTES;
-                case SECONDS:
-                    return SECONDS;
-                case MILLISECONDS:
-                    return MILLISECONDS;
-                case MICROSECONDS:
-                    return MICROSECONDS;
-                case NANOSECONDS:
-                    return NANOSECONDS;
-                default:
-                    throw new IllegalArgumentException("time precision must be one of:"
-                            + Arrays.toString(InfluxQLPrecision.values()));
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -187,8 +170,8 @@ public class InfluxQLQuery {
      * The possible values to be used in the header <code>Accept</code>, when making queries.
      */
     public enum AcceptHeader {
-        JSON("application/json"),
-        CSV("application/csv");
+
+        JSON("application/json"), CSV("application/csv");
 
         private final String val;
 
@@ -197,7 +180,7 @@ public class InfluxQLQuery {
         }
 
         public String getVal() {
-            return val;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

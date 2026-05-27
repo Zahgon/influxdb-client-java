@@ -48,6 +48,7 @@ public class OrganizationsQuery {
      */
     @Nullable
     private String org;
+
     /**
      * Filter organizations to a specific organization ID. (optional)
      */
@@ -62,56 +63,55 @@ public class OrganizationsQuery {
 
     @Nullable
     public Integer getOffset() {
-        return offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOffset(@Nullable final Integer offset) {
-        this.offset = offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public Integer getLimit() {
-        return limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLimit(@Nullable final Integer limit) {
-        this.limit = limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public Boolean getDescending() {
-        return descending;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDescending(@Nullable final Boolean descending) {
-        this.descending = descending;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getOrg() {
-        return org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOrg(@Nullable final String org) {
-        this.org = org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getOrgID() {
-        return orgID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOrgID(@Nullable final String orgID) {
-        this.orgID = orgID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getUserID() {
-        return userID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setUserID(@Nullable final String userID) {
-        this.userID = userID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

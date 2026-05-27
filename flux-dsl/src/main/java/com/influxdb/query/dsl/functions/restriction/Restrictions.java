@@ -35,17 +35,17 @@ public abstract class Restrictions {
 
     @Nonnull
     public static Restrictions and(@Nonnull final Restrictions... restrictions) {
-        return new Logical("and", restrictions);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     public static Restrictions or(@Nonnull final Restrictions... restrictions) {
-        return new Logical("or", restrictions);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     public static Restrictions not(@Nonnull final Restrictions restrictions) {
-        return new Not(restrictions);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -55,7 +55,7 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction measurement() {
-        return new ColumnRestriction("_measurement");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -65,7 +65,7 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction field() {
-        return new ColumnRestriction("_field");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -75,7 +75,7 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction start() {
-        return new ColumnRestriction("_start");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -85,7 +85,7 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction stop() {
-        return new ColumnRestriction("_stop");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -95,7 +95,7 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction time() {
-        return new ColumnRestriction("_time");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -105,7 +105,7 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction value() {
-        return new ColumnRestriction("_value");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -116,7 +116,7 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction tag(@Nonnull final String tagName) {
-        return column(tagName);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -127,12 +127,13 @@ public abstract class Restrictions {
      */
     @Nonnull
     public static ColumnRestriction column(@Nonnull final String columnName) {
-        return new ColumnRestriction(columnName);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static class Logical extends Restrictions {
 
         private final String operator;
+
         private final Restrictions[] restrictions;
 
         Logical(@Nonnull final String operator, @Nonnull final Restrictions... restrictions) {
@@ -143,15 +144,7 @@ public abstract class Restrictions {
 
         @Override
         public String toString() {
-
-            return Stream.of(restrictions)
-                    .map(Object::toString)
-                    .filter(it -> it != null && !it.isEmpty())
-                    .collect(() -> new StringJoiner(" " + operator + " ", "(", ")")
-                                    .setEmptyValue(""),
-                            StringJoiner::add,
-                            StringJoiner::merge)
-                    .toString();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -166,7 +159,7 @@ public abstract class Restrictions {
 
         @Override
         public String toString() {
-            return "not " + restriction.toString();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

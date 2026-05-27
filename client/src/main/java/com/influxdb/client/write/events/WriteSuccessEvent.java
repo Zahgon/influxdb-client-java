@@ -24,7 +24,6 @@ package com.influxdb.client.write.events;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.domain.WritePrecision;
 
 /**
@@ -37,16 +36,14 @@ public final class WriteSuccessEvent extends AbstractWriteEvent {
     private static final Logger LOG = Logger.getLogger(WriteSuccessEvent.class.getName());
 
     private String organization;
+
     private String bucket;
+
     private WritePrecision precision;
+
     private String lineProtocol;
 
-    public WriteSuccessEvent(@Nonnull final String organization,
-                             @Nonnull final String bucket,
-                             @Nonnull final WritePrecision precision,
-                             @Nonnull final String lineProtocol) {
-
-
+    public WriteSuccessEvent(@Nonnull final String organization, @Nonnull final String bucket, @Nonnull final WritePrecision precision, @Nonnull final String lineProtocol) {
         this.organization = organization;
         this.bucket = bucket;
         this.precision = precision;
@@ -57,33 +54,32 @@ public final class WriteSuccessEvent extends AbstractWriteEvent {
      * @return The organization that was used for write data.
      */
     public String getOrganization() {
-        return organization;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return The bucket that was used for write data.
      */
     public String getBucket() {
-        return bucket;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return The Precision that was used for write data.
      */
     public WritePrecision getPrecision() {
-        return precision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * @return The successfully written data.
      */
     public String getLineProtocol() {
-        return lineProtocol;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void logEvent() {
-
-        LOG.log(Level.FINE, "The data was successfully written to InfluxDB.");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

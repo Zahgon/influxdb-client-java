@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.time.temporal.ChronoUnit;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -82,7 +81,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "aggregateWindow";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -92,13 +91,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withEvery(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit) {
-
-        Arguments.checkNotNull(every, "Every is required");
-        Arguments.checkNotNull(everyUnit, "Every ChronoUnit is required");
-
-        this.withPropertyValue("every", every, everyUnit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -107,12 +100,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withEvery(@Nonnull final String every) {
-
-        Arguments.checkDuration(every, "Every");
-
-        this.withPropertyValue("every", every);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,12 +109,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withFunction(@Nonnull final String function) {
-
-        Arguments.checkNonEmpty(function, "Function");
-
-        this.withFunction("fn: (column, tables=<-)", function);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -135,12 +118,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withAggregateFunction(@Nonnull final String namedFunction) {
-
-        Arguments.checkNonEmpty(namedFunction, "Function");
-
-        this.withPropertyValue("fn", namedFunction);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -149,12 +127,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withColumn(@Nonnull final String column) {
-
-        Arguments.checkNonEmpty(column, "Column");
-
-        this.withPropertyValueEscaped("column", column);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -163,12 +136,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withTimeSrc(@Nonnull final String timeSrc) {
-
-        Arguments.checkNonEmpty(timeSrc, "timeSrc");
-
-        this.withPropertyValueEscaped("timeSrc", timeSrc);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -177,12 +145,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withTimeDst(@Nonnull final String timeDst) {
-
-        Arguments.checkNonEmpty(timeDst, "timeDst");
-
-        this.withPropertyValueEscaped("timeDst", timeDst);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -192,10 +155,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withCreateEmpty(final boolean createEmpty) {
-
-        this.withPropertyValue("createEmpty", createEmpty);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -205,13 +165,7 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withOffset(@Nonnull final Long amount, @Nonnull final ChronoUnit unit) {
-
-        Arguments.checkNotNull(amount, "amount");
-        Arguments.checkNotNull(unit, "unit");
-
-        this.withPropertyValue("offset", amount, unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -220,11 +174,6 @@ public final class AggregateWindow extends AbstractParametrizedFlux {
      */
     @Nonnull
     public AggregateWindow withOffset(@Nonnull final String offset) {
-
-        Arguments.checkDuration(offset, "offset");
-
-        this.withPropertyValue("offset", offset);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

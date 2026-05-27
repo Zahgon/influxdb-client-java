@@ -32,7 +32,6 @@ import java.util.regex.Pattern;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
-
 import com.influxdb.LogLevel;
 import com.influxdb.client.domain.WriteConsistency;
 import com.influxdb.client.domain.WritePrecision;
@@ -40,7 +39,6 @@ import com.influxdb.client.write.PointSettings;
 import com.influxdb.client.write.WriteParameters;
 import com.influxdb.exceptions.InfluxException;
 import com.influxdb.utils.Arguments;
-
 import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Protocol;
@@ -53,28 +51,37 @@ import okhttp3.Protocol;
 public final class InfluxDBClientOptions {
 
     private static final Pattern TAGS_PROPERTY = Pattern.compile("(influx2\\.tags\\.)(.+)");
+
     private static final Pattern DURATION_PATTERN = Pattern.compile("^(\\d+)([a-zA-Z]{0,2})$");
 
     private final String url;
+
     private final String clientType;
+
     private final OkHttpClient.Builder okHttpClient;
+
     private final LogLevel logLevel;
 
     private final AuthScheme authScheme;
+
     private final char[] token;
+
     private final String username;
+
     private final char[] password;
 
     private final String org;
+
     private final String bucket;
+
     private final WritePrecision precision;
+
     private final WriteConsistency consistency;
+
     private final PointSettings pointSettings;
 
     private InfluxDBClientOptions(@Nonnull final InfluxDBClientOptions.Builder builder) {
-
         Arguments.checkNotNull(builder, "InfluxDBClientOptions.Builder");
-
         this.url = builder.url;
         this.clientType = builder.clientType;
         this.okHttpClient = builder.okHttpClient;
@@ -83,7 +90,6 @@ public final class InfluxDBClientOptions {
         this.token = builder.token;
         this.username = builder.username;
         this.password = builder.password;
-
         this.org = builder.org;
         this.bucket = builder.bucket;
         this.precision = builder.precision != null ? builder.precision : WriteParameters.DEFAULT_WRITE_PRECISION;
@@ -100,7 +106,6 @@ public final class InfluxDBClientOptions {
          * Basic auth.
          */
         SESSION,
-
         /**
          * Authentication token.
          */
@@ -113,7 +118,7 @@ public final class InfluxDBClientOptions {
      */
     @Nonnull
     public String getUrl() {
-        return url;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -124,7 +129,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public String getClientType() {
-        return clientType;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -133,7 +138,7 @@ public final class InfluxDBClientOptions {
      */
     @Nonnull
     public OkHttpClient.Builder getOkHttpClient() {
-        return okHttpClient;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -142,7 +147,7 @@ public final class InfluxDBClientOptions {
      */
     @Nonnull
     public LogLevel getLogLevel() {
-        return logLevel;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -152,7 +157,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public AuthScheme getAuthScheme() {
-        return authScheme;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -161,7 +166,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public char[] getToken() {
-        return token;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -170,7 +175,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public String getUsername() {
-        return username;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -179,7 +184,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public char[] getPassword() {
-        return password;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -188,7 +193,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public String getOrg() {
-        return org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -197,7 +202,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public String getBucket() {
-        return bucket;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -206,9 +211,8 @@ public final class InfluxDBClientOptions {
      */
     @Nonnull
     public WritePrecision getPrecision() {
-        return precision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * The write consistency for the point.
@@ -224,7 +228,7 @@ public final class InfluxDBClientOptions {
      */
     @Nullable
     public WriteConsistency getConsistency() {
-        return consistency;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -235,7 +239,7 @@ public final class InfluxDBClientOptions {
      */
     @Nonnull
     public PointSettings getPointSettings() {
-        return pointSettings;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -245,7 +249,7 @@ public final class InfluxDBClientOptions {
      */
     @Nonnull
     public static InfluxDBClientOptions.Builder builder() {
-        return new InfluxDBClientOptions.Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -255,18 +259,27 @@ public final class InfluxDBClientOptions {
     public static class Builder {
 
         private String url;
+
         private String clientType;
+
         private OkHttpClient.Builder okHttpClient;
+
         private LogLevel logLevel;
 
         private AuthScheme authScheme;
+
         private char[] token;
+
         private String username;
+
         private char[] password;
 
         private String org;
+
         private String bucket;
+
         private WritePrecision precision;
+
         private WriteConsistency consistency;
 
         private final PointSettings pointSettings = new PointSettings();
@@ -283,11 +296,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder url(@Nonnull final String url) {
-            Arguments.checkNonEmpty(url, "url");
-
-            connectionString(url);
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -301,11 +310,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder clientType(@Nonnull final String clientType) {
-            Arguments.checkNonEmpty(clientType, "clientType");
-
-            this.clientType = clientType;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -316,12 +321,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder okHttpClient(@Nonnull final OkHttpClient.Builder okHttpClient) {
-
-            Arguments.checkNotNull(okHttpClient, "OkHttpClient.Builder");
-
-            this.okHttpClient = okHttpClient;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -332,12 +332,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder logLevel(@Nonnull final LogLevel logLevel) {
-
-            Arguments.checkNotNull(logLevel, "logLevel");
-
-            this.logLevel = logLevel;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -355,17 +350,8 @@ public final class InfluxDBClientOptions {
          * @return {@code this}
          */
         @Nonnull
-        public InfluxDBClientOptions.Builder authenticate(@Nonnull final String username,
-                                                          @Nonnull final char[] password) {
-
-            Arguments.checkNonEmpty(username, "username");
-            Arguments.checkNotNull(password, "password");
-
-            this.authScheme = AuthScheme.SESSION;
-            this.username = username;
-            this.password = password;
-
-            return this;
+        public InfluxDBClientOptions.Builder authenticate(@Nonnull final String username, @Nonnull final char[] password) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -376,13 +362,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder authenticateToken(final char[] token) {
-
-            Arguments.checkNotNull(token, "token");
-
-            this.authScheme = AuthScheme.TOKEN;
-            this.token = token;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -393,10 +373,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder org(@Nullable final String org) {
-
-            this.org = org;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -407,10 +384,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder bucket(@Nullable final String bucket) {
-
-            this.bucket = bucket;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -421,10 +395,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder precision(@Nullable final WritePrecision precision) {
-
-            this.precision = precision;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -442,10 +413,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder consistency(@Nullable final WriteConsistency consistency) {
-
-            this.consistency = consistency;
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -463,14 +431,8 @@ public final class InfluxDBClientOptions {
          * @return this
          */
         @Nonnull
-        public InfluxDBClientOptions.Builder addDefaultTag(@Nonnull final String key,
-                                                           @Nullable final String expression) {
-
-            Arguments.checkNotNull(key, "tagName");
-
-            pointSettings.addDefaultTag(key, expression);
-
-            return this;
+        public InfluxDBClientOptions.Builder addDefaultTag(@Nonnull final String key, @Nullable final String expression) {
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -498,26 +460,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder connectionString(@Nonnull final String connectionString) {
-
-            Arguments.checkNonEmpty(connectionString, "url");
-
-            ParsedUrl parsedUrl = new ParsedUrl(connectionString);
-            HttpUrl parse = parsedUrl.httpUrl;
-
-            String org = parse.queryParameter("org");
-            String bucket = parse.queryParameter("bucket");
-            String token = parse.queryParameter("token");
-            String logLevel = parse.queryParameter("logLevel");
-            String readTimeout = parse.queryParameter("readTimeout");
-            String writeTimeout = parse.queryParameter("writeTimeout");
-            String connectTimeout = parse.queryParameter("connectTimeout");
-            String precision = parse.queryParameter("precision");
-            String consistency = parse.queryParameter("consistency");
-            String clientType = parse.queryParameter("clientType");
-
-            String url = parsedUrl.urlWithoutParams;
-            return configure(url, org, bucket, token, logLevel, readTimeout, writeTimeout, connectTimeout,
-                    precision, consistency, clientType);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -527,44 +470,7 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions.Builder loadProperties() {
-
-            try (InputStream inputStream = this.getClass().getResourceAsStream("/influx2.properties")) {
-
-                Properties properties = new Properties();
-                properties.load(inputStream);
-
-                String url = properties.getProperty("influx2.url");
-                String org = properties.getProperty("influx2.org");
-                String bucket = properties.getProperty("influx2.bucket");
-                String token = properties.getProperty("influx2.token");
-                String logLevel = properties.getProperty("influx2.logLevel");
-                String readTimeout = properties.getProperty("influx2.readTimeout");
-                String writeTimeout = properties.getProperty("influx2.writeTimeout");
-                String connectTimeout = properties.getProperty("influx2.connectTimeout");
-                String precision = properties.getProperty("influx2.precision");
-                String consistency = properties.getProperty("influx2.consistency");
-                String clientType = properties.getProperty("influx2.clientType");
-
-                //
-                // Default tags
-                //
-                properties.stringPropertyNames().forEach(key -> {
-
-                    Matcher matcher = TAGS_PROPERTY.matcher(key);
-
-                    if (matcher.matches()) {
-                        String tagKey = matcher.group(2);
-                        addDefaultTag(tagKey, properties.getProperty(key).trim());
-
-                    }
-                });
-
-                return configure(url, org, bucket, token, logLevel, readTimeout, writeTimeout, connectTimeout,
-                        precision, consistency, clientType);
-
-            } catch (IOException e) {
-                throw new IllegalStateException(e);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -574,36 +480,11 @@ public final class InfluxDBClientOptions {
          */
         @Nonnull
         public InfluxDBClientOptions build() {
-
-            if (url == null) {
-                throw new IllegalStateException("The url to connect to InfluxDB has to be defined.");
-            }
-
-            if (okHttpClient == null) {
-                okHttpClient = new OkHttpClient.Builder()
-                        .protocols(Collections.singletonList(Protocol.HTTP_1_1));
-            }
-
-            if (logLevel == null) {
-                logLevel = LogLevel.NONE;
-            }
-
-            return new InfluxDBClientOptions(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
-        private InfluxDBClientOptions.Builder configure(@Nonnull final String url,
-                                                        @Nullable final String org,
-                                                        @Nullable final String bucket,
-                                                        @Nullable final String token,
-                                                        @Nullable final String logLevel,
-                                                        @Nullable final String readTimeout,
-                                                        @Nullable final String writeTimeout,
-                                                        @Nullable final String connectTimeout,
-                                                        @Nullable final String precision,
-                                                        @Nullable final String consistency,
-                                                        @Nullable final String clientType) {
-
+        private InfluxDBClientOptions.Builder configure(@Nonnull final String url, @Nullable final String org, @Nullable final String bucket, @Nullable final String token, @Nullable final String logLevel, @Nullable final String readTimeout, @Nullable final String writeTimeout, @Nullable final String connectTimeout, @Nullable final String precision, @Nullable final String consistency, @Nullable final String clientType) {
             this.url = new ParsedUrl(url).urlWithoutParams;
             if (org != null) {
                 org(org);
@@ -611,31 +492,24 @@ public final class InfluxDBClientOptions {
             if (bucket != null) {
                 bucket(bucket);
             }
-
             if (token != null) {
                 authenticateToken(token.toCharArray());
             }
-
             if (logLevel != null) {
                 logLevel(Enum.valueOf(LogLevel.class, logLevel));
             }
-
             if (precision != null) {
                 precision(Enum.valueOf(WritePrecision.class, precision));
             }
-
             if (consistency != null) {
                 consistency(Enum.valueOf(WriteConsistency.class, consistency));
             }
-
             if (okHttpClient == null) {
-                okHttpClient = new OkHttpClient.Builder()
-                        .protocols(Collections.singletonList(Protocol.HTTP_1_1));
+                okHttpClient = new OkHttpClient.Builder().protocols(Collections.singletonList(Protocol.HTTP_1_1));
             }
             if (readTimeout != null) {
                 okHttpClient.readTimeout(toDuration(readTimeout));
             }
-
             if (writeTimeout != null) {
                 okHttpClient.writeTimeout(toDuration(writeTimeout));
             }
@@ -645,23 +519,19 @@ public final class InfluxDBClientOptions {
             if (clientType != null) {
                 clientType(clientType);
             }
-
             return this;
         }
 
         @Nonnull
         private Duration toDuration(@Nonnull final String value) {
-
             Matcher matcher = DURATION_PATTERN.matcher(value);
             if (!matcher.matches()) {
                 throw new InfluxException("'" + value + "' is not a valid duration");
             }
-
             String amount = matcher.group(1);
             String unit = matcher.group(2);
-
             ChronoUnit chronoUnit;
-            switch (unit != null && !unit.isEmpty() ? unit.toLowerCase() : "ms") {
+            switch(unit != null && !unit.isEmpty() ? unit.toLowerCase() : "ms") {
                 case "ms":
                     chronoUnit = ChronoUnit.MILLIS;
                     break;
@@ -674,33 +544,28 @@ public final class InfluxDBClientOptions {
                 default:
                     throw new InfluxException("unknown unit for '" + value + "'");
             }
-
             return Duration.of(Long.parseLong(amount), chronoUnit);
         }
 
         private static final class ParsedUrl {
+
             @Nonnull
             private final String urlWithoutParams;
+
             @Nonnull
             private final HttpUrl httpUrl;
 
             private ParsedUrl(@Nonnull final String connectionString) {
-
                 HttpUrl parse = HttpUrl.parse(connectionString);
                 if (parse == null) {
                     throw new InfluxException("Unable to parse connection string " + connectionString);
                 }
                 this.httpUrl = parse;
-
                 HttpUrl url = this.httpUrl.newBuilder().build();
-
                 //detect IPV6
                 String host = url.host().contains(":") ? "[" + url.host() + "]" : url.host();
                 String urlWithoutParams = url.scheme() + "://" + host + ":" + url.port() + url.encodedPath();
-
-                this.urlWithoutParams = urlWithoutParams.endsWith("/")
-                        ? urlWithoutParams
-                        : urlWithoutParams + "/";
+                this.urlWithoutParams = urlWithoutParams.endsWith("/") ? urlWithoutParams : urlWithoutParams + "/";
             }
         }
     }

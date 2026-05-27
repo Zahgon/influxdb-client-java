@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -47,7 +46,7 @@ public final class FillFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "fill";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -56,12 +55,7 @@ public final class FillFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public FillFlux withColumn(@Nonnull final String column) {
-
-        Arguments.checkNonEmpty(column, "column");
-
-        this.withPropertyValueEscaped("column", column);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -70,15 +64,7 @@ public final class FillFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public FillFlux withValue(@Nonnull final Object value) {
-        Arguments.checkNotNull(value, "value");
-
-        if (value instanceof String) {
-            this.withPropertyValueEscaped("value", (String) value);
-        } else {
-            this.withPropertyValue("value", value);
-        }
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -87,10 +73,6 @@ public final class FillFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public FillFlux withUsePrevious(@Nonnull final Boolean usePrevious) {
-        Arguments.checkNotNull(usePrevious, "usePrevious");
-
-        this.withPropertyValue("usePrevious", usePrevious);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

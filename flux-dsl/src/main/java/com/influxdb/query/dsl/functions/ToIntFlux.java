@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 
 /**
@@ -49,6 +48,6 @@ public final class ToIntFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "toInt";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

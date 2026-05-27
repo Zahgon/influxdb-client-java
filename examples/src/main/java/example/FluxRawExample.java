@@ -28,30 +28,6 @@ import com.influxdb.client.flux.FluxClientFactory;
 public class FluxRawExample {
 
     public static void main(final String[] args) {
-
-        FluxClient fluxClient = FluxClientFactory.create(
-            "http://localhost:8086/");
-
-        String fluxQuery = "from(bucket: \"telegraf\")\n"
-            + " |> range(start: -1d)"
-            + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" and r[\"_field\"] == \"usage_system\"))"
-            + " |> sample(n: 5, pos: 1)";
-
-        fluxClient.queryRaw(
-            fluxQuery, (cancellable, line) -> {
-                // process the flux query result record
-                System.out.println(line);
-
-            }, error -> {
-                // error handling while processing result
-                error.printStackTrace();
-
-            }, () -> {
-                // on complete
-                System.out.println("Query completed");
-            });
-
-        fluxClient.close();
-
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

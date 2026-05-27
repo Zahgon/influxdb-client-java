@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.utils.ImportUtils;
 
 /**
@@ -69,34 +68,21 @@ public class VariableAssignment extends Flux implements IsVariableAssignment {
 
     @Nonnull
     public String getVariableName() {
-        return name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void appendActual(@Nonnull final Map<String, Object> parameters, @Nonnull final StringBuilder builder) {
-        builder.append(name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString(@Nonnull final Map<String, Object> parameters, final boolean prependImports) {
-        StringBuilder builder = new StringBuilder();
-
-        if (prependImports) {
-            builder.append(ImportUtils.getImportsString(this));
-        }
-        builder.append(name).append(" = ").append(expression.toString(parameters, false));
-
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     @Override
     public Set<String> getImports() {
-        Set<String> result = new TreeSet<>(expression.getImports());
-        if (imports != null) {
-            result.addAll(imports);
-        }
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

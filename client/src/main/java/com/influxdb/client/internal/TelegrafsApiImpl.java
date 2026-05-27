@@ -30,7 +30,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.TelegrafsApi;
 import com.influxdb.client.domain.AddResourceMemberRequestBody;
 import com.influxdb.client.domain.Label;
@@ -52,7 +51,6 @@ import com.influxdb.client.domain.User;
 import com.influxdb.client.service.TelegrafsService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -65,483 +63,239 @@ final class TelegrafsApiImpl extends AbstractRestClient implements TelegrafsApi 
     private final TelegrafsService service;
 
     TelegrafsApiImpl(@Nonnull final TelegrafsService service) {
-
         Arguments.checkNotNull(service, "service");
-
         this.service = service;
     }
 
     @Nonnull
     @Override
-    public Telegraf createTelegraf(@Nonnull final String name,
-                                   @Nullable final String description,
-                                   @Nonnull final Organization org,
-                                   @Nonnull final Collection<TelegrafPlugin> plugins) {
-
-        Arguments.checkNotNull(org, "org");
-
-        return createTelegraf(name, description, org, createAgentConfiguration(), plugins);
+    public Telegraf createTelegraf(@Nonnull final String name, @Nullable final String description, @Nonnull final Organization org, @Nonnull final Collection<TelegrafPlugin> plugins) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Telegraf createTelegraf(@Nonnull final String name,
-                                   @Nullable final String description,
-                                   @Nonnull final Organization org,
-                                   @Nonnull final Map<String, Object> agentConfiguration,
-                                   @Nonnull final Collection<TelegrafPlugin> plugins) {
-
-        Arguments.checkNotNull(org, "org");
-
-        return createTelegraf(name, description, org.getId(), agentConfiguration, plugins);
+    public Telegraf createTelegraf(@Nonnull final String name, @Nullable final String description, @Nonnull final Organization org, @Nonnull final Map<String, Object> agentConfiguration, @Nonnull final Collection<TelegrafPlugin> plugins) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Telegraf createTelegraf(@Nonnull final String name,
-                                   @Nullable final String description,
-                                   @Nonnull final String orgID,
-                                   @Nonnull final Collection<TelegrafPlugin> plugins) {
-
-        return createTelegraf(name, description, orgID, createAgentConfiguration(), plugins);
+    public Telegraf createTelegraf(@Nonnull final String name, @Nullable final String description, @Nonnull final String orgID, @Nonnull final Collection<TelegrafPlugin> plugins) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public Telegraf createTelegraf(@Nonnull final String name,
-                                   @Nullable final String description,
-                                   @Nonnull final String orgID,
-                                   @Nonnull final Map<String, Object> agentConfiguration,
-                                   @Nonnull final Collection<TelegrafPlugin> plugins) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkNonEmpty(orgID, "orgID");
-        Arguments.checkNotNull(agentConfiguration, "agentConfiguration");
-        Arguments.checkNotNull(plugins, "plugins");
-
-        StringBuilder config = new StringBuilder();
-
-        // append agent configuration
-        config.append("[agent]").append("\n");
-
-        TelegrafPluginRequest telegrafRequest = new TelegrafPluginRequest()
-                .name(name)
-                .description(description)
-                .orgID(orgID)
-                .config(config.toString());
-
-        for (TelegrafPlugin plugin : plugins) {
-            telegrafRequest.addPluginsItem(new TelegrafPluginRequestPlugins()
-                    .description(plugin.getDescription())
-                    .type(plugin.getType().getValue())
-                    .name(plugin.getName())
-                    .config(plugin.getConfig()));
-        }
-
-        return createTelegraf(telegrafRequest);
+    public Telegraf createTelegraf(@Nonnull final String name, @Nullable final String description, @Nonnull final String orgID, @Nonnull final Map<String, Object> agentConfiguration, @Nonnull final Collection<TelegrafPlugin> plugins) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Telegraf createTelegraf(@Nonnull final String name,
-                                   @Nullable final String description,
-                                   @Nonnull final String orgID,
-                                   @Nonnull final String config,
-                                   @Nullable final TelegrafRequestMetadata metadata) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkNonEmpty(orgID, "orgID");
-        Arguments.checkNonEmpty(config, "config");
-
-        TelegrafPluginRequest telegrafRequest = new TelegrafPluginRequest()
-                .name(name)
-                .description(description)
-                .orgID(orgID)
-                .config(config)
-                .metadata(metadata);
-
-        return createTelegraf(telegrafRequest);
+    public Telegraf createTelegraf(@Nonnull final String name, @Nullable final String description, @Nonnull final String orgID, @Nonnull final String config, @Nullable final TelegrafRequestMetadata metadata) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Telegraf createTelegraf(@Nonnull final String name,
-                                   @Nullable final String description,
-                                   @Nonnull final Organization org,
-                                   @Nonnull final String config,
-                                   @Nullable final TelegrafRequestMetadata metadata) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkNotNull(org, "org");
-        Arguments.checkNonEmpty(config, "config");
-
-        return createTelegraf(name, description, org.getId(), config, metadata);
+    public Telegraf createTelegraf(@Nonnull final String name, @Nullable final String description, @Nonnull final Organization org, @Nonnull final String config, @Nullable final TelegrafRequestMetadata metadata) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Telegraf createTelegraf(@Nonnull final TelegrafPluginRequest telegrafPluginRequest) {
-
-        Arguments.checkNotNull(telegrafPluginRequest, "telegrafPluginRequest");
-
-        Call<Telegraf> call = service.postTelegrafs(telegrafPluginRequest, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @Nonnull
     @SuppressWarnings("MagicNumber")
     public HashMap<String, Object> createAgentConfiguration() {
-        HashMap<String, Object> agent = new LinkedHashMap<>();
-        agent.put("interval", "10s");
-        agent.put("round_interval", true);
-        agent.put("metric_batch_size", 1000);
-        agent.put("metric_buffer_limit", 10000);
-        agent.put("collection_jitter", "0s");
-        agent.put("flush_jitter", "0s");
-        agent.put("precision", "");
-        agent.put("omit_hostname", false);
-        return agent;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Telegraf updateTelegraf(@Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "TelegrafConfig");
-
-        TelegrafPluginRequest telegrafRequest = toTelegrafRequest(telegraf);
-
-        return updateTelegraf(telegraf.getId(), telegrafRequest);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Telegraf updateTelegraf(@Nonnull final String telegrafID,
-                                   @Nonnull final TelegrafPluginRequest telegrafPluginRequest) {
-        Arguments.checkNotNull(telegrafPluginRequest, "TelegrafPluginRequest");
-
-        Call<Telegraf> telegrafConfigCall = service.putTelegrafsID(telegrafID, telegrafPluginRequest, null);
-
-        return execute(telegrafConfigCall);
+    public Telegraf updateTelegraf(@Nonnull final String telegrafID, @Nonnull final TelegrafPluginRequest telegrafPluginRequest) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteTelegraf(@Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "TelegrafConfig");
-
-        deleteTelegraf(telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteTelegraf(@Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(telegrafID, "telegrafConfigID");
-
-        Call<Void> call = service.deleteTelegrafsID(telegrafID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Telegraf cloneTelegraf(@Nonnull final String clonedName,
-                                  @Nonnull final String telegrafConfigID) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNonEmpty(telegrafConfigID, "telegrafConfigID");
-
-        Telegraf telegrafConfig = findTelegrafByID(telegrafConfigID);
-
-        return cloneTelegraf(clonedName, telegrafConfig);
+    public Telegraf cloneTelegraf(@Nonnull final String clonedName, @Nonnull final String telegrafConfigID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Telegraf cloneTelegraf(@Nonnull final String clonedName,
-                                  @Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNotNull(telegraf, "TelegrafConfig");
-
-
-        TelegrafPluginRequest telegrafRequest = toTelegrafRequest(telegraf);
-
-        Telegraf created = createTelegraf(telegrafRequest);
-        created.setName(clonedName);
-
-        getLabels(telegraf).forEach(label -> addLabel(label, created));
-
-        return created;
+    public Telegraf cloneTelegraf(@Nonnull final String clonedName, @Nonnull final Telegraf telegraf) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Telegraf findTelegrafByID(@Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig ID");
-
-        Call<Telegraf> telegrafConfig = service.getTelegrafsIDTelegraf(telegrafID, null, "application/json");
-
-        return execute(telegrafConfig);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Telegraf> findTelegrafs() {
-        return findTelegrafsByOrgId(null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Telegraf> findTelegrafsByOrg(@Nonnull final Organization organization) {
-
-        Arguments.checkNotNull(organization, "organization");
-
-        return findTelegrafsByOrgId(organization.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Telegraf> findTelegrafsByOrgId(@Nullable final String orgID) {
-
-        Call<Telegrafs> configsCall = service.getTelegrafs(orgID, null);
-
-        Telegrafs telegrafConfigs = execute(configsCall);
-        LOG.log(Level.FINEST, "findTelegrafs found: {0}", telegrafConfigs);
-
-        return telegrafConfigs.getConfigurations();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public String getTOML(@Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "TelegrafConfig");
-
-        return getTOML(telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public String getTOML(@Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig ID");
-
-        Call<String> telegrafConfig = service
-                .getTelegrafsID(telegrafID, null, "application/toml");
-
-        return execute(telegrafConfig);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceMember> getMembers(@Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "TelegrafConfig");
-
-        return getMembers(telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceMember> getMembers(@Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig.ID");
-
-        Call<ResourceMembers> call = service.getTelegrafsIDMembers(telegrafID, null);
-        ResourceMembers resourceMembers = execute(call);
-        LOG.log(Level.FINEST, "findTelegrafConfigMembers found: {0}", resourceMembers);
-
-        return resourceMembers.getUsers();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceMember addMember(@Nonnull final User member, @Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-        Arguments.checkNotNull(member, "member");
-
-        return addMember(member.getId(), telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceMember addMember(@Nonnull final String memberID, @Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(memberID, "Member ID");
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig.ID");
-
-        AddResourceMemberRequestBody user = new AddResourceMemberRequestBody();
-        user.setId(memberID);
-
-        Call<ResourceMember> call = service.postTelegrafsIDMembers(telegrafID, user, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteMember(@Nonnull final User member, @Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-        Arguments.checkNotNull(member, "member");
-
-        deleteMember(member.getId(), telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteMember(@Nonnull final String memberID, @Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(memberID, "Member ID");
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig.ID");
-
-        Call<Void> call = service.deleteTelegrafsIDMembersID(memberID, telegrafID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceOwner> getOwners(@Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-
-        return getOwners(telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceOwner> getOwners(@Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig.ID");
-
-        Call<ResourceOwners> call = service.getTelegrafsIDOwners(telegrafID, null);
-        ResourceOwners resourceMembers = execute(call);
-        LOG.log(Level.FINEST, "findTelegrafConfigOwners found: {0}", resourceMembers);
-
-        return resourceMembers.getUsers();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceOwner addOwner(@Nonnull final User owner, @Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-        Arguments.checkNotNull(owner, "owner");
-
-        return addOwner(owner.getId(), telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceOwner addOwner(@Nonnull final String ownerID, @Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(ownerID, "Owner ID");
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig.ID");
-
-        AddResourceMemberRequestBody user = new AddResourceMemberRequestBody();
-        user.setId(ownerID);
-
-        Call<ResourceOwner> call = service.postTelegrafsIDOwners(telegrafID, user, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteOwner(@Nonnull final User owner, @Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-        Arguments.checkNotNull(owner, "owner");
-
-        deleteOwner(owner.getId(), telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteOwner(@Nonnull final String ownerID, @Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(ownerID, "Owner ID");
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig.ID");
-
-        Call<Void> call = service.deleteTelegrafsIDOwnersID(ownerID, telegrafID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-
-        return getLabels(telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(telegrafID, "TelegrafConfig.ID");
-
-        Call<LabelsResponse> call = service.getTelegrafsIDLabels(telegrafID, null);
-
-        return execute(call).getLabels();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final Label label, @Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-
-        return addLabel(label.getId(), telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final String labelID, @Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(telegrafID, "telegrafConfigID");
-
-        LabelMapping labelMapping = new LabelMapping();
-        labelMapping.setLabelID(labelID);
-
-        Call<LabelResponse> call = service.postTelegrafsIDLabels(telegrafID, labelMapping, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final Label label, @Nonnull final Telegraf telegraf) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(telegraf, "telegrafConfig");
-
-        deleteLabel(label.getId(), telegraf.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final String labelID, @Nonnull final String telegrafID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(telegrafID, "telegrafConfigID");
-
-        Call<Void> call = service.deleteTelegrafsIDLabelsID(telegrafID, labelID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     private TelegrafPluginRequest toTelegrafRequest(@Nonnull final Telegraf telegraf) {
-
         Arguments.checkNotNull(telegraf, "telegraf");
-
         TelegrafPluginRequest telegrafRequest = new TelegrafPluginRequest();
         telegrafRequest.setName(telegraf.getName());
         telegrafRequest.setDescription(telegraf.getDescription());
         telegrafRequest.setConfig(telegraf.getConfig());
         telegrafRequest.setMetadata(telegraf.getMetadata());
         telegrafRequest.setOrgID(telegraf.getOrgID());
-
         return telegrafRequest;
     }
 }

@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -57,7 +56,7 @@ public final class MeanFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "mean";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -66,11 +65,6 @@ public final class MeanFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public MeanFlux withColumn(@Nonnull final String column) {
-
-        Arguments.checkNonEmpty(column, "Column");
-
-        this.withPropertyValueEscaped("column", column);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

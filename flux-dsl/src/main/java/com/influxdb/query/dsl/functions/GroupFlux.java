@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -59,14 +58,13 @@ import com.influxdb.utils.Arguments;
 public final class GroupFlux extends AbstractParametrizedFlux {
 
     public GroupFlux(@Nonnull final Flux source) {
-
         super(source);
     }
 
     @Nonnull
     @Override
     protected String operatorName() {
-        return "group";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -75,12 +73,7 @@ public final class GroupFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public GroupFlux withBy(@Nonnull final String groupBy) {
-
-        Arguments.checkNotNull(groupBy, "GroupBy Column are required");
-
-        this.withPropertyValue("columns", new String[]{groupBy});
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -89,12 +82,7 @@ public final class GroupFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public GroupFlux withBy(@Nonnull final String[] groupBy) {
-
-        Arguments.checkNotNull(groupBy, "GroupBy Columns are required");
-
-        this.withPropertyValue("columns", groupBy);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -103,12 +91,7 @@ public final class GroupFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public GroupFlux withBy(@Nonnull final Collection<String> groupBy) {
-
-        Arguments.checkNotNull(groupBy, "GroupBy Columns are required");
-
-        this.withPropertyValue("columns", groupBy);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -117,13 +100,7 @@ public final class GroupFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public GroupFlux withExcept(@Nonnull final String except) {
-
-        Arguments.checkNotNull(except, "GroupBy Except Columns are required");
-
-        this.withPropertyValue("columns", new String[]{except});
-        this.withPropertyValueEscaped("mode", "except");
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -132,13 +109,7 @@ public final class GroupFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public GroupFlux withExcept(@Nonnull final String[] except) {
-
-        Arguments.checkNotNull(except, "GroupBy Except Columns are required");
-
-        this.withPropertyValue("columns", except);
-        this.withPropertyValueEscaped("mode", "except");
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -147,12 +118,6 @@ public final class GroupFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public GroupFlux withExcept(@Nonnull final Collection<String> except) {
-
-        Arguments.checkNotNull(except, "GroupBy Except Columns are required");
-
-        this.withPropertyValue("columns", except);
-        this.withPropertyValueEscaped("mode", "except");
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

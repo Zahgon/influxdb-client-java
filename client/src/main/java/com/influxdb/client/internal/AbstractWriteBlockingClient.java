@@ -27,7 +27,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.InfluxDBClientOptions;
 import com.influxdb.client.domain.WriteConsistency;
 import com.influxdb.client.domain.WritePrecision;
@@ -36,7 +35,6 @@ import com.influxdb.client.service.WriteService;
 import com.influxdb.client.write.WriteParameters;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -47,57 +45,24 @@ public abstract class AbstractWriteBlockingClient extends AbstractRestClient {
     private static final Logger LOG = Logger.getLogger(AbstractWriteBlockingClient.class.getName());
 
     private final WriteService service;
+
     private final MeasurementMapper measurementMapper = new MeasurementMapper();
 
     protected final InfluxDBClientOptions options;
 
-    public AbstractWriteBlockingClient(@Nonnull final WriteService service,
-                                       @Nonnull final InfluxDBClientOptions options) {
-
+    public AbstractWriteBlockingClient(@Nonnull final WriteService service, @Nonnull final InfluxDBClientOptions options) {
         Arguments.checkNotNull(service, "service");
         Arguments.checkNotNull(options, "options");
-
         this.options = options;
         this.service = service;
     }
 
-    protected void write(@Nonnull final WriteParameters parameters,
-                         @Nonnull final Stream<AbstractWriteClient.BatchWriteData> stream) {
-
-        String lineProtocol = stream.map(AbstractWriteClient.BatchWriteData::toLineProtocol)
-                .filter(it -> it != null && !it.isEmpty())
-                .collect(Collectors.joining("\n"));
-
-        if (lineProtocol.isEmpty()) {
-
-            LOG.warning("The writes: " + stream + " doesn't contains any Line Protocol, skipping");
-            return;
-        }
-
-        String organization = parameters.orgSafe(options);
-        String bucket = parameters.bucketSafe(options);
-        WritePrecision precision = parameters.precisionSafe(options);
-        WriteConsistency consistency = parameters.consistencySafe(options);
-
-        LOG.log(Level.FINEST,
-                "Writing time-series data into InfluxDB (org={0}, bucket={1}, precision={2})...",
-                new Object[]{organization, bucket, precision});
-
-        Call<Void> voidCall = service.postWrite(organization, bucket, lineProtocol, null,
-                null, "text/plain; charset=utf-8", null,
-                "application/json", null, precision, consistency);
-
-        execute(voidCall);
-
-        LOG.log(Level.FINEST, "Written data into InfluxDB: {0}", lineProtocol);
+    protected void write(@Nonnull final WriteParameters parameters, @Nonnull final Stream<AbstractWriteClient.BatchWriteData> stream) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
-    protected <M> BatchWriteDataMeasurement toMeasurementBatch(@Nullable final M measurement,
-                                                               @Nonnull final WritePrecision precision) {
-
-        Arguments.checkNotNull(precision, "WritePrecision");
-
-        return new BatchWriteDataMeasurement(measurement, precision, options, measurementMapper);
+    protected <M> BatchWriteDataMeasurement toMeasurementBatch(@Nullable final M measurement, @Nonnull final WritePrecision precision) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

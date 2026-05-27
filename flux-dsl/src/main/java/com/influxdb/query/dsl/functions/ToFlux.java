@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -69,7 +68,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "to";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,12 +77,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withBucket(@Nonnull final String bucket) {
-
-        Arguments.checkNonEmpty(bucket, "bucket");
-
-        this.withPropertyValueEscaped("bucket", bucket);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -92,12 +86,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withBucketID(@Nonnull final String bucketID) {
-
-        Arguments.checkNonEmpty(bucketID, "bucketID");
-
-        this.withPropertyValueEscaped("bucketID", bucketID);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,12 +95,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withOrg(@Nonnull final String org) {
-
-        Arguments.checkNonEmpty(org, "org");
-
-        this.withPropertyValueEscaped("org", org);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -120,12 +104,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withOrgID(@Nonnull final String orgID) {
-
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        this.withPropertyValueEscaped("orgID", orgID);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -134,12 +113,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withHost(@Nonnull final String host) {
-
-        Arguments.checkNonEmpty(host, "host");
-
-        this.withPropertyValueEscaped("host", host);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -148,12 +122,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withToken(@Nonnull final String token) {
-
-        Arguments.checkNonEmpty(token, "token");
-
-        this.withPropertyValueEscaped("token", token);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -162,12 +131,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withTimeColumn(@Nonnull final String timeColumn) {
-
-        Arguments.checkNonEmpty(timeColumn, "timeColumn");
-
-        this.withPropertyValueEscaped("timeColumn", timeColumn);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -176,12 +140,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withTagColumns(@Nonnull final String[] tagColumns) {
-
-        Arguments.checkNotNull(tagColumns, "tagColumns");
-
-        this.withPropertyValue("tagColumns", tagColumns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -190,12 +149,7 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withTagColumns(@Nonnull final Collection<String> tagColumns) {
-
-        Arguments.checkNotNull(tagColumns, "tagColumns");
-
-        this.withPropertyValue("tagColumns", tagColumns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -204,11 +158,6 @@ public final class ToFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ToFlux withFieldFunction(@Nonnull final String fieldFn) {
-
-        Arguments.checkNonEmpty(fieldFn, "fieldFn");
-
-        this.withFunction("fieldFn: (r)", fieldFn);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

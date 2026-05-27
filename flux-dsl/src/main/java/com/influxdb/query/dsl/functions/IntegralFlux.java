@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.time.temporal.ChronoUnit;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -57,7 +56,7 @@ public final class IntegralFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "integral";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,13 +66,7 @@ public final class IntegralFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public IntegralFlux withUnit(@Nonnull final Long duration, @Nonnull final ChronoUnit unit) {
-
-        Arguments.checkNotNull(duration, "Duration is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        this.withPropertyValue("unit", duration, unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,11 +75,6 @@ public final class IntegralFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public IntegralFlux withUnit(@Nonnull final String unit) {
-
-        Arguments.checkDuration(unit, "Unit");
-
-        this.withPropertyValue("unit", unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

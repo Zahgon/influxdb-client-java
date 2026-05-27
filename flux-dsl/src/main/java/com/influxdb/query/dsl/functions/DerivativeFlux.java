@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.functions;
 import java.time.temporal.ChronoUnit;
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -68,7 +67,7 @@ public final class DerivativeFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "derivative";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,13 +77,7 @@ public final class DerivativeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DerivativeFlux withUnit(@Nonnull final Long duration, @Nonnull final ChronoUnit unit) {
-
-        Arguments.checkNotNull(duration, "Duration is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        this.withPropertyValue("unit", duration, unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -93,12 +86,7 @@ public final class DerivativeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DerivativeFlux withUnit(@Nonnull final String unit) {
-
-        Arguments.checkDuration(unit, "Unit");
-
-        this.withPropertyValue("unit", unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -107,10 +95,7 @@ public final class DerivativeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DerivativeFlux withNonNegative(final boolean useStartTime) {
-
-        this.withPropertyValue("nonNegative", useStartTime);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -119,12 +104,7 @@ public final class DerivativeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DerivativeFlux withColumns(@Nonnull final String[] columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -133,12 +113,7 @@ public final class DerivativeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DerivativeFlux withColumns(@Nonnull final Collection<String> columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -147,11 +122,6 @@ public final class DerivativeFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DerivativeFlux withTimeColumn(@Nonnull final String timeColumn) {
-
-        Arguments.checkNonEmpty(timeColumn, "Time column");
-
-        this.withPropertyValueEscaped("timeColumn", timeColumn);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

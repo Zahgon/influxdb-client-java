@@ -26,9 +26,7 @@ import java.time.Instant;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
 import com.influxdb.client.domain.WritePrecision;
-
 import static java.util.function.Function.identity;
 
 /**
@@ -39,8 +37,11 @@ import static java.util.function.Function.identity;
 public final class NanosecondConverter {
 
     private static final BigInteger NANOS_PER_SECOND = BigInteger.valueOf(1000_000_000L);
+
     private static final BigInteger MICRO_PER_NANOS = BigInteger.valueOf(1000L);
+
     private static final BigInteger MILLIS_PER_NANOS = BigInteger.valueOf(1000000L);
+
     private static final BigInteger SECONDS_PER_NANOS = BigInteger.valueOf(1000000000L);
 
     private NanosecondConverter() {
@@ -66,7 +67,7 @@ public final class NanosecondConverter {
      * @return epoch timestamp in precision
      */
     public static BigInteger convert(final long millis, final WritePrecision precision) {
-        return TIMESTAMP_CALCULATIONS.get(precision).apply(BigInteger.valueOf(millis).multiply(MILLIS_PER_NANOS));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -77,11 +78,7 @@ public final class NanosecondConverter {
      * @return epoch timestamp in precision
      */
     public static BigInteger convert(final Instant instant, final WritePrecision precision) {
-        BigInteger nanos = BigInteger.valueOf(instant.getEpochSecond())
-                .multiply(NANOS_PER_SECOND)
-                .add(BigInteger.valueOf(instant.getNano()));
-
-        return TIMESTAMP_CALCULATIONS.get(precision).apply(nanos);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -91,7 +88,6 @@ public final class NanosecondConverter {
      * @return epoch timestamp in precision
      */
     public static BigInteger currentTimestamp(final WritePrecision precision) {
-        Instant now = Instant.now();
-        return convert(now, precision);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

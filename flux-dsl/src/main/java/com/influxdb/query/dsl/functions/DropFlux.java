@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -68,7 +67,7 @@ public final class DropFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "drop";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -77,12 +76,7 @@ public final class DropFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DropFlux withColumns(@Nonnull final String[] columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -91,12 +85,7 @@ public final class DropFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DropFlux withColumns(@Nonnull final Collection<String> columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,11 +95,6 @@ public final class DropFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DropFlux withFunction(@Nonnull final String function) {
-
-        Arguments.checkNonEmpty(function, "Function");
-
-        this.withFunction("fn: (column)", function);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.utils;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.HasImports;
 
 public final class ImportUtils {
@@ -33,14 +32,6 @@ public final class ImportUtils {
     }
 
     public static String getImportsString(@Nonnull final HasImports hasImports) {
-        String importString = "";
-        Set<String> collectedImports = hasImports.getImports();
-        if (!collectedImports.isEmpty()) {
-            importString = collectedImports
-                    .stream()
-                    .map(s -> "import \"" + s + "\"")
-                    .collect(Collectors.joining("\n", "", "\n"));
-        }
-        return importString;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

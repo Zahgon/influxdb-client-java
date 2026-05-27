@@ -24,7 +24,6 @@ package com.influxdb.client.internal;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.ChecksApi;
 import com.influxdb.client.FindOptions;
 import com.influxdb.client.domain.Check;
@@ -44,7 +43,6 @@ import com.influxdb.client.domain.ThresholdCheck;
 import com.influxdb.client.service.ChecksService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -56,242 +54,109 @@ final class ChecksApiImpl extends AbstractRestClient implements ChecksApi {
 
     ChecksApiImpl(final ChecksService service) {
         Arguments.checkNotNull(service, "checksService");
-
         this.service = service;
     }
 
     @Nonnull
     @Override
-    public ThresholdCheck createThresholdCheck(@Nonnull final String name,
-                                               @Nonnull final String query,
-                                               @Nonnull final String every,
-                                               @Nonnull final String messageTemplate,
-                                               @Nonnull final Threshold threshold,
-                                               @Nonnull final String orgID) {
-
-        Arguments.checkNotNull(threshold, "threshold");
-
-        List<Threshold> thresholds = Collections.singletonList(threshold);
-
-        return createThresholdCheck(name, query, every, messageTemplate, thresholds, orgID);
+    public ThresholdCheck createThresholdCheck(@Nonnull final String name, @Nonnull final String query, @Nonnull final String every, @Nonnull final String messageTemplate, @Nonnull final Threshold threshold, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public ThresholdCheck createThresholdCheck(@Nonnull final String name,
-                                               @Nonnull final String query,
-                                               @Nonnull final String every,
-                                               @Nonnull final String messageTemplate,
-                                               @Nonnull final List<Threshold> thresholds,
-                                               @Nonnull final String orgID) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkDuration(every, "every");
-        Arguments.checkNonEmpty(messageTemplate, "messageTemplate");
-        Arguments.checkNotNull(thresholds, "thresholds");
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        ThresholdCheck threshold = new ThresholdCheck();
-        threshold
-                .every(every)
-                .statusMessageTemplate(messageTemplate)
-                .thresholds(thresholds)
-                .name(name)
-                .orgID(orgID)
-                .query(createDashboardQuery(query))
-                .status(TaskStatusType.ACTIVE);
-
-        return (ThresholdCheck) createCheck(threshold);
+    public ThresholdCheck createThresholdCheck(@Nonnull final String name, @Nonnull final String query, @Nonnull final String every, @Nonnull final String messageTemplate, @Nonnull final List<Threshold> thresholds, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public DeadmanCheck createDeadmanCheck(@Nonnull final String name,
-                                           @Nonnull final String query,
-                                           @Nonnull final String every,
-                                           @Nonnull final String timeSince,
-                                           @Nonnull final String staleTime,
-                                           @Nonnull final String messageTemplate,
-                                           @Nonnull final CheckStatusLevel level,
-                                           @Nonnull final String orgID) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkDuration(every, "every");
-        Arguments.checkDuration(timeSince, "timeSince");
-        Arguments.checkDuration(staleTime, "staleTime");
-        Arguments.checkNonEmpty(messageTemplate, "messageTemplate");
-        Arguments.checkNotNull(level, "level");
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        DeadmanCheck deadman = new DeadmanCheck();
-        deadman
-                .every(every)
-                .statusMessageTemplate(messageTemplate)
-                .level(level)
-                .staleTime(staleTime)
-                .timeSince(timeSince)
-                .name(name)
-                .orgID(orgID)
-                .query(createDashboardQuery(query))
-                .status(TaskStatusType.ACTIVE);
-
-        return (DeadmanCheck) createCheck(deadman);
+    public DeadmanCheck createDeadmanCheck(@Nonnull final String name, @Nonnull final String query, @Nonnull final String every, @Nonnull final String timeSince, @Nonnull final String staleTime, @Nonnull final String messageTemplate, @Nonnull final CheckStatusLevel level, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @Nonnull
     public Check createCheck(@Nonnull final Check check) {
-
-        Arguments.checkNotNull(check, "check");
-
-        Call<Check> call = service.createCheck(check);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Check updateCheck(@Nonnull final Check check) {
-
-        Arguments.checkNotNull(check, "check");
-
-        CheckPatch patch = new CheckPatch()
-                .name(check.getName())
-                .description(check.getDescription())
-                .status(CheckPatch.StatusEnum.fromValue(check.getStatus().getValue()));
-
-        return updateCheck(check.getId(), patch);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Check updateCheck(@Nonnull final String checkID, @Nonnull final CheckPatch patch) {
-
-        Arguments.checkNotNull(checkID, "checkID");
-        Arguments.checkNotNull(patch, "patch");
-
-        Call<Check> call = service.patchChecksID(checkID, patch, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteCheck(@Nonnull final Check check) {
-
-        Arguments.checkNotNull(check, "check");
-
-        deleteCheck(check.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteCheck(@Nonnull final String checkID) {
-
-        Arguments.checkNotNull(checkID, "checkID");
-
-        Call<Void> call = service.deleteChecksID(checkID, null);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Check findCheckByID(@Nonnull final String checkID) {
-
-        Arguments.checkNotNull(checkID, "checkID");
-
-        Call<Check> call = service.getChecksID(checkID, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Check> findChecks(@Nonnull final String orgID) {
-
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        return findChecks(orgID, new FindOptions()).getChecks();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Checks findChecks(@Nonnull final String orgID, @Nonnull final FindOptions findOptions) {
-
-        Arguments.checkNonEmpty(orgID, "orgID");
-        Arguments.checkNotNull(findOptions, "findOptions");
-
-        Call<Checks> call = service.getChecks(orgID, null, findOptions.getOffset(), findOptions.getLimit());
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final Check check) {
-        Arguments.checkNotNull(check, "check");
-
-        return getLabels(check.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final String checkID) {
-        Arguments.checkNonEmpty(checkID, "checkID");
-
-        Call<LabelsResponse> call = service.getChecksIDLabels(checkID, null);
-
-        return execute(call).getLabels();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final Label label, @Nonnull final Check check) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(check, "check");
-
-        return addLabel(label.getId(), check.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final String labelID, @Nonnull final String checkID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(checkID, "checkID");
-
-        LabelMapping labelMapping = new LabelMapping();
-        labelMapping.setLabelID(labelID);
-
-        Call<LabelResponse> call = service.postChecksIDLabels(checkID, labelMapping, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final Label label, @Nonnull final Check check) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(check, "check");
-
-        deleteLabel(label.getId(), check.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final String labelID, @Nonnull final String checkID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(checkID, "checkID");
-
-        Call<Void> call = service.deleteChecksIDLabelsID(checkID, labelID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     private DashboardQuery createDashboardQuery(@Nonnull final String query) {
-        return new DashboardQuery()
-                .editMode(QueryEditMode.ADVANCED)
-                .text(query);
+        return new DashboardQuery().editMode(QueryEditMode.ADVANCED).text(query);
     }
 }

@@ -36,7 +36,6 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.query.dsl.VariableAssignment;
 import com.influxdb.utils.Arguments;
@@ -48,25 +47,21 @@ import com.influxdb.utils.Arguments;
  */
 public final class FunctionsParameters {
 
-    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter
-            .ofPattern("yyyy-MM-dd'T'HH:mm:ss.nnnnnnnnn'Z'")
-            .withZone(ZoneId.of("UTC"));
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.nnnnnnnnn'Z'").withZone(ZoneId.of("UTC"));
 
     private static final String DEFAULT_DELIMITER = ":";
-    private static final String FUNCTION_DELIMITER = " => ";
-    private static final int DOUBLE_FRACTION_DIGITS = 340;
 
+    private static final String FUNCTION_DELIMITER = " => ";
+
+    private static final int DOUBLE_FRACTION_DIGITS = 340;
 
     private final Map<String, Property<?>> properties = new LinkedHashMap<>();
 
     public static String escapeDoubleQuotes(final String val) {
-        return val.replace("\"", "\\\"");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat(
-            "0.0",
-            DecimalFormatSymbols.getInstance(Locale.ENGLISH)
-    );
+    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("0.0", DecimalFormatSymbols.getInstance(Locale.ENGLISH));
 
     static {
         // https://stackoverflow.com/a/25307973
@@ -78,7 +73,7 @@ public final class FunctionsParameters {
 
     @Nonnull
     public static FunctionsParameters of() {
-        return new FunctionsParameters();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -88,66 +83,8 @@ public final class FunctionsParameters {
      * @return serialized value
      */
     @Nullable
-    public static String serializeValue(
-            @Nonnull final Object value,
-            final boolean escapeStrings
-    ) {
-        if (value instanceof String) {
-            if (escapeStrings) {
-                return '"' + escapeDoubleQuotes((String) value) + '"';
-            }
-            return (String) value;
-        }
-        if (value instanceof Integer || value instanceof Long) {
-            return value.toString();
-        }
-        if (value instanceof Number) {
-            String s = value.toString();
-            if (s.contains("E")) {
-                return DECIMAL_FORMAT.format(value);
-            } else {
-                return s;
-            }
-        }
-
-        Object serializedValue = value;
-        if (serializedValue.getClass().isArray()) {
-            serializedValue = Arrays.asList((Object[]) value);
-        }
-
-        // collection to delimited string ["one", "two", "three"]
-        if (serializedValue instanceof Collection) {
-
-            //noinspection unchecked
-            Collection<Object> collection = (Collection<Object>) serializedValue;
-            if (collection.isEmpty()) {
-                return null;
-            }
-
-            return collection.stream()
-                    .map((v) -> serializeValue(v, true))
-                    .collect(Collectors.joining(", ", "[", "]"));
-        }
-
-        if (serializedValue instanceof Map) {
-            return ((Map<?, ?>) serializedValue).entrySet().stream()
-                    .map(entry -> entry.getKey() + ": " + serializeValue(entry.getValue(), true))
-                    .collect(Collectors.joining(", ", "{", "}"));
-        }
-
-        if (serializedValue instanceof Instant) {
-            return DATE_FORMATTER.format((Instant) value);
-        }
-
-        if (serializedValue instanceof Supplier) {
-            return serializeValue(((Supplier<?>) serializedValue).get(), escapeStrings);
-        }
-
-        if (serializedValue instanceof VariableAssignment) {
-            return ((VariableAssignment) serializedValue).getVariableName();
-        }
-
-        return serializedValue.toString();
+    public static String serializeValue(@Nonnull final Object value, final boolean escapeStrings) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -156,11 +93,7 @@ public final class FunctionsParameters {
      * @see Flux#withPropertyNamed(String, String)
      */
     public void putPropertyNamed(@Nonnull final String fluxName, @Nonnull final String namedProperty) {
-
-        Arguments.checkNonEmpty(fluxName, "Flux property name");
-        Arguments.checkNonEmpty(namedProperty, "Named property");
-
-        put(fluxName, new NamedProperty<>(namedProperty, DEFAULT_DELIMITER));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -169,11 +102,7 @@ public final class FunctionsParameters {
      * @see Flux#withPropertyNamed(String, String)
      */
     public void putFunctionNamed(@Nonnull final String functionName, @Nonnull final String namedProperty) {
-
-        Arguments.checkNonEmpty(functionName, "functionName");
-        Arguments.checkNonEmpty(namedProperty, "Named property");
-
-        put(functionName, new NamedProperty<>(namedProperty, FUNCTION_DELIMITER));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -182,20 +111,7 @@ public final class FunctionsParameters {
      * @see Flux#withPropertyValue(String, Object)
      */
     public void putPropertyValue(@Nonnull final String fluxName, @Nullable final Object value) {
-
-        Arguments.checkNonEmpty(fluxName, "Flux property name");
-
-        if (value == null) {
-            return;
-        }
-
-        put(fluxName, new AbstractProperty<Object>() {
-            @Nonnull
-            @Override
-            public Object value(@Nonnull final Map<String, Object> namedProperties) {
-                return value;
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -204,26 +120,7 @@ public final class FunctionsParameters {
      * @see Flux#withPropertyValue(String, Object)
      */
     public void putFunctionValue(@Nonnull final String functionName, @Nullable final Object function) {
-
-        Arguments.checkNonEmpty(functionName, "functionName");
-
-        if (function == null) {
-            return;
-        }
-
-        put(functionName, new Property<Object>() {
-            @Nonnull
-            @Override
-            public Object value(@Nonnull final Map<String, Object> namedProperties) {
-                return function;
-            }
-
-            @Nonnull
-            @Override
-            public String delimiter() {
-                return FUNCTION_DELIMITER;
-            }
-        });
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -232,17 +129,8 @@ public final class FunctionsParameters {
      * @param unit     the unit that the duration is measured in, must have an exact duration.  If null than ignored.
      * @see Flux#withPropertyValue(String, Long, ChronoUnit)
      */
-    public void putPropertyValue(@Nonnull final String fluxName,
-                                 @Nullable final Long amount,
-                                 @Nullable final ChronoUnit unit) {
-
-        Arguments.checkNonEmpty(fluxName, "Flux property name");
-
-        if (amount == null || unit == null) {
-            return;
-        }
-
-        putPropertyValue(fluxName, new TimeInterval(amount, unit));
+    public void putPropertyValue(@Nonnull final String fluxName, @Nullable final Long amount, @Nullable final ChronoUnit unit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -251,56 +139,29 @@ public final class FunctionsParameters {
      * @see Flux#withPropertyValueEscaped(String, String)
      */
     public void putPropertyValueString(@Nonnull final String fluxName, @Nullable final String value) {
-
-        Arguments.checkNonEmpty(fluxName, "Flux property name");
-
-        if (value == null) {
-            return;
-        }
-
-        put(fluxName, new StringProperty(value));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     public Collection<String> keys() {
-        return properties.keySet();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String get(@Nonnull final String key, @Nonnull final Map<String, Object> namedProperties) {
-
-        Property<?> property = properties.get(key);
-        if (property == null) {
-            return null;
-        }
-
-        Object value = property.value(namedProperties);
-        if (value == null) {
-            return null;
-        }
-
-        // array to collection
-        return serializeValue(value, false);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private void put(@Nonnull final String name, @Nullable final Property<?> property) {
-
         if (property == null) {
             return;
         }
-
         properties.put(name, property);
     }
 
     @Nonnull
     public String getDelimiter(@Nonnull final String key) {
-
-        Property<?> property = properties.get(key);
-        if (property == null) {
-            return DEFAULT_DELIMITER;
-        }
-
-        return property.delimiter();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private interface Property<T> {
@@ -322,14 +183,12 @@ public final class FunctionsParameters {
     private static final class NamedProperty<T> implements Property<T> {
 
         private final String parameterName;
+
         private final String delimiter;
 
-        private NamedProperty(@Nonnull final String parameterName,
-                              @Nonnull final String delimiter) {
-
+        private NamedProperty(@Nonnull final String parameterName, @Nonnull final String delimiter) {
             Arguments.checkNonEmpty(parameterName, "Parameter name");
             Arguments.checkNonEmpty(delimiter, "delimiter");
-
             this.parameterName = parameterName;
             this.delimiter = delimiter;
         }
@@ -338,22 +197,13 @@ public final class FunctionsParameters {
         @Override
         @SuppressWarnings("unchecked")
         public T value(@Nonnull final Map<String, Object> namedProperties) {
-
-            Object parameterValue = namedProperties.get(parameterName);
-            // parameter must be defined
-            if (parameterValue == null) {
-                String message = String.format("The parameter '%s' is not defined.", parameterName);
-
-                throw new IllegalStateException(message);
-            }
-
-            return (T) parameterValue;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
         @Override
         public String delimiter() {
-            return delimiter;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -368,12 +218,7 @@ public final class FunctionsParameters {
         @Nullable
         @Override
         public String value(@Nonnull final Map<String, Object> namedProperties) {
-
-            if (value == null) {
-                return null;
-            }
-
-            return "\"" + escapeDoubleQuotes(value) + "\"";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -385,7 +230,7 @@ public final class FunctionsParameters {
         @Nonnull
         @Override
         public String delimiter() {
-            return DEFAULT_DELIMITER;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

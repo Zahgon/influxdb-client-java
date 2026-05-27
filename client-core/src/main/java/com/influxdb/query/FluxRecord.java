@@ -31,9 +31,7 @@ import java.util.Objects;
 import java.util.StringJoiner;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.utils.Arguments;
-
 
 /**
  * A record is a tuple of values. Each record in the table represents a single point in the series.
@@ -55,9 +53,7 @@ public final class FluxRecord implements Serializable {
     private List<Object> row = new ArrayList<>();
 
     public FluxRecord(@Nonnull final Integer table) {
-
         Arguments.checkNotNull(table, "Table index");
-
         this.table = table;
     }
 
@@ -66,7 +62,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public Instant getStart() {
-        return (Instant) getValueByKey("_start");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -74,7 +70,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public Instant getStop() {
-        return (Instant) getValueByKey("_stop");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -82,7 +78,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public Instant getTime() {
-        return (Instant) getValueByKey("_time");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -90,7 +86,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public Object getValue() {
-        return getValueByKey("_value");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -98,7 +94,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public String getField() {
-        return (String) getValueByKey("_field");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -106,7 +102,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public String getMeasurement() {
-        return (String) getValueByKey("_measurement");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -114,7 +110,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nonnull
     public Integer getTable() {
-        return table;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -122,7 +118,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nonnull
     public Map<String, Object> getValues() {
-        return values;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -130,7 +126,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nonnull
     public List<Object> getRow() {
-        return row;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -142,9 +138,7 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public Object getValueByIndex(final int index) {
-
-        //noinspection unchecked
-        return values.values().toArray()[index];
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -155,36 +149,21 @@ public final class FluxRecord implements Serializable {
      */
     @Nullable
     public Object getValueByKey(@Nonnull final String key) {
-
-        Arguments.checkNonEmpty(key, "key");
-
-        return values.get(key);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", FluxRecord.class.getSimpleName() + "[", "]")
-                .add("table=" + table)
-                .add("values=" + values.size())
-                .toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final FluxRecord that = (FluxRecord) o;
-        return Objects.equals(table, that.table)
-                && Objects.equals(values, that.values);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(table, values);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

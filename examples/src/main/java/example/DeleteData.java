@@ -23,7 +23,6 @@ package example;
 
 import java.time.OffsetDateTime;
 import java.time.temporal.ChronoUnit;
-
 import com.influxdb.client.DeleteApi;
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;
@@ -37,22 +36,6 @@ public class DeleteData {
     private static char[] token = "my-token".toCharArray();
 
     public static void main(final String[] args) {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token);
-
-        DeleteApi deleteApi = influxDBClient.getDeleteApi();
-
-        try {
-
-            OffsetDateTime start = OffsetDateTime.now().minus(1, ChronoUnit.HOURS);
-            OffsetDateTime stop = OffsetDateTime.now();
-
-            deleteApi.delete(start, stop, "", "my-bucket", "my-org");
-
-        } catch (InfluxException ie) {
-            System.out.println("InfluxException: " + ie);
-        }
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 
 /**
@@ -64,7 +63,7 @@ public final class SampleFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "sample";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -73,9 +72,7 @@ public final class SampleFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public SampleFlux withN(final int n) {
-        withPropertyValue("n", n);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -84,8 +81,6 @@ public final class SampleFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public SampleFlux withPos(final int pos) {
-        withPropertyValue("pos", pos);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -71,74 +71,57 @@ public final class FluxColumn implements Serializable {
 
     @Nonnull
     public String getDataType() {
-        return dataType;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDataType(final String dataType) {
-        this.dataType = dataType;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public int getIndex() {
-        return index;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setIndex(final int index) {
-        this.index = index;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getLabel() {
-        return label;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLabel(final String label) {
-        this.label = label;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public boolean isGroup() {
-        return group;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setGroup(final boolean group) {
-        this.group = group;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getDefaultValue() {
-        return defaultValue;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setDefaultValue(final String defaultValue) {
-        this.defaultValue = defaultValue;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", FluxColumn.class.getSimpleName() + "[", "]")
-                .add("index=" + index)
-                .add("label='" + label + "'")
-                .add("dataType='" + dataType + "'")
-                .add("group=" + group)
-                .add("defaultValue='" + defaultValue + "'")
-                .toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean equals(final Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        final FluxColumn that = (FluxColumn) o;
-        return index == that.index
-            && group == that.group
-            && Objects.equals(label, that.label)
-            && Objects.equals(dataType, that.dataType)
-            && Objects.equals(defaultValue, that.defaultValue);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(index, label, dataType, group, defaultValue);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

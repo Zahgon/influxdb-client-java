@@ -25,7 +25,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
 import javax.annotation.Nonnull;
-
 import com.influxdb.exceptions.InfluxException;
 import com.influxdb.utils.Arguments;
 
@@ -41,9 +40,7 @@ public final class WriteErrorEvent extends AbstractWriteEvent {
     private final Throwable throwable;
 
     public WriteErrorEvent(@Nonnull final Throwable throwable) {
-
         Arguments.checkNotNull(throwable, "Throwable");
-
         this.throwable = throwable;
     }
 
@@ -52,26 +49,11 @@ public final class WriteErrorEvent extends AbstractWriteEvent {
      */
     @Nonnull
     public Throwable getThrowable() {
-        return throwable;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void logEvent() {
-        if (throwable instanceof InfluxException ie) {
-          String selectHeaders = Stream.of("trace-id",
-                "trace-sampled",
-                "X-Influxdb-Build",
-                "X-Influxdb-Request-ID",
-                "X-Influxdb-Version")
-              .filter(name -> ie.headers().get(name) != null)
-              .reduce("", (message, name) -> message.concat(String.format("%s: %s\n",
-                name, ie.headers().get(name))));
-            LOG.log(Level.SEVERE,
-              String.format("An error occurred during writing of data.  Select Response Headers:\n%s", selectHeaders),
-              throwable);
-        } else {
-            LOG.log(Level.SEVERE, "An error occurred during writing of data", throwable);
-
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -22,7 +22,6 @@
 package com.influxdb.spring.health;
 
 import com.influxdb.client.InfluxDBClient;
-
 import org.springframework.boot.health.contributor.AbstractHealthIndicator;
 import org.springframework.boot.health.contributor.Health;
 import org.springframework.boot.health.contributor.HealthIndicator;
@@ -40,18 +39,11 @@ public class InfluxDB2HealthIndicator extends AbstractHealthIndicator {
     public InfluxDB2HealthIndicator(final InfluxDBClient influxDBClient) {
         super("InfluxDBClient 2 health check failed");
         Assert.notNull(influxDBClient, "InfluxDBClient must not be null");
-
         this.influxDBClient = influxDBClient;
     }
 
     @Override
     protected void doHealthCheck(final Health.Builder builder) {
-        boolean success = this.influxDBClient.ping();
-
-        if (success) {
-            builder.up();
-        } else {
-            builder.down();
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

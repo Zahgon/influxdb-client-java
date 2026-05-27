@@ -23,7 +23,6 @@ package example;
 
 import java.time.temporal.ChronoUnit;
 import java.util.List;
-
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;
 import com.influxdb.client.QueryApi;
@@ -35,30 +34,10 @@ import com.influxdb.query.dsl.functions.restriction.Restrictions;
 public class SynchronousQueryDSL {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org);
-
-        Flux flux = Flux.from("my-bucket")
-                .range(-30L, ChronoUnit.MINUTES)
-                .filter(Restrictions.and(Restrictions.measurement().equal("cpu")))
-                .limit(10);
-
-        QueryApi queryApi = influxDBClient.getQueryApi();
-
-        //
-        // Query data
-        //
-        List<FluxTable> tables = queryApi.query(flux.toString());
-        for (FluxTable fluxTable : tables) {
-            List<FluxRecord> records = fluxTable.getRecords();
-            for (FluxRecord fluxRecord : records) {
-                System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-            }
-        }
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

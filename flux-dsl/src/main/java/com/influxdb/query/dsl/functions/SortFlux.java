@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -65,7 +64,7 @@ public final class SortFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "sort";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -74,10 +73,7 @@ public final class SortFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public SortFlux withDesc(final boolean desc) {
-
-        this.withPropertyValue("desc", desc);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -86,12 +82,7 @@ public final class SortFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public SortFlux withColumns(@Nonnull final String[] columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -100,11 +91,6 @@ public final class SortFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public SortFlux withColumns(@Nonnull final Collection<String> columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

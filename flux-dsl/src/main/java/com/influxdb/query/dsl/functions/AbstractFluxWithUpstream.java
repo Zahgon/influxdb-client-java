@@ -25,7 +25,6 @@ import java.util.Map;
 import java.util.Set;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -43,18 +42,13 @@ abstract class AbstractFluxWithUpstream extends Flux {
     }
 
     AbstractFluxWithUpstream(@Nonnull final Flux source) {
-
         Arguments.checkNotNull(source, "Source is required");
-
         this.source = source;
     }
 
     @Override
     public void appendActual(@Nonnull final Map<String, Object> parameters, @Nonnull final StringBuilder builder) {
-
-        if (source != null) {
-            source.appendActual(parameters, builder);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -63,17 +57,11 @@ abstract class AbstractFluxWithUpstream extends Flux {
      * @param builder Flux query chain.
      */
     void appendDelimiter(@Nonnull final StringBuilder builder) {
-        if (source != null) {
-            builder.append("\n");
-            builder.append("\t|> ");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void collectImports(@Nonnull final Set<String> collectedImports) {
-        super.collectImports(collectedImports);
-        if (source != null) {
-            source.collectImports(collectedImports);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

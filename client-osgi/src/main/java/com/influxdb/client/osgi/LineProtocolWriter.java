@@ -24,12 +24,10 @@ package com.influxdb.client.osgi;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.WriteApiBlocking;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.internal.NanosecondConverter;
-
 import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.ConfigurationPolicy;
@@ -67,9 +65,7 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
  * must not contain timestamp data!). Value is read from OSGi event (property {@link EventConstants#TIMESTAMP}) or
  * {@link System#currentTimeMillis()} is set if property not found.</p>
  */
-@Component(immediate = true, configurationPolicy = ConfigurationPolicy.REQUIRE, property = {
-        EventConstants.EVENT_TOPIC + "=" + LineProtocolWriter.DEFAULT_EVENT_TOPIC
-})
+@Component(immediate = true, configurationPolicy = ConfigurationPolicy.REQUIRE, property = { EventConstants.EVENT_TOPIC + "=" + LineProtocolWriter.DEFAULT_EVENT_TOPIC })
 public class LineProtocolWriter implements EventHandler {
 
     /**
@@ -81,10 +77,12 @@ public class LineProtocolWriter implements EventHandler {
      * OSGi event property name used to write single line protocol record.
      */
     public static final String RECORD = "record";
+
     /**
      * OSGi event property name used to write list of line protocol records.
      */
     public static final String RECORDS = "records";
+
     /**
      * OSGi event property name to set precision.
      */
@@ -94,6 +92,7 @@ public class LineProtocolWriter implements EventHandler {
      * OSGi event property name to override InfluxDB organization.
      */
     public static final String ORGANIZATION = "organization";
+
     /**
      * OSGi event property name to override InfluxDB bucket.
      */
@@ -102,45 +101,39 @@ public class LineProtocolWriter implements EventHandler {
     /**
      * Configuration for Line Protocol Writer.
      */
-    @ObjectClassDefinition(name = "InfluxDB Line Protocol Writer",
-            description = "Event handler writing line protocol record(s) to InfluxDB")
+    @ObjectClassDefinition(name = "InfluxDB Line Protocol Writer", description = "Event handler writing line protocol record(s) to InfluxDB")
     public @interface Config {
 
         /**
          * OSGi event handler topic(s).
          */
-        @AttributeDefinition(name = "Topics",
-                description = "OSGi event topics")
-        String[] event_topics() default {DEFAULT_EVENT_TOPIC};
+        @AttributeDefinition(name = "Topics", description = "OSGi event topics")
+        String[] event_topics() default { DEFAULT_EVENT_TOPIC };
 
         /**
          * OSGi target filter for InfluxDB connection, i.e. <code>(alias=test)</code>. The following properties are
          * copied from {@link InfluxDBConnector}: <code>organization</code>, <code>bucket</code>, <code>database</code>,
          * <code>url</code>, <code>alias</code>.
          */
-        @AttributeDefinition(required = false, name = "InfluxDB client target",
-                description = "OSGi target filter of InfluxDB client service")
+        @AttributeDefinition(required = false, name = "InfluxDB client target", description = "OSGi target filter of InfluxDB client service")
         String client_target();
 
         /**
          * Current timestamp is appended to line protocol record(s) is enabled.
          */
-        @AttributeDefinition(required = false, name = "Append timestamp",
-                description = "Append timestamp to line protocol record(s)", type = AttributeType.BOOLEAN)
+        @AttributeDefinition(required = false, name = "Append timestamp", description = "Append timestamp to line protocol record(s)", type = AttributeType.BOOLEAN)
         boolean timestamp_append() default false;
 
         /**
          * InfluxDB organization to write data (overriding organization of {@link InfluxDBClient}).
          */
-        @AttributeDefinition(required = false, name = "Organization",
-                description = "InfluxDB organization to write")
+        @AttributeDefinition(required = false, name = "Organization", description = "InfluxDB organization to write")
         String organization();
 
         /**
          * InfluxDB bucket to write data (overriding bucket of {@link InfluxDBClient}).
          */
-        @AttributeDefinition(required = false, name = "Bucket",
-                description = "InfluxDB bucket to write")
+        @AttributeDefinition(required = false, name = "Bucket", description = "InfluxDB bucket to write")
         String bucket();
     }
 
@@ -157,7 +150,7 @@ public class LineProtocolWriter implements EventHandler {
     @Activate
     @Modified
     void start(final Config config) {
-        this.config = config;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -167,40 +160,7 @@ public class LineProtocolWriter implements EventHandler {
      */
     @Override
     public void handleEvent(final Event event) {
-        String organization = (String) event.getProperty(ORGANIZATION);
-        if (organization == null) {
-            organization = config.organization();
-        }
-        String bucket = (String) event.getProperty(BUCKET);
-        if (bucket == null) {
-            bucket = config.bucket();
-        }
-
-        final WritePrecision writePrecision = getPrecision(event);
-        final WriteApiBlocking writeApi = client.getWriteApiBlocking();
-
-        final String record = (String) event.getProperty(RECORD);
-        final List<String> records = (List<String>) event.getProperty(RECORDS);
-        final BigInteger timestamp = calculateTimestamp(event, writePrecision);
-        if (record != null) {
-            final String recordToWrite = timestamp != null ? record + " " + timestamp : record;
-            if (organization != null && bucket != null) {
-                writeApi.writeRecord(bucket, organization, writePrecision, recordToWrite);
-            } else {
-                writeApi.writeRecord(writePrecision, recordToWrite);
-            }
-        } else if (records != null) {
-            final List<String> recordsToWrite = timestamp != null
-                    ? records.stream().map(r -> r + " " + timestamp).collect(Collectors.toList())
-                    : records;
-            if (organization != null && bucket != null) {
-                writeApi.writeRecords(bucket, organization, writePrecision, recordsToWrite);
-            } else {
-                writeApi.writeRecords(writePrecision, recordsToWrite);
-            }
-        } else {
-            throw new IllegalArgumentException("Missing line protocol record(s)");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private WritePrecision getPrecision(final Event event) {
@@ -216,7 +176,6 @@ public class LineProtocolWriter implements EventHandler {
         } else {
             writePrecision = WritePrecision.NS;
         }
-
         return writePrecision;
     }
 

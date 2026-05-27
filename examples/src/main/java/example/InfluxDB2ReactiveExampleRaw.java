@@ -24,37 +24,15 @@ package example;
 import com.influxdb.client.reactive.InfluxDBClientReactive;
 import com.influxdb.client.reactive.InfluxDBClientReactiveFactory;
 import com.influxdb.client.reactive.QueryReactiveApi;
-
 import io.reactivex.rxjava3.core.Flowable;
 
 public class InfluxDB2ReactiveExampleRaw {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) {
-
-        InfluxDBClientReactive influxDBClient = InfluxDBClientReactiveFactory.create("http://localhost:8086", token, org);
-
-        //
-        // Query data
-        //
-        String flux = "from(bucket:\"my-bucket\") |> range(start: 0)";
-
-        QueryReactiveApi queryApi = influxDBClient.getQueryReactiveApi();
-
-        Flowable.fromPublisher(queryApi.queryRaw(flux))
-                //
-                // Take first 10 records
-                //
-                .take(10)
-                .subscribe(line -> {
-                    //
-                    // The callback to consume a line of CSV response
-                    //
-                    System.out.println("Response: " + line);
-                });
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

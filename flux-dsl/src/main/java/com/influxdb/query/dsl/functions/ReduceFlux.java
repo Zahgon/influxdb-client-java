@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -67,6 +66,7 @@ import com.influxdb.utils.Arguments;
  * @author Jakub Bednar (24/02/2020 13:02)
  */
 public final class ReduceFlux extends AbstractParametrizedFlux {
+
     public ReduceFlux(@Nonnull final Flux source) {
         super(source);
     }
@@ -74,7 +74,7 @@ public final class ReduceFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "reduce";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,12 +83,7 @@ public final class ReduceFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ReduceFlux withFunction(@Nonnull final String function) {
-
-        Arguments.checkNonEmpty(function, "Function");
-
-        this.withFunction("fn: (r, accumulator)", String.format("(%s)", function));
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -97,10 +92,6 @@ public final class ReduceFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public ReduceFlux withIdentity(@Nonnull final String identity) {
-        Arguments.checkNonEmpty(identity, "identity");
-
-        this.withPropertyValue("identity", identity);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

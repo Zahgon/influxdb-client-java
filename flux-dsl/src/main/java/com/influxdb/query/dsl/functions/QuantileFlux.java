@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -70,7 +69,7 @@ public final class QuantileFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "quantile";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,12 +82,10 @@ public final class QuantileFlux extends AbstractParametrizedFlux {
          * on large data sources.
          */
         ESTIMATE_TDIGEST,
-
         /**
          * An aggregate result that takes the average of the two points closest to the quantile value.
          */
         EXACT_MEAN,
-
         EXACT_SELECTOR
     }
 
@@ -98,12 +95,7 @@ public final class QuantileFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public QuantileFlux withColumn(@Nonnull final String column) {
-
-        Arguments.checkNonEmpty(column, "column");
-
-        this.withPropertyValueEscaped("column", column);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -112,12 +104,7 @@ public final class QuantileFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public QuantileFlux withQuantile(@Nonnull final Float quantile) {
-
-        Arguments.checkNotNull(quantile, "quantile");
-
-        this.withPropertyValue("q", quantile);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -126,12 +113,7 @@ public final class QuantileFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public QuantileFlux withCompression(@Nonnull final Float compression) {
-
-        Arguments.checkNotNull(compression, "compression");
-
-        this.withPropertyValue("compression", compression);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -140,12 +122,7 @@ public final class QuantileFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public QuantileFlux withMethod(@Nonnull final String method) {
-
-        Arguments.checkNotNull(method, "method");
-
-        this.withPropertyValueEscaped("method", method);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -154,11 +131,6 @@ public final class QuantileFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public QuantileFlux withMethod(@Nonnull final MethodType method) {
-
-        Arguments.checkNotNull(method, "method");
-
-        this.withPropertyValueEscaped("method", method.toString().toLowerCase());
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

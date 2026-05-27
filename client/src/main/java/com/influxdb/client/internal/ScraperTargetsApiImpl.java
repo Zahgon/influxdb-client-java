@@ -26,7 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.ScraperTargetsApi;
 import com.influxdb.client.domain.AddResourceMemberRequestBody;
 import com.influxdb.client.domain.Label;
@@ -45,7 +44,6 @@ import com.influxdb.client.domain.User;
 import com.influxdb.client.service.ScraperTargetsService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -58,354 +56,179 @@ final class ScraperTargetsApiImpl extends AbstractRestClient implements ScraperT
     private final ScraperTargetsService service;
 
     ScraperTargetsApiImpl(@Nonnull final ScraperTargetsService service) {
-
         Arguments.checkNotNull(service, "service");
-
         this.service = service;
     }
 
     @Nonnull
     @Override
     public ScraperTargetResponse createScraperTarget(@Nonnull final ScraperTargetRequest scraperTargetRequest) {
-
-        Arguments.checkNotNull(scraperTargetRequest, "scraperTargetRequest");
-
-        Call<ScraperTargetResponse> call = service.postScrapers(scraperTargetRequest, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public ScraperTargetResponse createScraperTarget(@Nonnull final String name,
-                                                     @Nonnull final String url,
-                                                     @Nonnull final String bucketID,
-                                                     @Nonnull final String orgID) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkNonEmpty(url, "url");
-        Arguments.checkNonEmpty(bucketID, "bucketID");
-        Arguments.checkNonEmpty(orgID, " orgID");
-
-        ScraperTargetRequest scraperTarget = new ScraperTargetRequest();
-        scraperTarget.setName(name);
-        scraperTarget.setUrl(url);
-        scraperTarget.setBucketID(bucketID);
-        scraperTarget.setOrgID(orgID);
-
-        return createScraperTarget(scraperTarget);
+    public ScraperTargetResponse createScraperTarget(@Nonnull final String name, @Nonnull final String url, @Nonnull final String bucketID, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ScraperTargetResponse updateScraperTarget(@Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        return updateScraperTarget(scraperTargetResponse.getId(), scraperTargetResponse);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public ScraperTargetResponse updateScraperTarget(@Nonnull final String scraperTargetID,
-                                                     @Nonnull final ScraperTargetRequest scraperTargetRequest) {
-
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-        Arguments.checkNotNull(scraperTargetRequest, "scraperTargetRequest");
-
-        Call<ScraperTargetResponse> call = service
-                .patchScrapersID(scraperTargetID, scraperTargetRequest, null);
-
-        return execute(call);
+    public ScraperTargetResponse updateScraperTarget(@Nonnull final String scraperTargetID, @Nonnull final ScraperTargetRequest scraperTargetRequest) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteScraperTarget(@Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        deleteScraperTarget(scraperTargetResponse.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteScraperTarget(@Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<Void> call = service.deleteScrapersID(scraperTargetID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public ScraperTargetResponse cloneScraperTarget(@Nonnull final String clonedName,
-                                                    @Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        ScraperTargetResponse scraperTarget = findScraperTargetByID(scraperTargetID);
-
-        return cloneScraperTarget(clonedName, scraperTarget);
+    public ScraperTargetResponse cloneScraperTarget(@Nonnull final String clonedName, @Nonnull final String scraperTargetID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public ScraperTargetResponse cloneScraperTarget(@Nonnull final String clonedName,
-                                                    @Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        ScraperTargetRequest cloned = new ScraperTargetRequest();
-        cloned.setName(clonedName);
-        cloned.setUrl(scraperTargetResponse.getUrl());
-        cloned.setOrgID(scraperTargetResponse.getOrgID());
-        cloned.setBucketID(scraperTargetResponse.getBucketID());
-
-        ScraperTargetResponse created = createScraperTarget(cloned);
-
-        getLabels(scraperTargetResponse).forEach(label -> addLabel(label, created));
-
-        return created;
+    public ScraperTargetResponse cloneScraperTarget(@Nonnull final String clonedName, @Nonnull final ScraperTargetResponse scraperTargetResponse) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ScraperTargetResponse findScraperTargetByID(@Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<ScraperTargetResponse> call = service.getScrapersID(scraperTargetID, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ScraperTargetResponse> findScraperTargets() {
-
-        return findScraperTargetsByOrgId(null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ScraperTargetResponse> findScraperTargetsByOrg(@Nonnull final Organization organization) {
-
-        Arguments.checkNotNull(organization, "organization");
-
-        return findScraperTargetsByOrgId(organization.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ScraperTargetResponse> findScraperTargetsByOrgId(@Nullable final String orgID) {
-
-        Call<ScraperTargetResponses> call = service.getScrapers(null, null, null, orgID, null);
-
-        ScraperTargetResponses responses = execute(call);
-        LOG.log(Level.FINEST, "findScraperTargets found: {0}", responses);
-
-        return responses.getConfigurations();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceMember> getMembers(@Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        return getMembers(scraperTargetResponse.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceMember> getMembers(@Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<ResourceMembers> call = service.getScrapersIDMembers(scraperTargetID, null);
-        ResourceMembers resourceMembers = execute(call);
-        LOG.log(Level.FINEST, "findScraperTargetMembers found: {0}", resourceMembers);
-
-        return resourceMembers.getUsers();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public ResourceMember addMember(@Nonnull final User member,
-                                    @Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-        Arguments.checkNotNull(member, "member");
-
-        return addMember(member.getId(), scraperTargetResponse.getId());
+    public ResourceMember addMember(@Nonnull final User member, @Nonnull final ScraperTargetResponse scraperTargetResponse) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceMember addMember(@Nonnull final String memberID, @Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(memberID, "Member ID");
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        AddResourceMemberRequestBody user = new AddResourceMemberRequestBody();
-        user.setId(memberID);
-
-        Call<ResourceMember> call = service
-                .postScrapersIDMembers(scraperTargetID, user, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteMember(@Nonnull final User member, @Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-        Arguments.checkNotNull(member, "member");
-
-        deleteMember(member.getId(), scraperTargetResponse.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteMember(@Nonnull final String memberID, @Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(memberID, "Member ID");
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<Void> call = service.deleteScrapersIDMembersID(memberID, scraperTargetID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceOwner> getOwners(@Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        return getOwners(scraperTargetResponse.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceOwner> getOwners(@Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<ResourceOwners> call = service.getScrapersIDOwners(scraperTargetID, null);
-        ResourceOwners resourceMembers = execute(call);
-        LOG.log(Level.FINEST, "findScraperTargetOwners found: {0}", resourceMembers);
-
-        return resourceMembers.getUsers();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public ResourceOwner addOwner(@Nonnull final User owner,
-                                  @Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-        Arguments.checkNotNull(owner, "owner");
-
-        return addOwner(owner.getId(), scraperTargetResponse.getId());
+    public ResourceOwner addOwner(@Nonnull final User owner, @Nonnull final ScraperTargetResponse scraperTargetResponse) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceOwner addOwner(@Nonnull final String ownerID, @Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(ownerID, "Owner ID");
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        AddResourceMemberRequestBody user = new AddResourceMemberRequestBody();
-        user.setId(ownerID);
-
-        Call<ResourceOwner> call = service.postScrapersIDOwners(scraperTargetID, user, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteOwner(@Nonnull final User owner, @Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-        Arguments.checkNotNull(owner, "owner");
-
-        deleteOwner(owner.getId(), scraperTargetResponse.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteOwner(@Nonnull final String ownerID, @Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(ownerID, "Owner ID");
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<Void> call = service.deleteScrapersIDOwnersID(ownerID, scraperTargetID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        return getLabels(scraperTargetResponse.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<LabelsResponse> call = service.getScrapersIDLabels(scraperTargetID, null);
-
-        return execute(call).getLabels();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public LabelResponse addLabel(@Nonnull final Label label,
-                                  @Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        return addLabel(label.getId(), scraperTargetResponse.getId());
+    public LabelResponse addLabel(@Nonnull final Label label, @Nonnull final ScraperTargetResponse scraperTargetResponse) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final String labelID, @Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        LabelMapping labelMapping = new LabelMapping();
-        labelMapping.setLabelID(labelID);
-
-        Call<LabelResponse> call = service.postScrapersIDLabels(scraperTargetID, labelMapping, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final Label label, @Nonnull final ScraperTargetResponse scraperTargetResponse) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(scraperTargetResponse, "scraperTarget");
-
-        deleteLabel(label.getId(), scraperTargetResponse.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final String labelID, @Nonnull final String scraperTargetID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(scraperTargetID, "scraperTargetID");
-
-        Call<Void> call = service.deleteScrapersIDLabelsID(scraperTargetID, labelID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

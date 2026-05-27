@@ -32,12 +32,10 @@ import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.WriteApiBlocking;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.Point;
-
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.osgi.service.component.annotations.Activate;
@@ -79,9 +77,7 @@ import org.osgi.service.metatype.annotations.ObjectClassDefinition;
  *
  * <p>Structured data can be decorated with host name, host address or timestamp (by configuration).</p>
  */
-@Component(immediate = true, configurationPolicy = ConfigurationPolicy.REQUIRE, property = {
-        EventConstants.EVENT_TOPIC + "=" + PointWriter.DEFAULT_EVENT_TOPIC
-})
+@Component(immediate = true, configurationPolicy = ConfigurationPolicy.REQUIRE, property = { EventConstants.EVENT_TOPIC + "=" + PointWriter.DEFAULT_EVENT_TOPIC })
 @Designate(ocd = PointWriter.Config.class)
 @Slf4j
 public class PointWriter implements EventHandler {
@@ -95,6 +91,7 @@ public class PointWriter implements EventHandler {
      * OSGi event property name used to write single structured data.
      */
     public static final String POINT = "point";
+
     /**
      * OSGi event property name used to write collection of structured data.
      */
@@ -104,6 +101,7 @@ public class PointWriter implements EventHandler {
      * OSGi event property name to override InfluxDB organization.
      */
     public static final String ORGANIZATION = "organization";
+
     /**
      * OSGi event property name to override InfluxDB bucket.
      */
@@ -137,68 +135,59 @@ public class PointWriter implements EventHandler {
     /**
      * Configuration for Point Writer.
      */
-    @ObjectClassDefinition(name = "InfluxDB Point Writer",
-            description = "Event handler writing point(s) to InfluxDB")
+    @ObjectClassDefinition(name = "InfluxDB Point Writer", description = "Event handler writing point(s) to InfluxDB")
     public @interface Config {
 
         /**
          * OSGi event handler topic(s).
          */
-        @AttributeDefinition(name = "Topics",
-                description = "OSGi event topics")
-        String[] event_topics() default {DEFAULT_EVENT_TOPIC};
+        @AttributeDefinition(name = "Topics", description = "OSGi event topics")
+        String[] event_topics() default { DEFAULT_EVENT_TOPIC };
 
         /**
          * OSGi target filter for InfluxDB connection, i.e. <code>(alias=test)</code>. The following properties are
          * copied from {@link InfluxDBConnector}: <code>organization</code>, <code>bucket</code>, <code>database</code>,
          * <code>url</code>, <code>alias</code>.
          */
-        @AttributeDefinition(required = false, name = "InfluxDB client target",
-                description = "OSGi target filter of InfluxDB client service")
+        @AttributeDefinition(required = false, name = "InfluxDB client target", description = "OSGi target filter of InfluxDB client service")
         String client_target();
 
         /**
          * Tag point(s) by host name (as {@link PointWriter#HOST_NAME}) if enabled.
          */
-        @AttributeDefinition(required = false, name = "Add host name",
-                description = "Add host name to point(s)", type = AttributeType.BOOLEAN)
+        @AttributeDefinition(required = false, name = "Add host name", description = "Add host name to point(s)", type = AttributeType.BOOLEAN)
         boolean host_name_add() default false;
 
         /**
          * Tag point(s) by host address (as {@link PointWriter#HOST_ADDRESS}) if enabled.
          */
-        @AttributeDefinition(required = false, name = "Add host address",
-                description = "Add host address to point(s)", type = AttributeType.BOOLEAN)
+        @AttributeDefinition(required = false, name = "Add host address", description = "Add host address to point(s)", type = AttributeType.BOOLEAN)
         boolean host_address_add() default false;
 
         /**
          * Add timestamp to point(s) if enabled. Timestamp of OSGi event is used if available, current timestamp
          * otherwise.
          */
-        @AttributeDefinition(required = false, name = "Add timestamp",
-                description = "Add timestamp to point(s)", type = AttributeType.BOOLEAN)
+        @AttributeDefinition(required = false, name = "Add timestamp", description = "Add timestamp to point(s)", type = AttributeType.BOOLEAN)
         boolean timestamp_add() default false;
 
         /**
          * Precision used if adding timestamp, values: <code>s</code>, <code>ms</code>, <code>us</code>,
          * <code>ns</code>.
          */
-        @AttributeDefinition(required = false, name = "Precision",
-                description = "Precision used if adding timestamp")
+        @AttributeDefinition(required = false, name = "Precision", description = "Precision used if adding timestamp")
         String timestamp_precision() default "ns";
 
         /**
          * InfluxDB organization to write data (overriding organization of {@link InfluxDBClient}).
          */
-        @AttributeDefinition(required = false, name = "Organization",
-                description = "InfluxDB organization to write")
+        @AttributeDefinition(required = false, name = "Organization", description = "InfluxDB organization to write")
         String organization();
 
         /**
          * InfluxDB bucket to write data (overriding bucket of {@link InfluxDBClient}).
          */
-        @AttributeDefinition(required = false, name = "Bucket",
-                description = "InfluxDB bucket to write")
+        @AttributeDefinition(required = false, name = "Bucket", description = "InfluxDB bucket to write")
         String bucket();
     }
 
@@ -215,7 +204,7 @@ public class PointWriter implements EventHandler {
     @Activate
     @Modified
     void start(final Config config) {
-        this.config = config;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -225,57 +214,12 @@ public class PointWriter implements EventHandler {
      */
     @Override
     public void handleEvent(final Event event) {
-        String organization = (String) event.getProperty(ORGANIZATION);
-        if (organization == null) {
-            organization = config.organization();
-        }
-        String bucket = (String) event.getProperty(BUCKET);
-        if (bucket == null) {
-            bucket = config.bucket();
-        }
-
-        final WriteApiBlocking writeApi = client.getWriteApiBlocking();
-
-        final Object point = event.getProperty(POINT);
-        final Collection<Object> points = (Collection<Object>) event.getProperty(POINTS);
-
-        final Instant timestamp;
-        if (config.timestamp_add()) {
-            final Long epoch = (Long) event.getProperty(EventConstants.TIMESTAMP);
-            if (epoch != null) {
-                timestamp = new Date(epoch).toInstant();
-            } else {
-                timestamp = Instant.now();
-            }
-        } else {
-            timestamp = null;
-        }
-
-        if (point != null) {
-            if (organization != null && bucket != null) {
-                writeApi.writePoint(bucket, organization, decorate(point, event, timestamp));
-            } else {
-                writeApi.writePoint(decorate(point, event, timestamp));
-            }
-        } else if (points != null) {
-            if (organization != null && bucket != null) {
-                writeApi.writePoints(bucket, organization, points.stream()
-                        .map(p -> decorate(p, event, timestamp))
-                        .collect(Collectors.toList()));
-            } else {
-                writeApi.writePoints(points.stream()
-                        .map(p -> decorate(p, event, timestamp))
-                        .collect(Collectors.toList()));
-            }
-        } else {
-            throw new IllegalArgumentException("Missing point(s)");
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @SneakyThrows
     private Point decorate(final Object object, final Event event, final Instant instant) {
         final WritePrecision precision = WritePrecision.fromValue(config.timestamp_precision());
-
         final Point point;
         if (object instanceof Point) {
             point = (Point) object;
@@ -285,9 +229,7 @@ public class PointWriter implements EventHandler {
         } else if (object instanceof Map) {
             final String measurement = event.getTopic().replaceAll(".*/", "");
             point = Point.measurement(measurement);
-
             final Map<String, Object> data = (Map<String, Object>) object;
-
             final Object timestamp = data.get(TIMESTAMP_KEY);
             if (instant != null) {
                 point.time(instant, precision);
@@ -295,25 +237,18 @@ public class PointWriter implements EventHandler {
                 // instant must be set because no (valid) _timestamp found in map
                 point.time(Instant.now(), precision);
             }
-
-            Optional.ofNullable((Map<String, String>) data.get(TAGS_KEY))
-                    .ifPresent(tags -> point.addTags(tags));
-
-            Optional.ofNullable((Map<String, Object>) data.get(FIELDS_KEY))
-                    .ifPresent(fields -> point.addFields(fields));
+            Optional.ofNullable((Map<String, String>) data.get(TAGS_KEY)).ifPresent(tags -> point.addTags(tags));
+            Optional.ofNullable((Map<String, Object>) data.get(FIELDS_KEY)).ifPresent(fields -> point.addFields(fields));
         } else {
             throw new IllegalArgumentException("Invalid point");
         }
-
         if (config.host_name_add()) {
             point.addTag(HOST_NAME, InetAddress.getLocalHost().getHostName());
             point.addField(HOST_NAME, InetAddress.getLocalHost().getHostName());
         }
-
         if (config.host_address_add()) {
             point.addTag(HOST_ADDRESS, InetAddress.getLocalHost().getHostAddress());
         }
-
         return point;
     }
 
@@ -333,7 +268,6 @@ public class PointWriter implements EventHandler {
         } else {
             return false;
         }
-
         return true;
     }
 }

@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.functions;
 import java.util.Collection;
 import java.util.Map;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -61,9 +60,8 @@ public final class FromFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "from";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * @param bucket Bucket name
@@ -71,12 +69,7 @@ public final class FromFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public FromFlux withBucket(@Nonnull final String bucket) {
-
-        Arguments.checkNonEmpty(bucket, "Bucket name");
-
-        this.withPropertyValueEscaped("bucket", bucket);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -85,12 +78,7 @@ public final class FromFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public FromFlux withHosts(@Nonnull final Collection<String> hosts) {
-
-        Arguments.checkNotNull(hosts, "Hosts are required");
-
-        this.withPropertyValue("hosts", hosts);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -99,12 +87,7 @@ public final class FromFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public FromFlux withHosts(@Nonnull final String[] hosts) {
-
-        Arguments.checkNotNull(hosts, "Hosts are required");
-
-        this.withPropertyValue("hosts", hosts);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -115,10 +98,7 @@ public final class FromFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public Flux withLocationNamed(@Nonnull final String name) {
-        Arguments.checkNonEmpty(name, "name");
-        this.options.location = String.format("timezone.location(name: \"%s\")", name);
-        addImport("timezone");
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -129,28 +109,21 @@ public final class FromFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public Flux withLocationFixed(@Nonnull final String offset) {
-        Arguments.checkDuration(offset, "offset");
-        this.options.location = String.format("timezone.fixed(offset: %s)", offset);
-        addImport("timezone");
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void appendActual(@Nonnull final Map<String, Object> parameters, @Nonnull final StringBuilder builder) {
-        // append timezone configuration
-        if (options.location != null) {
-            builder.append("option location = ");
-            builder.append(options.location);
-            builder.append("\n");
-        }
-        super.appendActual(parameters, builder);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     void appendDelimiter(@Nonnull final StringBuilder builder) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static class FluxOptions {
+
         private String location;
     }
 }

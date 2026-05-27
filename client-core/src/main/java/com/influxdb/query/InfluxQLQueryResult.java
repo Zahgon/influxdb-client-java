@@ -27,7 +27,6 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.utils.Arguments;
 
 /**
@@ -39,7 +38,6 @@ public final class InfluxQLQueryResult {
 
     public InfluxQLQueryResult(@Nonnull final List<Result> results) {
         Arguments.checkNotNull(results, "results");
-
         this.results = results;
     }
 
@@ -48,20 +46,20 @@ public final class InfluxQLQueryResult {
      */
     @Nonnull
     public List<Result> getResults() {
-        return this.results;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Represents one result of an InfluxQL query.
      */
     public static final class Result {
+
         private final List<Series> series;
 
         private final int index;
 
         public Result(final int index, @Nonnull final List<Series> series) {
             Arguments.checkNotNull(series, "series");
-
             this.index = index;
             this.series = series;
         }
@@ -70,7 +68,7 @@ public final class InfluxQLQueryResult {
          * @return the index of the result
          */
         public int getIndex() {
-            return index;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -78,15 +76,15 @@ public final class InfluxQLQueryResult {
          */
         @Nonnull
         public List<Series> getSeries() {
-            return this.series;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
     }
 
     /**
      * Represents one series within the {@link Result} of an InfluxQL query.
      */
     public static final class Series {
+
         @Nonnull
         private final Map<String, String> tags;
 
@@ -98,17 +96,14 @@ public final class InfluxQLQueryResult {
 
         private final List<Record> values;
 
-        public Series(final @Nonnull String name, final @Nonnull Map<String, Integer> columns) {
+        public Series(@Nonnull final String name, @Nonnull final Map<String, Integer> columns) {
             this(name, new HashMap<>(), columns);
         }
 
-        public Series(final @Nonnull String name,
-                      final @Nonnull Map<String, String> tags,
-                      final @Nonnull Map<String, Integer> columns) {
+        public Series(@Nonnull final String name, @Nonnull final Map<String, String> tags, @Nonnull final Map<String, Integer> columns) {
             Arguments.checkNotNull(name, "name");
             Arguments.checkNotNull(tags, "tags");
             Arguments.checkNotNull(columns, "columns");
-
             this.name = name;
             this.tags = tags;
             this.columns = columns;
@@ -120,7 +115,7 @@ public final class InfluxQLQueryResult {
          */
         @Nonnull
         public String getName() {
-            return this.name;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -128,7 +123,7 @@ public final class InfluxQLQueryResult {
          */
         @Nonnull
         public Map<String, String> getTags() {
-            return this.tags;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -136,22 +131,19 @@ public final class InfluxQLQueryResult {
          */
         @Nonnull
         public Map<String, Integer> getColumns() {
-            return this.columns;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
-
 
         /**
          * @return the values
          */
         @Nonnull
         public List<Record> getValues() {
-            return this.values;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         public void addRecord(@Nonnull final Record record) {
-            Arguments.checkNotNull(record, "record");
-
-            this.values.add(record);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -171,17 +163,14 @@ public final class InfluxQLQueryResult {
              * @return the converted string value
              */
             @Nullable
-            Object extractValue(
-                    @Nonnull String columnName,
-                    @Nonnull String rawValue,
-                    int resultIndex,
-                    @Nonnull String seriesName);
+            Object extractValue(@Nonnull String columnName, @Nonnull String rawValue, int resultIndex, @Nonnull String seriesName);
         }
 
         /**
          * Represents one data record within a {@link Series} of an InfluxQL query.
          */
         public final class Record {
+
             private final Object[] values;
 
             public Record(final Object[] values) {
@@ -196,20 +185,12 @@ public final class InfluxQLQueryResult {
              */
             @Nullable
             public Object getValueByKey(@Nonnull final String key) {
-
-                Arguments.checkNonEmpty(key, "key");
-
-                Integer index = columns.get(key);
-                if (index == null) {
-                    return null;
-                }
-                return values[index];
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
 
             public Object[] getValues() {
-                return values;
+                throw new UnsupportedOperationException("STUB: not implemented");
             }
         }
     }
-
 }

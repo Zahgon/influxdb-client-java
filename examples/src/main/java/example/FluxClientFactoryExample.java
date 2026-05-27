@@ -29,34 +29,6 @@ import com.influxdb.client.flux.FluxConnectionOptions;
 public class FluxClientFactoryExample {
 
     public static void main(final String[] args) {
-
-        FluxConnectionOptions options = FluxConnectionOptions.builder()
-            .url("http://localhost:8086/")
-            .build();
-
-        FluxClient fluxClient = FluxClientFactory.create(options);
-
-        String fluxQuery = "from(bucket: \"telegraf\")\n"
-            + " |> range(start: -1d)"
-            + " |> filter(fn: (r) => (r[\"_measurement\"] == \"cpu\" and r[\"_field\"] == \"usage_system\"))"
-            + " |> sample(n: 5, pos: 1)";
-
-        fluxClient.query(
-            fluxQuery, (cancellable, record) -> {
-                // process the flux query result record
-                System.out.println(
-                    record.getTime() + ": " + record.getValue());
-
-            }, error -> {
-                // error handling while processing result
-                error.printStackTrace();
-
-            }, () -> {
-                // on complete
-                System.out.println("Query completed");
-            });
-
-        fluxClient.close();
-
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

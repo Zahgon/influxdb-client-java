@@ -22,7 +22,6 @@
 package com.influxdb.query.exceptions;
 
 import javax.annotation.Nullable;
-
 import com.influxdb.exceptions.InfluxException;
 
 /**
@@ -36,12 +35,11 @@ public class FluxQueryException extends InfluxException {
 
     public FluxQueryException(@Nullable final String message, final int reference) {
         super(message);
-
         this.reference = reference;
     }
 
     @Override
     public int reference() {
-        return reference;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

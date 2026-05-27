@@ -22,41 +22,20 @@
 package example;
 
 import java.time.temporal.ChronoUnit;
-
 import com.influxdb.client.reactive.InfluxDBClientReactive;
 import com.influxdb.client.reactive.InfluxDBClientReactiveFactory;
 import com.influxdb.client.reactive.QueryReactiveApi;
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.query.dsl.functions.restriction.Restrictions;
-
 import io.reactivex.rxjava3.core.Flowable;
 
 public class InfluxDB2ReactiveExampleDSL {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) {
-
-        InfluxDBClientReactive influxDBClient = InfluxDBClientReactiveFactory.create("http://localhost:8086", token, org);
-        
-        //
-        // Query data
-        //
-        Flux flux = Flux.from("my-bucket")
-                .range(-30L, ChronoUnit.MINUTES)
-                .filter(Restrictions.and(Restrictions.measurement().equal("temperature")));
-
-        QueryReactiveApi queryApi = influxDBClient.getQueryReactiveApi();
-
-        Flowable.fromPublisher(queryApi.query(flux.toString()))
-                .subscribe(fluxRecord -> {
-                    //
-                    // The callback to consume a FluxRecord.
-                    //
-                    System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-                });
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

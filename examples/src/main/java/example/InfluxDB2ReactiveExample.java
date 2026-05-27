@@ -24,41 +24,15 @@ package example;
 import com.influxdb.client.reactive.InfluxDBClientReactive;
 import com.influxdb.client.reactive.InfluxDBClientReactiveFactory;
 import com.influxdb.client.reactive.QueryReactiveApi;
-
 import io.reactivex.rxjava3.core.Flowable;
 
 public class InfluxDB2ReactiveExample {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) {
-
-        InfluxDBClientReactive influxDBClient = InfluxDBClientReactiveFactory.create("http://localhost:8086", token, org);
-
-        //
-        // Query data
-        //
-        String flux = "from(bucket:\"my-bucket\") |> range(start: 0)";
-
-        QueryReactiveApi queryApi = influxDBClient.getQueryReactiveApi();
-
-        Flowable.fromPublisher(queryApi.query(flux))
-                //
-                // Filter records by measurement name
-                //
-                .filter(it -> "temperature".equals(it.getMeasurement()))
-                //
-                // Take first 10 records
-                //
-                .take(10)
-                .subscribe(fluxRecord -> {
-                    //
-                    // The callback to consume a FluxRecord.
-                    //
-                    System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-                });
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

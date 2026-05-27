@@ -26,7 +26,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.AuthorizationsApi;
 import com.influxdb.client.domain.Authorization;
 import com.influxdb.client.domain.AuthorizationPostRequest;
@@ -38,7 +37,6 @@ import com.influxdb.client.domain.User;
 import com.influxdb.client.service.AuthorizationsService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -51,194 +49,115 @@ final class AuthorizationsApiImpl extends AbstractRestClient implements Authoriz
     private final AuthorizationsService service;
 
     AuthorizationsApiImpl(@Nonnull final AuthorizationsService service) {
-
         Arguments.checkNotNull(service, "service");
-
         this.service = service;
     }
 
     @Nonnull
     @Override
-    public Authorization createAuthorization(@Nonnull final Organization organization,
-                                             @Nonnull final List<Permission> permissions) {
-
-        Arguments.checkNotNull(organization, "Organization is required");
-        Arguments.checkNotNull(permissions, "Permissions are required");
-
-        return createAuthorization(organization.getId(), permissions);
+    public Authorization createAuthorization(@Nonnull final Organization organization, @Nonnull final List<Permission> permissions) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Authorization createAuthorization(@Nonnull final String orgID,
-                                             @Nonnull final List<Permission> permissions) {
-
-        Arguments.checkNonEmpty(orgID, "Organization ID");
-        Arguments.checkNotNull(permissions, "Permissions are required");
-
-        Authorization authorization = new Authorization();
-        authorization.setOrgID(orgID);
-        authorization.setPermissions(permissions);
-        authorization.setStatus(Authorization.StatusEnum.ACTIVE);
-
-        return createAuthorization(authorization);
+    public Authorization createAuthorization(@Nonnull final String orgID, @Nonnull final List<Permission> permissions) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Authorization createAuthorization(@Nonnull final Authorization authorization) {
-
-        Arguments.checkNotNull(authorization, "Authorization is required");
-
-        AuthorizationPostRequest request = new AuthorizationPostRequest();
-        request
-                .orgID(authorization.getOrgID())
-                .userID(authorization.getUserID())
-                .permissions(authorization.getPermissions())
-                .description(authorization.getDescription());
-
-        return createAuthorization(request);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @Nonnull
     public Authorization createAuthorization(@Nonnull final AuthorizationPostRequest request) {
-
-        Arguments.checkNotNull(request, "AuthorizationPostRequest is required");
-
-        Call<Authorization> call = service.postAuthorizations(request, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Authorization> findAuthorizations() {
-        return findAuthorizationsByUserID(null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Authorization findAuthorizationByID(@Nonnull final String authorizationID) {
-
-        Arguments.checkNonEmpty(authorizationID, "authorizationID");
-
-        Call<Authorization> call = service.getAuthorizationsID(authorizationID, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Authorization> findAuthorizationsByUser(@Nonnull final User user) {
-
-        Arguments.checkNotNull(user, "User is required");
-
-        return findAuthorizations(user.getId(), null, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Authorization> findAuthorizationsByUserID(@Nullable final String userID) {
-        return findAuthorizations(userID, null, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Authorization> findAuthorizationsByUserName(@Nullable final String userName) {
-        return findAuthorizations(null, userName, null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Authorization> findAuthorizationsByOrg(@Nonnull final Organization organization) {
-
-        Arguments.checkNotNull(organization, "organization");
-
-        return findAuthorizationsByOrgID(organization.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Authorization> findAuthorizationsByOrgID(@Nullable final String orgID) {
-        return findAuthorizations(null, null, orgID);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Authorization updateAuthorization(@Nonnull final Authorization authorization) {
-
-        Arguments.checkNotNull(authorization, "Authorization is required");
-
-        return updateAuthorization(authorization.getId(), authorization);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @Nonnull
-    public Authorization updateAuthorization(@Nonnull final String authorizationID,
-                                             @Nonnull final AuthorizationUpdateRequest request) {
-
-        Arguments.checkNonEmpty(authorizationID, "authorizationID");
-        Arguments.checkNotNull(authorizationID, "AuthorizationUpdateRequest");
-
-        Call<Authorization> authorizationCall = service.patchAuthorizationsID(authorizationID, request, null);
-
-        return execute(authorizationCall);
+    public Authorization updateAuthorization(@Nonnull final String authorizationID, @Nonnull final AuthorizationUpdateRequest request) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteAuthorization(@Nonnull final Authorization authorization) {
-
-        Arguments.checkNotNull(authorization, "Authorization is required");
-
-        deleteAuthorization(authorization.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteAuthorization(@Nonnull final String authorizationID) {
-
-        Arguments.checkNonEmpty(authorizationID, "authorizationID");
-
-        Call<Void> call = service.deleteAuthorizationsID(authorizationID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Authorization cloneAuthorization(@Nonnull final String authorizationID) {
-
-        Arguments.checkNonEmpty(authorizationID, "authorizationID");
-
-        Authorization authorization = findAuthorizationByID(authorizationID);
-
-        return cloneAuthorization(authorization);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Authorization cloneAuthorization(@Nonnull final Authorization authorization) {
-
-        Arguments.checkNotNull(authorization, "authorization");
-
-        Authorization cloned = new Authorization();
-        cloned.setOrgID(authorization.getOrgID());
-        cloned.setStatus(Authorization.StatusEnum.ACTIVE);
-        cloned.setDescription(authorization.getDescription());
-        cloned.setPermissions(authorization.getPermissions());
-
-        return createAuthorization(cloned);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
-    private List<Authorization> findAuthorizations(@Nullable final String userID,
-                                                   @Nullable final String userName,
-                                                   @Nullable final String orgID) {
-
+    private List<Authorization> findAuthorizations(@Nullable final String userID, @Nullable final String userName, @Nullable final String orgID) {
         Call<Authorizations> authorizationsCall = service.getAuthorizations(null, userID, userName, orgID, null);
-
         Authorizations authorizations = execute(authorizationsCall);
         LOG.log(Level.FINEST, "findAuthorizations found: {0}", authorizations);
-
         return authorizations.getAuthorizations();
     }
 }

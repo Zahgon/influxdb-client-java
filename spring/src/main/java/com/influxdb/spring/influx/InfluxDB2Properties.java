@@ -22,9 +22,7 @@
 package com.influxdb.spring.influx;
 
 import java.time.Duration;
-
 import com.influxdb.LogLevel;
-
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 /**
@@ -88,82 +86,82 @@ public class InfluxDB2Properties {
     private Duration connectTimeout = Duration.ofMillis(DEFAULT_TIMEOUT);
 
     public String getUrl() {
-        return url;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setUrl(final String url) {
-        this.url = url;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getUsername() {
-        return username;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setUsername(final String username) {
-        this.username = username;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getPassword() {
-        return password;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setPassword(final String password) {
-        this.password = password;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getToken() {
-        return token;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setToken(final String token) {
-        this.token = token;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public LogLevel getLogLevel() {
-        return logLevel;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLogLevel(final LogLevel logLevel) {
-        this.logLevel = logLevel;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getOrg() {
-        return org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOrg(final String org) {
-        this.org = org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public String getBucket() {
-        return bucket;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setBucket(final String bucket) {
-        this.bucket = bucket;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Duration getReadTimeout() {
-        return readTimeout;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setReadTimeout(final Duration readTimeout) {
-        this.readTimeout = readTimeout;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Duration getWriteTimeout() {
-        return writeTimeout;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setWriteTimeout(final Duration writeTimeout) {
-        this.writeTimeout = writeTimeout;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public Duration getConnectTimeout() {
-        return connectTimeout;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setConnectTimeout(final Duration connectTimeout) {
-        this.connectTimeout = connectTimeout;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

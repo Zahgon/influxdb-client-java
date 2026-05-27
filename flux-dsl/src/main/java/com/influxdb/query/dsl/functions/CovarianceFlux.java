@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Collection;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -64,7 +63,7 @@ public final class CovarianceFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "covariance";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -73,16 +72,7 @@ public final class CovarianceFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public CovarianceFlux withColumns(@Nonnull final String[] columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        if (columns.length != 2) {
-            throw new IllegalArgumentException("Exactly two columns must be provided.");
-        }
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -91,16 +81,7 @@ public final class CovarianceFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public CovarianceFlux withColumns(@Nonnull final Collection<String> columns) {
-
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        if (columns.size() != 2) {
-            throw new IllegalArgumentException("Exactly two columns must be provided.");
-        }
-
-        this.withPropertyValue("columns", columns);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -109,10 +90,7 @@ public final class CovarianceFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public CovarianceFlux withPearsonr(final boolean pearsonr) {
-
-        this.withPropertyValue("pearsonr", pearsonr);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,11 +99,6 @@ public final class CovarianceFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public CovarianceFlux withValueDst(@Nonnull final String valueDst) {
-
-        Arguments.checkNonEmpty(valueDst, "Value destination");
-
-        this.withPropertyValueEscaped("valueDst", valueDst);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

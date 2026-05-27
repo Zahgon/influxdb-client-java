@@ -37,11 +37,9 @@ import java.util.stream.Stream;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.annotation.concurrent.NotThreadSafe;
-
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.client.write.internal.NanosecondConverter;
 import com.influxdb.utils.Arguments;
-
 import static com.influxdb.client.write.WriteParameters.DEFAULT_WRITE_PRECISION;
 
 /**
@@ -54,20 +52,23 @@ import static com.influxdb.client.write.WriteParameters.DEFAULT_WRITE_PRECISION;
 public final class Point {
 
     private static final int MAX_FRACTION_DIGITS = 340;
-    private static final ThreadLocal<NumberFormat> NUMBER_FORMATTER =
-            ThreadLocal.withInitial(() -> {
-                NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH);
-                numberFormat.setMaximumFractionDigits(MAX_FRACTION_DIGITS);
-                numberFormat.setGroupingUsed(false);
-                numberFormat.setMinimumFractionDigits(1);
-                return numberFormat;
-            });
 
+    private static final ThreadLocal<NumberFormat> NUMBER_FORMATTER = ThreadLocal.withInitial(() -> {
+        NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH);
+        numberFormat.setMaximumFractionDigits(MAX_FRACTION_DIGITS);
+        numberFormat.setGroupingUsed(false);
+        numberFormat.setMinimumFractionDigits(1);
+        return numberFormat;
+    });
 
     private final String name;
+
     private final Map<String, String> tags = new TreeMap<>();
+
     private final Map<String, Object> fields = new TreeMap<>();
+
     private Number time;
+
     private WritePrecision precision = DEFAULT_WRITE_PRECISION;
 
     /**
@@ -76,9 +77,7 @@ public final class Point {
      * @param measurementName the measurement name
      */
     public Point(@Nonnull final String measurementName) {
-
         Arguments.checkNotNull(measurementName, "measurement");
-
         this.name = measurementName;
     }
 
@@ -90,10 +89,7 @@ public final class Point {
      */
     @Nonnull
     public static Point measurement(@Nonnull final String measurementName) {
-
-        Arguments.checkNotNull(measurementName, "measurement");
-
-        return new Point(measurementName);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -102,7 +98,7 @@ public final class Point {
      */
     @Nonnull
     public Map<String, String> getTags() {
-        return Collections.unmodifiableMap(this.tags);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -111,7 +107,7 @@ public final class Point {
      */
     @Nonnull
     public Map<String, Object> getFields() {
-        return Collections.unmodifiableMap(this.fields);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -123,12 +119,7 @@ public final class Point {
      */
     @Nonnull
     public Point addTag(@Nonnull final String key, @Nullable final String value) {
-
-        Arguments.checkNotNull(key, "tagName");
-
-        tags.put(key, value);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -139,12 +130,7 @@ public final class Point {
      */
     @Nonnull
     public Point addTags(@Nonnull final Map<String, String> tagsToAdd) {
-
-        Arguments.checkNotNull(tagsToAdd, "tagsToAdd");
-
-        tagsToAdd.forEach(this::addTag);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -156,7 +142,7 @@ public final class Point {
      */
     @Nonnull
     public Point addField(@Nonnull final String field, final boolean value) {
-        return putField(field, value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -167,7 +153,7 @@ public final class Point {
      * @return this
      */
     public Point addField(@Nonnull final String field, final long value) {
-        return putField(field, value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -179,7 +165,7 @@ public final class Point {
      */
     @Nonnull
     public Point addField(@Nonnull final String field, final double value) {
-        return putField(field, value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -191,7 +177,7 @@ public final class Point {
      */
     @Nonnull
     public Point addField(@Nonnull final String field, @Nullable final Number value) {
-        return putField(field, value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -203,7 +189,7 @@ public final class Point {
      */
     @Nonnull
     public Point addField(@Nonnull final String field, @Nullable final String value) {
-        return putField(field, value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -214,12 +200,7 @@ public final class Point {
      */
     @Nonnull
     public Point addFields(@Nonnull final Map<String, Object> fieldsToAdd) {
-
-        Arguments.checkNotNull(fieldsToAdd, "fieldsToAdd");
-
-        fieldsToAdd.forEach(this::putField);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -231,14 +212,7 @@ public final class Point {
      */
     @Nonnull
     public Point time(@Nullable final Instant time, @Nonnull final WritePrecision precision) {
-
-        if (time == null) {
-            return time((Long) null, precision);
-        }
-
-        BigInteger convertedTime = NanosecondConverter.convert(time, precision);
-
-        return time(convertedTime, precision);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -250,13 +224,7 @@ public final class Point {
      */
     @Nonnull
     public Point time(@Nullable final Number time, @Nonnull final WritePrecision precision) {
-
-        Arguments.checkNotNull(precision, "precision");
-
-        this.time = time;
-        this.precision = precision;
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -268,8 +236,7 @@ public final class Point {
      */
     @Nonnull
     public Point time(@Nullable final Long time, @Nonnull final WritePrecision precision) {
-
-        return time((Number) time, precision);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -277,7 +244,7 @@ public final class Point {
      */
     @Nullable
     public Number getTime() {
-        return time;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -285,7 +252,7 @@ public final class Point {
      */
     @Nonnull
     public WritePrecision getPrecision() {
-        return precision;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -294,7 +261,7 @@ public final class Point {
      * @return true, if the point contains any fields, false otherwise.
      */
     public boolean hasFields() {
-        return !fields.isEmpty();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -302,7 +269,7 @@ public final class Point {
      */
     @Nonnull
     public String toLineProtocol() {
-        return toLineProtocol(null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -311,7 +278,7 @@ public final class Point {
      */
     @Nonnull
     public String toLineProtocol(@Nullable final PointSettings pointSettings) {
-        return toLineProtocol(pointSettings, precision);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -320,64 +287,36 @@ public final class Point {
      * @return Line Protocol
      */
     @Nonnull
-    public String toLineProtocol(@Nullable final PointSettings pointSettings,
-                                 @Nonnull final WritePrecision precision) {
-
-        StringBuilder sb = new StringBuilder();
-
-        escapeKey(sb, name, false);
-        appendTags(sb, pointSettings);
-        boolean appendedFields = appendFields(sb);
-        if (!appendedFields) {
-            return "";
-        }
-        appendTime(sb, precision);
-
-        return sb.toString();
+    public String toLineProtocol(@Nullable final PointSettings pointSettings, @Nonnull final WritePrecision precision) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     private Point putField(@Nonnull final String field, @Nullable final Object value) {
-
         Arguments.checkNonEmpty(field, "fieldName");
-
         fields.put(field, value);
         return this;
     }
 
     private void appendTags(@Nonnull final StringBuilder sb, @Nullable final PointSettings pointSettings) {
-
-
         Set<Map.Entry<String, String>> entries = this.tags.entrySet();
         if (pointSettings != null) {
-
             Map<String, String> defaultTags = pointSettings.getDefaultTags();
             if (!defaultTags.isEmpty()) {
-
-                entries = Stream.of(this.tags, defaultTags)
-                        .map(Map::entrySet)
-                        .flatMap(Collection::stream)
-                        .filter(entry -> entry.getValue() != null)
-                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> {
-                            if (v1.isEmpty()) {
-                                return v2;
-                            }
-
-                            return v1;
-                        }, TreeMap::new))
-                        .entrySet();
+                entries = Stream.of(this.tags, defaultTags).map(Map::entrySet).flatMap(Collection::stream).filter(entry -> entry.getValue() != null).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> {
+                    if (v1.isEmpty()) {
+                        return v2;
+                    }
+                    return v1;
+                }, TreeMap::new)).entrySet();
             }
         }
-
         for (Map.Entry<String, String> tag : entries) {
-
             String key = tag.getKey();
             String value = tag.getValue();
-
             if (key.isEmpty() || value == null || value.isEmpty()) {
                 continue;
             }
-
             sb.append(',');
             escapeKey(sb, key);
             sb.append('=');
@@ -387,7 +326,6 @@ public final class Point {
     }
 
     private boolean appendFields(@Nonnull final StringBuilder sb) {
-
         boolean appended = false;
         for (Map.Entry<String, Object> field : this.fields.entrySet()) {
             Object value = field.getValue();
@@ -410,29 +348,22 @@ public final class Point {
             } else {
                 sb.append(value);
             }
-
             sb.append(',');
-
             appended = true;
         }
-
         // efficiently chop off the trailing comma
         int lengthMinusOne = sb.length() - 1;
         if (sb.charAt(lengthMinusOne) == ',') {
             sb.setLength(lengthMinusOne);
         }
-
         return appended;
     }
 
     private void appendTime(@Nonnull final StringBuilder sb, final WritePrecision precision) {
-
         if (this.time == null) {
             return;
         }
-
         sb.append(" ");
-
         if (this.precision == precision) {
             if (this.time instanceof BigDecimal) {
                 sb.append(((BigDecimal) this.time).toBigInteger());
@@ -460,7 +391,7 @@ public final class Point {
 
     private void escapeKey(@Nonnull final StringBuilder sb, @Nonnull final String key, final boolean escapeEqual) {
         for (int i = 0; i < key.length(); i++) {
-            switch (key.charAt(i)) {
+            switch(key.charAt(i)) {
                 case '\n':
                     sb.append("\\n");
                     continue;
@@ -481,14 +412,13 @@ public final class Point {
                     break;
                 default:
             }
-
             sb.append(key.charAt(i));
         }
     }
 
     private void escapeValue(@Nonnull final StringBuilder sb, @Nonnull final String value) {
         for (int i = 0; i < value.length(); i++) {
-            switch (value.charAt(i)) {
+            switch(value.charAt(i)) {
                 case '\\':
                 case '\"':
                     sb.append('\\');
@@ -499,14 +429,12 @@ public final class Point {
     }
 
     private boolean isNotDefined(final Object value) {
-        return value == null
-                || (value instanceof Double && !Double.isFinite((Double) value))
-                || (value instanceof Float && !Float.isFinite((Float) value));
+        return value == null || (value instanceof Double && !Double.isFinite((Double) value)) || (value instanceof Float && !Float.isFinite((Float) value));
     }
 
     @Nonnull
     private TimeUnit toTimeUnit(@Nonnull final WritePrecision precision) {
-        switch (precision) {
+        switch(precision) {
             case MS:
                 return TimeUnit.MILLISECONDS;
             case S:

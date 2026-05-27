@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
-
 import io.reactivex.rxjava3.annotations.NonNull;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.FlowableTransformer;
@@ -35,27 +34,27 @@ import org.reactivestreams.Subscription;
  * @param <U> the output value type
  * @see FlowableBufferTimed
  */
-public final class FlowableBufferTimedFlushable<T, U extends List<? super T>> extends Flowable<U>
-        implements FlowableTransformer<T, U> {
+public final class FlowableBufferTimedFlushable<T, U extends List<? super T>> extends Flowable<U> implements FlowableTransformer<T, U> {
 
     final Publisher<T> source;
+
     final Publisher<Boolean> flusher;
 
     final long timespan;
+
     final long timeskip;
+
     final TimeUnit unit;
+
     final Scheduler scheduler;
+
     final Supplier<U> bufferSupplier;
+
     final int maxSize;
+
     final boolean restartTimerOnMaxSize;
 
-    public FlowableBufferTimedFlushable(Publisher<T> source,
-                                        Publisher<Boolean> flusher,
-                                        long timespan,
-                                        TimeUnit unit,
-                                        int maxSize,
-                                        Scheduler scheduler,
-                                        Supplier<U> bufferSupplier) {
+    public FlowableBufferTimedFlushable(Publisher<T> source, Publisher<Boolean> flusher, long timespan, TimeUnit unit, int maxSize, Scheduler scheduler, Supplier<U> bufferSupplier) {
         this.source = source;
         this.flusher = flusher;
         this.timespan = timespan;
@@ -68,27 +67,28 @@ public final class FlowableBufferTimedFlushable<T, U extends List<? super T>> ex
     }
 
     @Override
-    public @NonNull Publisher<U> apply(@NonNull final Flowable<T> upstream) {
-        return new FlowableBufferTimedFlushable<>(upstream, flusher, timeskip, unit, maxSize, scheduler, bufferSupplier);
+    @NonNull
+    public Publisher<U> apply(@NonNull final Flowable<T> upstream) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     protected void subscribeActual(@NonNull final Subscriber<? super U> subscriber) {
-        Scheduler.Worker w = scheduler.createWorker();
-        source.subscribe(new BufferExactBoundedSubscriber<>(
-                new SerializedSubscriber<>(subscriber),
-                bufferSupplier,
-                timespan, unit, maxSize, restartTimerOnMaxSize, w, flusher
-        ));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    static final class BufferExactBoundedSubscriber<T, U extends Collection<? super T>>
-            extends QueueDrainSubscriber<T, U, U> implements Subscription, Runnable, Disposable {
+    static final class BufferExactBoundedSubscriber<T, U extends Collection<? super T>> extends QueueDrainSubscriber<T, U, U> implements Subscription, Runnable, Disposable {
+
         final Supplier<U> bufferSupplier;
+
         final long timespan;
+
         final TimeUnit unit;
+
         final int maxSize;
+
         final boolean restartTimerOnMaxSize;
+
         final Worker w;
 
         final Publisher<Boolean> flusher;
@@ -103,11 +103,7 @@ public final class FlowableBufferTimedFlushable<T, U extends List<? super T>> ex
 
         long consumerIndex;
 
-        BufferExactBoundedSubscriber(
-                Subscriber<? super U> actual,
-                Supplier<U> bufferSupplier,
-                long timespan, TimeUnit unit, int maxSize,
-                boolean restartOnMaxSize, Worker w, Publisher<Boolean> flusher) {
+        BufferExactBoundedSubscriber(Subscriber<? super U> actual, Supplier<U> bufferSupplier, long timespan, TimeUnit unit, int maxSize, boolean restartOnMaxSize, Worker w, Publisher<Boolean> flusher) {
             super(actual, new MpscLinkedQueue<>());
             this.bufferSupplier = bufferSupplier;
             this.timespan = timespan;
@@ -120,165 +116,52 @@ public final class FlowableBufferTimedFlushable<T, U extends List<? super T>> ex
 
         @Override
         public void onSubscribe(@NonNull Subscription s) {
-            if (!SubscriptionHelper.validate(this.upstream, s)) {
-                return;
-            }
-            this.upstream = s;
-
-            U b;
-
-            try {
-                b = Objects.requireNonNull(bufferSupplier.get(), "The supplied buffer is null");
-            } catch (Throwable e) {
-                Exceptions.throwIfFatal(e);
-                w.dispose();
-                s.cancel();
-                EmptySubscription.error(e, downstream);
-                return;
-            }
-
-            buffer = b;
-
-            downstream.onSubscribe(this);
-
-            timer = w.schedulePeriodically(this, timespan, timespan, unit);
-
-            s.request(Long.MAX_VALUE);
-
-            flusher.subscribe(new LambdaSubscriber<>(
-                    ignore -> run(),
-                    Functions.ON_ERROR_MISSING,
-                    Functions.EMPTY_ACTION,
-                    FlowableInternalHelper.RequestMax.INSTANCE));
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void onNext(T t) {
-            U b;
-            synchronized (this) {
-                b = buffer;
-                if (b == null) {
-                    return;
-                }
-
-                b.add(t);
-
-                if (b.size() < maxSize) {
-                    return;
-                }
-
-                buffer = null;
-                producerIndex++;
-            }
-
-            if (restartTimerOnMaxSize) {
-                timer.dispose();
-            }
-
-            fastPathOrderedEmitMax(b, false, this);
-
-            try {
-                b = Objects.requireNonNull(bufferSupplier.get(), "The supplied buffer is null");
-            } catch (Throwable e) {
-                Exceptions.throwIfFatal(e);
-                cancel();
-                downstream.onError(e);
-                return;
-            }
-
-            synchronized (this) {
-                buffer = b;
-                consumerIndex++;
-            }
-            if (restartTimerOnMaxSize) {
-                timer = w.schedulePeriodically(this, timespan, timespan, unit);
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void onError(Throwable t) {
-            synchronized (this) {
-                buffer = null;
-            }
-            downstream.onError(t);
-            w.dispose();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void onComplete() {
-            U b;
-            synchronized (this) {
-                b = buffer;
-                buffer = null;
-            }
-
-            if (b != null) {
-                queue.offer(b);
-                done = true;
-                if (enter()) {
-                    QueueDrainHelper.drainMaxLoop(queue, downstream, false, this, this);
-                }
-                w.dispose();
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean accept(Subscriber<? super U> a, U v) {
-            a.onNext(v);
-            return true;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void request(long n) {
-            requested(n);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void cancel() {
-            if (!cancelled) {
-                cancelled = true;
-                dispose();
-            }
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void dispose() {
-            synchronized (this) {
-                buffer = null;
-            }
-            upstream.cancel();
-            w.dispose();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public boolean isDisposed() {
-            return w.isDisposed();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void run() {
-            U next;
-
-            try {
-                next = Objects.requireNonNull(bufferSupplier.get(), "The supplied buffer is null");
-            } catch (Throwable e) {
-                Exceptions.throwIfFatal(e);
-                cancel();
-                downstream.onError(e);
-                return;
-            }
-
-            U current;
-
-            synchronized (this) {
-                current = buffer;
-                if (current == null || producerIndex != consumerIndex) {
-                    return;
-                }
-                buffer = next;
-            }
-
-            fastPathOrderedEmitMax(current, false, this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

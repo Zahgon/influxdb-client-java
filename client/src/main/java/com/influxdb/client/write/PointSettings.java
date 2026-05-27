@@ -29,7 +29,6 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.utils.Arguments;
 
 /**
@@ -42,6 +41,7 @@ public final class PointSettings {
 
     // Android compiler compatibility
     private static final Pattern ENV_PROPERTY = Pattern.compile("(\\$\\{env\\.)(.+)\\}");
+
     private static final Pattern SYSTEM_PROPERTY = Pattern.compile("(\\$\\{)(.+)(\\})");
 
     private final Map<String, String> defaultTags = new TreeMap<>();
@@ -54,14 +54,8 @@ public final class PointSettings {
      * @return this
      */
     @Nonnull
-    public PointSettings addDefaultTag(@Nonnull final String key,
-                                       @Nullable final String expression) {
-
-        Arguments.checkNotNull(key, "tagName");
-
-        defaultTags.put(key, expression);
-
-        return this;
+    public PointSettings addDefaultTag(@Nonnull final String key, @Nullable final String expression) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -71,33 +65,6 @@ public final class PointSettings {
      */
     @Nonnull
     Map<String, String> getDefaultTags() {
-
-        Function<String, String> evaluation = expression -> {
-
-            if (expression == null) {
-                return null;
-            }
-
-            // env property
-            Matcher matcher = ENV_PROPERTY.matcher(expression);
-            if (matcher.matches()) {
-                return System.getenv(matcher.group(2));
-            }
-
-            // system property
-            matcher = SYSTEM_PROPERTY.matcher(expression);
-            if (matcher.matches()) {
-                return System.getProperty(matcher.group(2));
-            }
-
-            return expression;
-        };
-
-        return defaultTags
-                .entrySet()
-                .stream()
-                .map(entry -> new String[]{entry.getKey(), evaluation.apply(entry.getValue())})
-                .filter(keyValue -> keyValue[1] != null)
-                .collect(Collectors.toMap(keyValue -> keyValue[0], keyValue -> keyValue[1], (o, n) -> n, TreeMap::new));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

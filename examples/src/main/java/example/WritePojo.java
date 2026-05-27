@@ -22,7 +22,6 @@
 package example;
 
 import java.time.Instant;
-
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
 import com.influxdb.client.InfluxDBClient;
@@ -34,29 +33,13 @@ import com.influxdb.client.domain.WritePrecision;
 public class WritePojo {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
+
     private static String bucket = "my-bucket";
 
     public static void main(final String[] args) {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org, bucket);
-
-        //
-        // Write data
-        //
-        WriteApiBlocking writeApi = influxDBClient.getWriteApiBlocking();
-
-        //
-        // Write by POJO
-        //
-        Temperature temperature = new Temperature();
-        temperature.location = "south";
-        temperature.value = 62D;
-        temperature.time = Instant.now();
-
-        writeApi.writeMeasurement(WritePrecision.NS, temperature);
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Measurement(name = "temperature")

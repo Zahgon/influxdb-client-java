@@ -24,7 +24,6 @@ package com.influxdb.client.internal;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.FindOptions;
 import com.influxdb.client.NotificationRulesApi;
 import com.influxdb.client.domain.HTTPNotificationEndpoint;
@@ -48,7 +47,6 @@ import com.influxdb.client.domain.TaskStatusType;
 import com.influxdb.client.service.NotificationRulesService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -59,241 +57,117 @@ final class NotificationRulesApiImpl extends AbstractRestClient implements Notif
     private final NotificationRulesService service;
 
     NotificationRulesApiImpl(@Nonnull final NotificationRulesService service) {
-
         Arguments.checkNotNull(service, "service");
-
         this.service = service;
     }
 
     @Nonnull
     @Override
-    public SlackNotificationRule createSlackRule(@Nonnull final String name,
-                                                 @Nonnull final String every,
-                                                 @Nonnull final String messageTemplate,
-                                                 @Nonnull final RuleStatusLevel status,
-                                                 @Nonnull final SlackNotificationEndpoint endpoint,
-                                                 @Nonnull final String orgID) {
-
-        return createSlackRule(name, every, messageTemplate, status, Collections.emptyList(), endpoint, orgID);
+    public SlackNotificationRule createSlackRule(@Nonnull final String name, @Nonnull final String every, @Nonnull final String messageTemplate, @Nonnull final RuleStatusLevel status, @Nonnull final SlackNotificationEndpoint endpoint, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public SlackNotificationRule createSlackRule(@Nonnull final String name,
-                                                 @Nonnull final String every,
-                                                 @Nonnull final String messageTemplate,
-                                                 @Nonnull final RuleStatusLevel status,
-                                                 @Nonnull final List<TagRule> tagRules,
-                                                 @Nonnull final SlackNotificationEndpoint endpoint,
-                                                 @Nonnull final String orgID) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkDuration(every, "every");
-        Arguments.checkNonEmpty(messageTemplate, "messageTemplate");
-        Arguments.checkNotNull(status, "status");
-        Arguments.checkNotNull(tagRules, "tagRules");
-        Arguments.checkNotNull(endpoint, "endpoint");
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        SlackNotificationRule rule = new SlackNotificationRule();
-        rule.setMessageTemplate(messageTemplate);
-
-        return (SlackNotificationRule)
-                createRule(name, every, status, tagRules, endpoint, orgID, rule);
+    public SlackNotificationRule createSlackRule(@Nonnull final String name, @Nonnull final String every, @Nonnull final String messageTemplate, @Nonnull final RuleStatusLevel status, @Nonnull final List<TagRule> tagRules, @Nonnull final SlackNotificationEndpoint endpoint, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public PagerDutyNotificationRule createPagerDutyRule(@Nonnull final String name,
-                                                         @Nonnull final String every,
-                                                         @Nonnull final String messageTemplate,
-                                                         @Nonnull final RuleStatusLevel status,
-                                                         @Nonnull final List<TagRule> tagRules,
-                                                         @Nonnull final PagerDutyNotificationEndpoint endpoint,
-                                                         @Nonnull final String orgID) {
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkDuration(every, "every");
-        Arguments.checkNonEmpty(messageTemplate, "messageTemplate");
-        Arguments.checkNotNull(status, "status");
-        Arguments.checkNotNull(tagRules, "tagRules");
-        Arguments.checkNotNull(endpoint, "endpoint");
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        PagerDutyNotificationRule rule = new PagerDutyNotificationRule();
-        rule.setMessageTemplate(messageTemplate);
-
-        return (PagerDutyNotificationRule)
-                createRule(name, every, status, tagRules, endpoint, orgID, rule);
+    public PagerDutyNotificationRule createPagerDutyRule(@Nonnull final String name, @Nonnull final String every, @Nonnull final String messageTemplate, @Nonnull final RuleStatusLevel status, @Nonnull final List<TagRule> tagRules, @Nonnull final PagerDutyNotificationEndpoint endpoint, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public HTTPNotificationRule createHTTPRule(@Nonnull final String name,
-                                               @Nonnull final String every,
-                                               @Nonnull final RuleStatusLevel status,
-                                               @Nonnull final List<TagRule> tagRules,
-                                               @Nonnull final HTTPNotificationEndpoint endpoint,
-                                               @Nonnull final String orgID) {
-
-
-        HTTPNotificationRule rule = new HTTPNotificationRule();
-
-        return (HTTPNotificationRule)
-                createRule(name, every, status, tagRules, endpoint, orgID, rule);
+    public HTTPNotificationRule createHTTPRule(@Nonnull final String name, @Nonnull final String every, @Nonnull final RuleStatusLevel status, @Nonnull final List<TagRule> tagRules, @Nonnull final HTTPNotificationEndpoint endpoint, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @Nonnull
     public NotificationRule createRule(@Nonnull final NotificationRule rule) {
-
-        Arguments.checkNotNull(rule, "rule");
-
-        Call<NotificationRule> call = service.createNotificationRule(rule);
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public NotificationRule updateNotificationRule(@Nonnull final NotificationRule notificationRule) {
-        Arguments.checkNotNull(notificationRule, "update");
-
-        NotificationRuleUpdate update = new NotificationRuleUpdate()
-                .name(notificationRule.getName())
-                .description(notificationRule.getDescription())
-                .status(NotificationRuleUpdate.StatusEnum.fromValue(notificationRule.getStatus().getValue()));
-
-        return updateNotificationRule(notificationRule.getId(), update);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public NotificationRule updateNotificationRule(@Nonnull final String ruleID,
-                                                   @Nonnull final NotificationRuleUpdate update) {
-        Arguments.checkNotNull(ruleID, "ruleID");
-        Arguments.checkNotNull(update, "update");
-
-        Call<NotificationRule> call = service.patchNotificationRulesID(ruleID, update, null);
-
-        return execute(call);
+    public NotificationRule updateNotificationRule(@Nonnull final String ruleID, @Nonnull final NotificationRuleUpdate update) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteNotificationRule(@Nonnull final NotificationRule notificationRule) {
-        Arguments.checkNotNull(notificationRule, "notificationRule");
-
-        deleteNotificationRule(notificationRule.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteNotificationRule(@Nonnull final String ruleID) {
-        Arguments.checkNotNull(ruleID, "ruleID");
-
-        Call<Void> call = service.deleteNotificationRulesID(ruleID, null);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public NotificationRule findNotificationRuleByID(@Nonnull final String ruleID) {
-        Arguments.checkNotNull(ruleID, "ruleID");
-
-        Call<NotificationRule> call = service.getNotificationRulesID(ruleID, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<NotificationRule> findNotificationRules(@Nonnull final String orgID) {
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        return findNotificationRules(orgID, new FindOptions()).getNotificationRules();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public NotificationRules findNotificationRules(@Nonnull final String orgID,
-                                                   @Nonnull final FindOptions findOptions) {
-        Arguments.checkNonEmpty(orgID, "orgID");
-        Arguments.checkNotNull(findOptions, "findOptions");
-
-        Call<NotificationRules> call = service
-                .getNotificationRules(orgID, null, findOptions.getOffset(), findOptions.getLimit(),
-                        null, null);
-
-        return execute(call);
+    public NotificationRules findNotificationRules(@Nonnull final String orgID, @Nonnull final FindOptions findOptions) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final NotificationRule notificationRule) {
-        Arguments.checkNotNull(notificationRule, "notificationRule");
-
-        return getLabels(notificationRule.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final String ruleID) {
-        Arguments.checkNonEmpty(ruleID, "ruleID");
-
-        Call<LabelsResponse> call = service.getNotificationRulesIDLabels(ruleID, null);
-
-        return execute(call).getLabels();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final Label label, @Nonnull final NotificationRule notificationRule) {
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(notificationRule, "notificationRule");
-
-        return addLabel(label.getId(), notificationRule.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final String labelID, @Nonnull final String ruleID) {
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(ruleID, "ruleID");
-
-        LabelMapping labelMapping = new LabelMapping();
-        labelMapping.setLabelID(labelID);
-
-        Call<LabelResponse> call = service.postNotificationRuleIDLabels(ruleID, labelMapping, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final Label label, @Nonnull final NotificationRule notificationRule) {
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(notificationRule, "check");
-
-        deleteLabel(label.getId(), notificationRule.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final String labelID, @Nonnull final String ruleID) {
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(ruleID, "ruleID");
-
-        Call<Void> call = service.deleteNotificationRulesIDLabelsID(ruleID, labelID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
-    private NotificationRule createRule(@Nonnull final String name,
-                                        @Nonnull final String every,
-                                        @Nonnull final RuleStatusLevel status,
-                                        @Nonnull final List<TagRule> tagRules,
-                                        @Nonnull final NotificationEndpoint notificationEndpoint,
-                                        @Nonnull final String orgID,
-                                        @Nonnull final NotificationRule rule) {
-
+    private NotificationRule createRule(@Nonnull final String name, @Nonnull final String every, @Nonnull final RuleStatusLevel status, @Nonnull final List<TagRule> tagRules, @Nonnull final NotificationEndpoint notificationEndpoint, @Nonnull final String orgID, @Nonnull final NotificationRule rule) {
         Arguments.checkNotNull(rule, "rule");
-
         rule.setName(name);
         rule.setEvery(every);
         rule.setOrgID(orgID);
@@ -301,7 +175,6 @@ final class NotificationRulesApiImpl extends AbstractRestClient implements Notif
         rule.addStatusRulesItem(new StatusRule().currentLevel(status));
         rule.setEndpointID(notificationEndpoint.getId());
         rule.setStatus(TaskStatusType.ACTIVE);
-
         return createRule(rule);
     }
 }

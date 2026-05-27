@@ -24,10 +24,8 @@ package com.influxdb.query.dsl.functions.restriction;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.functions.properties.FunctionsParameters;
 import com.influxdb.utils.Arguments;
-
 import static com.influxdb.query.dsl.functions.properties.FunctionsParameters.escapeDoubleQuotes;
 
 /**
@@ -40,9 +38,7 @@ public final class ColumnRestriction {
     private final String fieldName;
 
     ColumnRestriction(@Nonnull final String recordColumn) {
-
         Arguments.checkNonEmpty(recordColumn, "Record column");
-
         this.fieldName = recordColumn;
     }
 
@@ -54,7 +50,7 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions equal(@Nonnull final Object value) {
-        return custom(value, "==");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -65,7 +61,7 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions notEqual(@Nonnull final Object value) {
-        return custom(value, "!=");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -76,7 +72,7 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions less(@Nonnull final Object value) {
-        return custom(value, "<");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -87,7 +83,7 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions greater(@Nonnull final Object value) {
-        return custom(value, ">");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -98,7 +94,7 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions lessOrEqual(@Nonnull final Object value) {
-        return custom(value, "<=");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -109,7 +105,7 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions greaterOrEqual(@Nonnull final Object value) {
-        return custom(value, ">=");
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,7 +117,7 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions custom(@Nonnull final Object value, @Nonnull final String operator) {
-        return new OperatorRestrictions(fieldName, value, operator);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -131,10 +127,11 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions exists() {
-        return new ExistsRestrictions(fieldName);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static final class ExistsRestrictions extends Restrictions {
+
         private final String fieldName;
 
         public ExistsRestrictions(@Nonnull final String fieldName) {
@@ -143,7 +140,7 @@ public final class ColumnRestriction {
 
         @Override
         public String toString() {
-            return "exists r[\"" + escapeDoubleQuotes(fieldName) + "\"]";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -154,11 +151,13 @@ public final class ColumnRestriction {
      */
     @Nonnull
     public Restrictions contains(@Nonnull final String[] set) {
-        return new ContainsRestrictions(fieldName, set);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static final class ContainsRestrictions extends Restrictions {
+
         private final String fieldName;
+
         private final String[] set;
 
         public ContainsRestrictions(@Nonnull final String fieldName, @Nonnull final String[] set) {
@@ -168,20 +167,19 @@ public final class ColumnRestriction {
 
         @Override
         public String toString() {
-            return "contains(value: r[\"" + escapeDoubleQuotes(fieldName) + "\"], set:["
-                    + Arrays.stream(set).map(FunctionsParameters::escapeDoubleQuotes)
-                    .collect(Collectors.joining("\", \"", "\"", "\"")) + "])";
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
     private static final class OperatorRestrictions extends Restrictions {
+
         private final String fieldName;
+
         private final Object fieldValue;
+
         private final String operator;
 
-        private OperatorRestrictions(@Nonnull final String fieldName,
-                                     @Nonnull final Object fieldValue,
-                                     @Nonnull final String operator) {
+        private OperatorRestrictions(@Nonnull final String fieldName, @Nonnull final Object fieldValue, @Nonnull final String operator) {
             this.fieldName = fieldName;
             this.fieldValue = fieldValue;
             this.operator = operator;
@@ -189,19 +187,7 @@ public final class ColumnRestriction {
 
         @Override
         public String toString() {
-
-            String value;
-            if (fieldValue instanceof String) {
-                if (operator.contains("~")) {
-                    value = escapeDoubleQuotes((String) fieldValue);
-                } else {
-                    value = "\"" + escapeDoubleQuotes((String) fieldValue) + "\"";
-                }
-            } else {
-                value = FunctionsParameters.serializeValue(fieldValue, false);
-            }
-
-            return "r[\"" + escapeDoubleQuotes(fieldName) + "\"] " + operator + " " + value;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

@@ -28,45 +28,10 @@ import com.influxdb.client.QueryApi;
 public class AsynchronousQuery {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) throws InterruptedException {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org);
-        //
-        // Query data
-        //
-        String flux = "from(bucket:\"my-bucket\") |> range(start: 0)";
-
-        QueryApi queryApi = influxDBClient.getQueryApi();
-
-        queryApi.query(flux, (cancellable, fluxRecord) -> {
-
-            //
-            // The callback to consume a FluxRecord.
-            //
-            // cancelable - object has the cancel method to stop asynchronous query
-            //
-            System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-
-        }, throwable -> {
-
-            //
-            // The callback to consume any error notification.
-            //
-            System.out.println("Error occurred: " + throwable.getMessage());
-
-        }, () -> {
-
-            //
-            // The callback to consume a notification about successfully end of stream.
-            //
-            System.out.println("Query completed");
-
-        });
-
-        Thread.sleep(5_000);
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

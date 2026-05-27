@@ -50,7 +50,7 @@ public final class FluxTable implements Serializable {
      */
     @Nonnull
     public List<FluxColumn> getColumns() {
-        return columns;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -59,7 +59,7 @@ public final class FluxTable implements Serializable {
      */
     @Nonnull
     public List<FluxColumn> getGroupKey() {
-        return columns.stream().filter(FluxColumn::isGroup).collect(Collectors.toList());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -67,14 +67,11 @@ public final class FluxTable implements Serializable {
      */
     @Nonnull
     public List<FluxRecord> getRecords() {
-        return records;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", FluxTable.class.getSimpleName() + "[", "]")
-                .add("columns=" + columns.size())
-                .add("records=" + records.size())
-                .toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

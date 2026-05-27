@@ -23,7 +23,6 @@ package com.influxdb.client.reactive.internal;
 
 import java.util.Collections;
 import javax.annotation.Nonnull;
-
 import com.influxdb.LogLevel;
 import com.influxdb.client.InfluxDBClientOptions;
 import com.influxdb.client.domain.HealthCheck;
@@ -35,7 +34,6 @@ import com.influxdb.client.reactive.WriteReactiveApi;
 import com.influxdb.client.service.QueryService;
 import com.influxdb.client.service.WriteService;
 import com.influxdb.utils.Arguments;
-
 import io.reactivex.rxjava3.core.Flowable;
 import org.reactivestreams.Publisher;
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
@@ -43,8 +41,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory;
 /**
  * @author Jakub Bednar (bednar@github) (20/11/2018 07:12)
  */
-public class InfluxDBClientReactiveImpl extends AbstractInfluxDBClient
-        implements InfluxDBClientReactive {
+public class InfluxDBClientReactiveImpl extends AbstractInfluxDBClient implements InfluxDBClientReactive {
 
     public InfluxDBClientReactiveImpl(@Nonnull final InfluxDBClientOptions options) {
         super(options, "java", Collections.singletonList(RxJava3CallAdapterFactory.createSynchronous()));
@@ -53,67 +50,53 @@ public class InfluxDBClientReactiveImpl extends AbstractInfluxDBClient
     @Nonnull
     @Override
     public QueryReactiveApi getQueryReactiveApi() {
-        return new QueryReactiveApiImpl(retrofit.create(QueryService.class), options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public WriteReactiveApi getWriteReactiveApi() {
-        return getWriteReactiveApi(WriteOptionsReactive.DEFAULTS);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public WriteReactiveApi getWriteReactiveApi(@Nonnull final WriteOptionsReactive writeOptions) {
-
-        Arguments.checkNotNull(writeOptions, "WriteOptions");
-
-        return new WriteReactiveApiImpl(writeOptions, retrofit.create(WriteService.class), options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Publisher<HealthCheck> health() {
-
-        return Flowable.fromCallable(() -> health(healthService.getHealth(null)));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LogLevel getLogLevel() {
-        return getLogLevel(this.loggingInterceptor);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InfluxDBClientReactive setLogLevel(@Nonnull final LogLevel logLevel) {
-
-        setLogLevel(this.loggingInterceptor, logLevel);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InfluxDBClientReactive enableGzip() {
-
-        this.gzipInterceptor.enableGzip();
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InfluxDBClientReactive disableGzip() {
-
-        this.gzipInterceptor.disableGzip();
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean isGzipEnabled() {
-
-        return this.gzipInterceptor.isEnabledGzip();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.time.temporal.ChronoUnit;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -43,7 +42,6 @@ import com.influxdb.utils.Arguments;
  *     .from("telegraf")
  *     .truncateTimeColumn("s");
  * </pre>
- *
  */
 public final class TruncateTimeColumnFlux extends AbstractParametrizedFlux {
 
@@ -54,7 +52,7 @@ public final class TruncateTimeColumnFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "truncateTimeColumn";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -63,10 +61,6 @@ public final class TruncateTimeColumnFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public TruncateTimeColumnFlux withUnit(@Nonnull final ChronoUnit unit) {
-        Arguments.checkNotNull(unit, "unit");
-
-        withPropertyValue("unit", 1L, unit);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

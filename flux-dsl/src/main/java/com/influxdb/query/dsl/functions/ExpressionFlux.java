@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Map;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -46,18 +45,12 @@ public final class ExpressionFlux extends AbstractFluxWithUpstream {
 
     public ExpressionFlux(@Nonnull final Flux source, @Nonnull final String expression) {
         super(source);
-
         Arguments.checkNonEmpty(expression, "Expression");
-
         this.expression = expression;
     }
 
     @Override
     public void appendActual(@Nonnull final Map<String, Object> parameters, @Nonnull final StringBuilder builder) {
-
-        super.appendActual(parameters, builder);
-
-        appendDelimiter(builder);
-        builder.append(expression);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -39,19 +39,19 @@ public class InvokableScriptsQuery {
 
     @Nullable
     public Integer getOffset() {
-        return offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOffset(@Nullable final Integer offset) {
-        this.offset = offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public Integer getLimit() {
-        return limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLimit(@Nullable final Integer limit) {
-        this.limit = limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

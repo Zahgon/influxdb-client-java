@@ -37,7 +37,6 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.Cancellable;
 import com.influxdb.query.FluxColumn;
 import com.influxdb.query.FluxRecord;
@@ -45,7 +44,6 @@ import com.influxdb.query.FluxTable;
 import com.influxdb.query.exceptions.FluxCsvParserException;
 import com.influxdb.query.exceptions.FluxQueryException;
 import com.influxdb.utils.Arguments;
-
 import okio.BufferedSource;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -59,22 +57,23 @@ import org.apache.commons.csv.CSVRecord;
 public class FluxCsvParser {
 
     private static final String ANNOTATION_DATATYPE = "#datatype";
+
     private static final String ANNOTATION_GROUP = "#group";
+
     private static final String ANNOTATION_DEFAULT = "#default";
-    private static final List<String> ANNOTATIONS = Arrays
-            .asList(ANNOTATION_DATATYPE, ANNOTATION_GROUP, ANNOTATION_DEFAULT);
+
+    private static final List<String> ANNOTATIONS = Arrays.asList(ANNOTATION_DATATYPE, ANNOTATION_GROUP, ANNOTATION_DEFAULT);
 
     private final ResponseMetadataMode responseMetadataMode;
 
     private enum ParsingState {
-        NORMAL,
 
-        IN_ERROR
+        NORMAL, IN_ERROR
     }
 
     public enum ResponseMetadataMode {
-        FULL,
 
+        FULL,
         // useful for Invokable scripts
         ONLY_NAMES
     }
@@ -97,7 +96,6 @@ public class FluxCsvParser {
          * @param cancellable cancellable
          * @param record      new {@link FluxRecord}
          */
-
         void accept(final int index, @Nonnull final Cancellable cancellable, @Nonnull final FluxRecord record);
     }
 
@@ -107,17 +105,17 @@ public class FluxCsvParser {
 
         @Override
         public void accept(final int index, @Nonnull final Cancellable cancellable, @Nonnull final FluxTable table) {
-            tables.add(index, table);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public void accept(final int index, @Nonnull final Cancellable cancellable, @Nonnull final FluxRecord record) {
-            tables.get(index).getRecords().add(record);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
         public List<FluxTable> getTables() {
-            return tables;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 
@@ -139,34 +137,8 @@ public class FluxCsvParser {
      * @throws IOException If there is a problem with reading CSV
      */
     @SuppressWarnings("MagicNumber")
-    public void parseFluxResponse(@Nonnull final BufferedSource bufferedSource,
-                                  @Nonnull final Cancellable cancellable,
-                                  @Nonnull final FluxResponseConsumer consumer) throws IOException {
-
-        Arguments.checkNotNull(bufferedSource, "bufferedSource");
-
-        Reader reader = new InputStreamReader(bufferedSource.inputStream(), StandardCharsets.UTF_8);
-
-        FluxCsvState state = new FluxCsvState();
-
-        try (CSVParser parser = new CSVParser(reader, CSVFormat.DEFAULT)) {
-            for (CSVRecord csvRecord : parser) {
-
-                if (cancellable.isCancelled()) {
-                    return;
-                }
-
-                state.csvRecord = csvRecord;
-
-                FluxRecordOrTable fluxRecordOrTable = parseNextResponse(state);
-                if (fluxRecordOrTable.table != null) {
-                    consumer.accept(state.tableIndex - 1, cancellable, fluxRecordOrTable.table);
-                }
-                if (fluxRecordOrTable.record != null) {
-                    consumer.accept(state.tableIndex - 1, cancellable, fluxRecordOrTable.record);
-                }
-            }
-        }
+    public void parseFluxResponse(@Nonnull final BufferedSource bufferedSource, @Nonnull final Cancellable cancellable, @Nonnull final FluxResponseConsumer consumer) throws IOException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -178,110 +150,16 @@ public class FluxCsvParser {
     @Nonnull
     @SuppressWarnings("MagicNumber")
     public FluxRecordOrTable parseNextResponse(@Nonnull final FluxCsvState state) {
-        FluxRecordOrTable result = new FluxRecordOrTable();
-        CSVRecord csvRecord = state.csvRecord;
-
-        //
-        // Response has HTTP status ok, but response is error.
-        //
-        if (csvRecord.size() >= 3 && csvRecord.get(1).equals("error") && csvRecord.get(2).equals("reference")) {
-
-            state.parsingState = ParsingState.IN_ERROR;
-            return result;
-        }
-
-        //
-        // Throw InfluxException with error response
-        //
-        if (ParsingState.IN_ERROR.equals(state.parsingState)) {
-            String error = csvRecord.get(1);
-            String referenceValue = csvRecord.get(2);
-
-            int reference = 0;
-            if (referenceValue != null && !referenceValue.isEmpty()) {
-                reference = Integer.parseInt(referenceValue);
-            }
-
-            throw new FluxQueryException(error, reference);
-        }
-
-        String token = csvRecord.get(0);
-        //// start new table
-        if ((ANNOTATIONS.contains(token) && !state.startNewTable)
-                || (responseMetadataMode == ResponseMetadataMode.ONLY_NAMES && state.table == null)) {
-            state.startNewTable = true;
-
-            state.table = new FluxTable();
-            state.groups = Collections.emptyList();
-            result.table = state.table;
-            state.tableIndex++;
-            state.tableId = -1;
-
-        } else if (state.table == null) {
-            String message = "Unable to parse CSV response. FluxTable definition was not found.";
-            throw new FluxCsvParserException(message);
-        }
-
-        //#datatype,string,long,dateTime:RFC3339,dateTime:RFC3339,dateTime:RFC3339,double,string,string,string
-        if (ANNOTATION_DATATYPE.equals(token)) {
-            addDataTypes(state.table, toList(csvRecord));
-
-        } else if (ANNOTATION_GROUP.equals(token)) {
-            state.groups = toList(csvRecord);
-        } else if (ANNOTATION_DEFAULT.equals(token)) {
-            addDefaultEmptyValues(state.table, toList(csvRecord));
-        } else {
-            // parse column names
-            if (state.startNewTable) {
-                if (responseMetadataMode == ResponseMetadataMode.ONLY_NAMES && state.table.getColumns().isEmpty()) {
-                    List<String> dataTypes = toList(csvRecord)
-                            .stream()
-                            .map(it -> "string")
-                            .collect(Collectors.toList());
-                    addDataTypes(state.table, dataTypes);
-                    state.groups = toList(csvRecord).stream().map(it -> "false").collect(Collectors.toList());
-                }
-                addGroups(state.table, state.groups);
-                addColumnNamesAndTags(state.table, toList(csvRecord));
-                state.startNewTable = false;
-                return result;
-            }
-
-            int currentId = Integer.parseInt(csvRecord.get(1 + 1));
-            if (state.tableId == -1) {
-                state.tableId = currentId;
-            }
-
-            if (state.tableId != currentId) {
-                //create new table with previous column headers settings
-                List<FluxColumn> fluxColumns = state.table.getColumns();
-                state.table = new FluxTable();
-                state.table.getColumns().addAll(fluxColumns);
-                result.table = state.table;
-                state.tableIndex++;
-                state.tableId = currentId;
-            }
-
-            result.record = parseRecord(state.tableIndex - 1, state.table, csvRecord);
-        }
-
-        return result;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private FluxRecord parseRecord(final int tableIndex, final FluxTable table, final CSVRecord csvRecord) {
-
         FluxRecord record = new FluxRecord(tableIndex);
-
         for (FluxColumn fluxColumn : table.getColumns()) {
-
             String columnName = fluxColumn.getLabel();
-
             String strValue = csvRecord.get(fluxColumn.getIndex() + 1);
-
             Object value = toValue(strValue, fluxColumn);
-
             record.getValues().put(columnName, value);
-
             record.getRow().add(value);
         }
         return record;
@@ -291,7 +169,6 @@ public class FluxCsvParser {
     private List<String> toList(final CSVRecord csvRecord) {
         List<String> ret = new ArrayList<>(csvRecord.size());
         int size = csvRecord.size();
-
         for (int i = 1; i < size; i++) {
             String rec = csvRecord.get(i);
             ret.add(rec);
@@ -300,11 +177,9 @@ public class FluxCsvParser {
     }
 
     @Nullable
-    private Object toValue(@Nullable final String strValue, final @Nonnull FluxColumn column) {
-
+    private Object toValue(@Nullable final String strValue, @Nonnull final FluxColumn column) {
         Arguments.checkNotNull(column, "column");
         String dataType = column.getDataType();
-
         // Default value
         if (strValue == null || strValue.isEmpty()) {
             String defaultValue = column.getDefaultValue();
@@ -316,8 +191,7 @@ public class FluxCsvParser {
             }
             return toValue(defaultValue, column);
         }
-
-        switch (dataType) {
+        switch(dataType) {
             case "boolean":
                 return Boolean.valueOf(strValue);
             case "unsignedLong":
@@ -325,7 +199,7 @@ public class FluxCsvParser {
             case "long":
                 return Long.parseLong(strValue);
             case "double":
-                switch (strValue) {
+                switch(strValue) {
                     case "+Inf":
                         return Double.POSITIVE_INFINITY;
                     case "-Inf":
@@ -346,100 +220,82 @@ public class FluxCsvParser {
         }
     }
 
-    private void addDataTypes(@Nonnull final FluxTable table,
-                              @Nonnull final List<String> dataTypes) {
-
+    private void addDataTypes(@Nonnull final FluxTable table, @Nonnull final List<String> dataTypes) {
         Arguments.checkNotNull(table, "table");
         Arguments.checkNotNull(dataTypes, "dataTypes");
-
         for (int index = 0; index < dataTypes.size(); index++) {
             String dataType = dataTypes.get(index);
-
             FluxColumn columnDef = new FluxColumn();
             columnDef.setDataType(dataType);
             columnDef.setIndex(index);
-
             table.getColumns().add(columnDef);
         }
     }
 
     private void addGroups(@Nonnull final FluxTable table, @Nonnull final List<String> groups) {
-
         Arguments.checkNotNull(table, "table");
         Arguments.checkNotNull(groups, "groups");
-
         for (int i = 0; i < table.getColumns().size(); i++) {
-
             FluxColumn fluxColumn = getFluxColumn(i, table);
-
             String group = groups.get(i);
             fluxColumn.setGroup(Boolean.parseBoolean(group));
         }
     }
 
     private void addDefaultEmptyValues(@Nonnull final FluxTable table, @Nonnull final List<String> defaultEmptyValues) {
-
         Arguments.checkNotNull(table, "table");
         Arguments.checkNotNull(defaultEmptyValues, "defaultEmptyValues");
-
         for (int i = 0; i < defaultEmptyValues.size(); i++) {
-
             FluxColumn fluxColumn = getFluxColumn(i, table);
-
             String defaultValue = defaultEmptyValues.get(i);
             fluxColumn.setDefaultValue(defaultValue);
         }
-
     }
 
     private void addColumnNamesAndTags(@Nonnull final FluxTable table, @Nonnull final List<String> columnNames) {
-
         Arguments.checkNotNull(table, "table");
         Arguments.checkNotNull(columnNames, "columnNames");
-
         int size = columnNames.size();
-
         for (int i = 0; i < size; i++) {
-
             FluxColumn fluxColumn = getFluxColumn(i, table);
-
             String columnName = columnNames.get(i);
             fluxColumn.setLabel(columnName);
         }
-
         Set<String> items = new HashSet<>();
-        Set<String> duplicates = columnNames.stream()
-                .filter(n -> !items.add(n))
-                .collect(Collectors.toSet());
-
+        Set<String> duplicates = columnNames.stream().filter(n -> !items.add(n)).collect(Collectors.toSet());
         if (!duplicates.isEmpty()) {
             System.out.printf("The response contains columns with duplicated names: %s)%n", duplicates);
-            System.out.println("You should use the \"FluxRecord.getRow()\" to access your data instead of "
-                    + "\"FluxRecord.getValues()\".");
+            System.out.println("You should use the \"FluxRecord.getRow()\" to access your data instead of " + "\"FluxRecord.getValues()\".");
         }
     }
 
     @Nonnull
-    private FluxColumn getFluxColumn(final int columnIndex, final @Nonnull FluxTable table) {
-
+    private FluxColumn getFluxColumn(final int columnIndex, @Nonnull final FluxTable table) {
         Arguments.checkNotNull(table, "table");
-
         return table.getColumns().get(columnIndex);
     }
 
     public static class FluxCsvState {
+
         private ParsingState parsingState = ParsingState.NORMAL;
 
         private int tableIndex = 0;
+
         private int tableId = -1;
+
         private boolean startNewTable = false;
+
         private FluxTable table = null;
+
         private List<String> groups = Collections.emptyList();
+
         public CSVRecord csvRecord;
     }
 
     public static class FluxRecordOrTable {
+
         public FluxRecord record;
+
         public FluxTable table;
     }
 }

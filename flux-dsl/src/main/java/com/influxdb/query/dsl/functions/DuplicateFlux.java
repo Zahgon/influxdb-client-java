@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -60,7 +59,7 @@ public final class DuplicateFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "duplicate";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -69,12 +68,7 @@ public final class DuplicateFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DuplicateFlux withColumn(@Nonnull final String column) {
-
-        Arguments.checkNonEmpty(column, "column");
-
-        this.withPropertyValueEscaped("column", column);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -83,11 +77,6 @@ public final class DuplicateFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public DuplicateFlux withAs(@Nonnull final String as) {
-
-        Arguments.checkNonEmpty(as, "as");
-
-        this.withPropertyValueEscaped("as", as);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

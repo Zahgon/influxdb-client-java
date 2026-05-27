@@ -29,7 +29,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.query.dsl.Expression;
 import com.influxdb.query.dsl.Expressions;
 import com.influxdb.query.dsl.Flux;
@@ -37,7 +36,6 @@ import com.influxdb.query.dsl.VariableAssignment;
 import com.influxdb.query.dsl.functions.properties.TimeInterval;
 import com.influxdb.query.dsl.utils.ImportUtils;
 import com.influxdb.utils.Arguments;
-
 import static com.influxdb.query.dsl.functions.properties.FunctionsParameters.escapeDoubleQuotes;
 
 /**
@@ -91,6 +89,7 @@ public class AbstractFunctionFlux<CALL extends AbstractFunctionCallFlux> extends
 
     @Nonnull
     private final Function<String, CALL> invocationFactory;
+
     @Nonnull
     private final Parameter[] parameter;
 
@@ -102,11 +101,7 @@ public class AbstractFunctionFlux<CALL extends AbstractFunctionCallFlux> extends
      *                           to the concrete <code>CALL</code> implementation
      * @param parameter          the parameters of this function
      */
-    protected AbstractFunctionFlux(
-            @Nonnull final String name,
-            @Nonnull final Expression functionDefinition,
-            @Nonnull final Function<String, CALL> invocationFactory,
-            @Nonnull final Parameter... parameter) {
+    protected AbstractFunctionFlux(@Nonnull final String name, @Nonnull final Expression functionDefinition, @Nonnull final Function<String, CALL> invocationFactory, @Nonnull final Parameter... parameter) {
         super(name, functionDefinition);
         this.invocationFactory = invocationFactory;
         this.parameter = parameter;
@@ -114,17 +109,7 @@ public class AbstractFunctionFlux<CALL extends AbstractFunctionCallFlux> extends
 
     @Override
     public String toString(@Nonnull final Map<String, Object> parameters, final boolean prependImports) {
-        StringBuilder builder = new StringBuilder();
-
-        if (prependImports) {
-            builder.append(ImportUtils.getImportsString(this));
-        }
-        builder.append(name).append(" = ")
-                .append(Arrays.stream(parameter)
-                        .map(Parameter::toString)
-                        .collect(Collectors.joining(", ", "(", ") => ")))
-                .append(expression.toString(parameters, false));
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -132,27 +117,24 @@ public class AbstractFunctionFlux<CALL extends AbstractFunctionCallFlux> extends
      */
     @Nonnull
     public CALL invoke() {
-        return invocationFactory.apply(getVariableName());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     public CALL invokePiped(@Nonnull final Flux flux) {
-        Arguments.checkNotNull(flux, "Source is required");
-
-        CALL invoke = invoke();
-        invoke.source = flux;
-        return invoke;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Set<String> getImports() {
-        return super.getImports();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-
     public static class Parameter {
+
         @Nonnull
         private final String name;
+
         private String defaultValue;
 
         private boolean pipeForward;
@@ -160,51 +142,38 @@ public class AbstractFunctionFlux<CALL extends AbstractFunctionCallFlux> extends
         private boolean optional;
 
         public Parameter(@Nonnull final String name) {
-
             Arguments.checkNotNull(name, "name");
-
             this.name = name;
         }
 
         @Nonnull
         public String getName() {
-            return name;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nullable
         public String getDefaultValue() {
-            return defaultValue;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
         public Parameter withDefaultValue(@Nonnull final Number defaultValue) {
-            Arguments.checkNotNull(defaultValue, "defaultValue");
-
-            this.defaultValue = String.valueOf(defaultValue);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
         public Parameter withDefaultValue(@Nonnull final String defaultValue) {
-            Arguments.checkNotNull(defaultValue, "defaultValue");
-
-            this.defaultValue = "\"" + escapeDoubleQuotes(defaultValue) + "\"";
-
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
         public Parameter withDefaultValue(final boolean defaultValue) {
-            this.defaultValue = String.valueOf(defaultValue);
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Nonnull
         public Parameter withDefaultValue(final long amount, @Nonnull final ChronoUnit unit) {
-            Arguments.checkNotNull(unit, "unit");
-
-            this.defaultValue = new TimeInterval(amount, unit).toString();
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -216,8 +185,7 @@ public class AbstractFunctionFlux<CALL extends AbstractFunctionCallFlux> extends
          */
         @Nonnull
         public Parameter withPipeForward(final boolean pipeForward) {
-            this.pipeForward = pipeForward;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -226,23 +194,12 @@ public class AbstractFunctionFlux<CALL extends AbstractFunctionCallFlux> extends
          */
         @Nonnull
         public Parameter withOptional(final boolean optional) {
-            this.optional = optional;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         @Override
         public String toString() {
-            StringBuilder result = new StringBuilder();
-            if (optional) {
-                result.append("?");
-            }
-            result.append(name);
-            if (pipeForward) {
-                result.append("=<-");
-            } else if (defaultValue != null) {
-                result.append(" = ").append(defaultValue);
-            }
-            return result.toString();
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

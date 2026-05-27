@@ -26,7 +26,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
 import com.influxdb.client.InfluxDBClient;
@@ -43,7 +42,6 @@ import com.influxdb.client.write.Point;
 import com.influxdb.client.write.events.WriteSuccessEvent;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
-
 import io.reactivex.rxjava3.core.BackpressureOverflowStrategy;
 
 /*
@@ -57,7 +55,6 @@ import io.reactivex.rxjava3.core.BackpressureOverflowStrategy;
               "bucket": "my-bucket"
           }'
  */
-
 @SuppressWarnings("CheckStyle")
 public class PlatformExample {
 
@@ -75,119 +72,13 @@ public class PlatformExample {
     }
 
     public static void main(final String[] args) throws Exception {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", findToken().toCharArray());
-
-        Organization medicalGMBH = influxDBClient.getOrganizationsApi()
-                .createOrganization("Medical Corp" + System.currentTimeMillis());
-
-        //
-        // Create New Bucket with retention 1h
-        //
-        Bucket temperatureBucket = influxDBClient.getBucketsApi().createBucket("temperature-sensors", medicalGMBH);
-
-        //
-        // Add Permissions to read and write to the Bucket
-        //
-        PermissionResource resource = new PermissionResource();
-        resource.setId(temperatureBucket.getId());
-        resource.setOrgID(medicalGMBH.getId());
-        resource.setType(PermissionResource.TYPE_BUCKETS);
-
-        Permission readBucket = new Permission();
-        readBucket.setResource(resource);
-        readBucket.setAction(Permission.ActionEnum.READ);
-
-        Permission writeBucket = new Permission();
-        writeBucket.setResource(resource);
-        writeBucket.setAction(Permission.ActionEnum.WRITE);
-
-        Authorization authorization = influxDBClient.getAuthorizationsApi()
-                .createAuthorization(medicalGMBH, Arrays.asList(readBucket, writeBucket));
-
-        String token = authorization.getToken();
-        System.out.println("The token to write to temperature-sensors bucket " + token);
-
-        InfluxDBClient client = InfluxDBClientFactory.create("http://localhost:8086", token.toCharArray());
-
-        CountDownLatch countDownLatch = new CountDownLatch(1);
-
-        //
-        // Write data
-        //
-        try (WriteApi writeApi = client.makeWriteApi(WriteOptions.builder()
-                .batchSize(5000)
-                .flushInterval(1000)
-                .backpressureStrategy(BackpressureOverflowStrategy.DROP_OLDEST)
-                .bufferLimit(10000)
-                .jitterInterval(1000)
-                .retryInterval(5000)
-                .build())) {
-
-            writeApi.listenEvents(WriteSuccessEvent.class, (value) -> countDownLatch.countDown());
-
-            //
-            // Write by POJO
-            //
-            Temperature temperature = new Temperature();
-            temperature.location = "south";
-            temperature.value = 62D;
-            temperature.time = Instant.now();
-            writeApi.writeMeasurement("temperature-sensors", medicalGMBH.getId(), WritePrecision.NS, temperature);
-
-            //
-            // Write by Point
-            //
-            Point point = Point.measurement("temperature")
-                    .addTag("location", "west")
-                    .addField("value", 55D)
-                    .time(Instant.now().toEpochMilli(), WritePrecision.MS);
-            writeApi.writePoint("temperature-sensors", medicalGMBH.getId(), point);
-
-            //
-            // Write by LineProtocol
-            //
-            String record = "temperature,location=north value=60.0";
-            writeApi.writeRecord("temperature-sensors", medicalGMBH.getId(), WritePrecision.NS, record);
-
-            countDownLatch.await(2, TimeUnit.SECONDS);
-        }
-
-        //
-        // Read data
-        //
-        List<FluxTable> tables = client.getQueryApi().query("from(bucket:\"temperature-sensors\") |> range(start: 0)", medicalGMBH.getId());
-
-        for (FluxTable fluxTable : tables) {
-            List<FluxRecord> records = fluxTable.getRecords();
-            for (FluxRecord fluxRecord : records) {
-                System.out.println(fluxRecord.getTime() + ": " + fluxRecord.getValueByKey("_value"));
-            }
-        }
-
-        client.close();
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private static String findToken() throws Exception {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086",
-                "my-user", "my-password".toCharArray());
-
-        String token = influxDBClient.getAuthorizationsApi()
-                .findAuthorizations()
-                .stream()
-                .filter(authorization -> authorization.getPermissions().stream()
-                        .map(Permission::getResource)
-                        .anyMatch(resource ->
-                                resource.getType().equals(PermissionResource.TYPE_ORGS) &&
-                                        resource.getId() == null &&
-                                        resource.getOrgID() == null))
-                .findFirst()
-                .orElseThrow(IllegalStateException::new).getToken();
-
+        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", "my-user", "my-password".toCharArray());
+        String token = influxDBClient.getAuthorizationsApi().findAuthorizations().stream().filter(authorization -> authorization.getPermissions().stream().map(Permission::getResource).anyMatch(resource -> resource.getType().equals(PermissionResource.TYPE_ORGS) && resource.getId() == null && resource.getOrgID() == null)).findFirst().orElseThrow(IllegalStateException::new).getToken();
         influxDBClient.close();
-
         return token;
     }
 }

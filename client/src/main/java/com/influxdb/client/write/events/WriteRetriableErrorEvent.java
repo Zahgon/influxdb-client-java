@@ -24,7 +24,6 @@ package com.influxdb.client.write.events;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
-
 import com.influxdb.utils.Arguments;
 
 /**
@@ -37,14 +36,12 @@ public final class WriteRetriableErrorEvent extends AbstractWriteEvent {
     private static final Logger LOG = Logger.getLogger(WriteRetriableErrorEvent.class.getName());
 
     private final Throwable throwable;
+
     private final Long retryInterval;
 
-    public WriteRetriableErrorEvent(@Nonnull final Throwable throwable,
-                                    @Nonnull final Long retryInterval) {
-
+    public WriteRetriableErrorEvent(@Nonnull final Throwable throwable, @Nonnull final Long retryInterval) {
         Arguments.checkNotNull(throwable, "Throwable");
         Arguments.checkNotNull(retryInterval, "retryInterval");
-
         this.throwable = throwable;
         this.retryInterval = retryInterval;
     }
@@ -54,7 +51,7 @@ public final class WriteRetriableErrorEvent extends AbstractWriteEvent {
      */
     @Nonnull
     public Throwable getThrowable() {
-        return throwable;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -62,13 +59,12 @@ public final class WriteRetriableErrorEvent extends AbstractWriteEvent {
      */
     @Nonnull
     public Long getRetryInterval() {
-        return retryInterval;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @SuppressWarnings("MagicNumber")
     public void logEvent() {
-        String msg = "The retriable error occurred during writing of data. Reason: ''{0}''. Retry in: {1}s.";
-        LOG.log(Level.WARNING, msg, new Object[]{throwable.getMessage(), (double) retryInterval / 1000});
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

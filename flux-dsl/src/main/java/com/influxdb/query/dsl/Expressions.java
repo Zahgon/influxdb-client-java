@@ -31,7 +31,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.utils.ImportUtils;
 import com.influxdb.utils.Arguments;
 
@@ -54,6 +53,7 @@ import com.influxdb.utils.Arguments;
  * </pre>
  */
 public class Expressions implements HasImports {
+
     private final List<Expression> expressions = new ArrayList<>();
 
     /**
@@ -61,7 +61,6 @@ public class Expressions implements HasImports {
      */
     public Expressions(@Nonnull final Expression... expressions) {
         Arguments.checkNotNull(expressions, "expressions");
-
         this.expressions.addAll(Arrays.stream(expressions).collect(Collectors.toList()));
     }
 
@@ -70,7 +69,6 @@ public class Expressions implements HasImports {
      */
     public Expressions(@Nonnull final Collection<? extends Expression> expressions) {
         Arguments.checkNotNull(expressions, "expressions");
-
         this.expressions.addAll(expressions);
     }
 
@@ -81,10 +79,7 @@ public class Expressions implements HasImports {
      * @return this
      */
     public Expressions addExpressions(@Nonnull final Expression... expressions) {
-        Arguments.checkNotNull(expressions, "expression");
-
-        this.expressions.addAll(Arrays.asList(expressions));
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -93,30 +88,16 @@ public class Expressions implements HasImports {
      * @return the string representation of the expressions
      */
     public String toString(@Nonnull final Map<String, Object> parameters, final boolean prependImports) {
-        StringBuilder builder = new StringBuilder();
-
-        if (prependImports) {
-            builder.append(ImportUtils.getImportsString(this));
-        }
-
-        for (Expression expression : expressions) {
-            builder.append(expression.toString(parameters, false)).append("\n");
-        }
-
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString() {
-        return toString(Collections.emptyMap(), true);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public Set<String> getImports() {
-        return expressions
-                .stream()
-                .map(HasImports::getImports)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toCollection(TreeSet::new));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -24,7 +24,6 @@ package com.influxdb.query.dsl.functions.properties;
 import java.time.Duration;
 import java.time.temporal.ChronoUnit;
 import javax.annotation.Nonnull;
-
 import com.influxdb.utils.Arguments;
 
 /**
@@ -38,13 +37,12 @@ import com.influxdb.utils.Arguments;
 public class TimeInterval {
 
     private Long interval;
+
     private ChronoUnit chronoUnit;
 
     public TimeInterval(@Nonnull final Long interval, @Nonnull final ChronoUnit chronoUnit) {
-
         Arguments.checkNotNull(interval, "Interval is required");
         Arguments.checkNotNull(chronoUnit, "ChronoUnit is required");
-
         this.interval = interval;
         this.chronoUnit = chronoUnit;
     }
@@ -52,67 +50,6 @@ public class TimeInterval {
     @Override
     @SuppressWarnings("MagicNumber")
     public String toString() {
-
-        String unit;
-        Long calculatedInterval = interval;
-        switch (chronoUnit) {
-            case NANOS:
-                unit = "ns";
-                break;
-            case MICROS:
-                unit = "us";
-                break;
-            case MILLIS:
-                unit = "ms";
-                break;
-            case SECONDS:
-                unit = "s";
-                break;
-            case MINUTES:
-                unit = "m";
-                break;
-            case HOURS:
-                unit = "h";
-                break;
-            case HALF_DAYS:
-                unit = "h";
-                calculatedInterval = Duration.of(interval, ChronoUnit.HALF_DAYS).toHours();
-                break;
-            case DAYS:
-                unit = "d";
-                break;
-            case WEEKS:
-                unit = "w";
-                break;
-            case MONTHS:
-                unit = "mo";
-                break;
-            case YEARS:
-                unit = "y";
-                break;
-            case DECADES:
-                unit = "y";
-                calculatedInterval = Math.multiplyExact(interval, 10);
-                break;
-            case CENTURIES:
-                unit = "y";
-                calculatedInterval = Math.multiplyExact(interval, 100);
-                break;
-            case MILLENNIA:
-                unit = "y";
-                calculatedInterval = Math.multiplyExact(interval, 1000);
-                break;
-            case ERAS:
-                unit = "y";
-                calculatedInterval = Math.multiplyExact(interval, 1000_000_000);
-                break;
-            case FOREVER:
-            default:
-                String message = String.format("The ChronoUnit.%s is not supported.", chronoUnit);
-
-                throw new IllegalArgumentException(message);
-        }
-
-        return String.valueOf(calculatedInterval) + unit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

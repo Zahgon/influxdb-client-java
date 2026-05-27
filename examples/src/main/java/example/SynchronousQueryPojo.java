@@ -23,7 +23,6 @@ package example;
 
 import java.time.Instant;
 import java.util.List;
-
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
 import com.influxdb.client.InfluxDBClient;
@@ -33,28 +32,11 @@ import com.influxdb.client.QueryApi;
 public class SynchronousQueryPojo {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org);
-
-        //
-        // Query data
-        //
-        String flux = "from(bucket:\"my-bucket\") |> range(start: 0) |> filter(fn: (r) => r._measurement == \"temperature\")";
-
-        QueryApi queryApi = influxDBClient.getQueryApi();
-
-        //
-        // Map to POJO
-        //
-        List<Temperature> temperatures = queryApi.query(flux, Temperature.class);
-        for (Temperature temperature : temperatures) {
-            System.out.println(temperature.location + ": " + temperature.value + " at " + temperature.time);
-        }
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Measurement(name = "temperature")

@@ -24,7 +24,6 @@ package com.influxdb.client.internal;
 import java.util.List;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.client.DashboardsApi;
 import com.influxdb.client.domain.AddResourceMemberRequestBody;
 import com.influxdb.client.domain.Cell;
@@ -48,7 +47,6 @@ import com.influxdb.client.domain.View;
 import com.influxdb.client.service.DashboardsService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -59,440 +57,236 @@ final class DashboardsApiImpl extends AbstractRestClient implements DashboardsAp
     private final DashboardsService service;
 
     DashboardsApiImpl(@Nonnull final DashboardsService service) {
-
         Arguments.checkNotNull(service, "service");
-
         this.service = service;
     }
 
     @Override
-    public Dashboard createDashboard(@Nonnull final String name,
-                                     @Nullable final String description,
-                                     @Nonnull final String orgID) {
-
-        Arguments.checkNonEmpty(name, "name");
-        Arguments.checkNonEmpty(description, "description");
-        Arguments.checkNonEmpty(orgID, "orgID");
-
-        return createDashboard(new CreateDashboardRequest().name(name).description(description).orgID(orgID));
+    public Dashboard createDashboard(@Nonnull final String name, @Nullable final String description, @Nonnull final String orgID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Dashboard createDashboard(@Nonnull final CreateDashboardRequest createDashboardRequest) {
-
-        Arguments.checkNotNull(createDashboardRequest, "createDashboardRequest");
-
-        Call<Dashboard> call = service.postDashboards(createDashboardRequest, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Dashboard updateDashboard(@Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(dashboard, "Dashboard");
-
-        PatchDashboardRequest request = new PatchDashboardRequest()
-                .name(dashboard.getName())
-                .description(dashboard.getDescription());
-
-        Call<Dashboard> call = service.patchDashboardsID(dashboard.getId(), null, request);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteDashboard(@Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        deleteDashboard(dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteDashboard(@Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        Call<Void> call = service.deleteDashboardsID(dashboardID, null);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Dashboard findDashboardByID(@Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        Call<Dashboard> call = service.getDashboardsID(dashboardID, null, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Dashboard> findDashboards() {
-        return findDashboardsByOrgName(null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Dashboard> findDashboardsByOrganization(@Nonnull final Organization organization) {
-
-        return findDashboardsByOrgName(organization.getName());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Dashboard> findDashboardsByOrgName(@Nullable final String orgName) {
-
-        Call<Dashboards> call = service
-                .getDashboards(null, null, null, null, null, null, null, null, orgName);
-
-        return execute(call).getDashboards();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceMember> getMembers(@Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return getMembers(dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceMember> getMembers(@Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        Call<ResourceMembers> call = service.getDashboardsIDMembers(dashboardID, null);
-
-        return execute(call).getUsers();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceMember addMember(@Nonnull final User member, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(member, "member");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return addMember(member.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceMember addMember(@Nonnull final String memberID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(memberID, "memberID");
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        AddResourceMemberRequestBody user = new AddResourceMemberRequestBody().id(memberID);
-
-        Call<ResourceMember> call = service.postDashboardsIDMembers(dashboardID, user, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteMember(@Nonnull final User member, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(member, "member");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        deleteMember(member.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteMember(@Nonnull final String memberID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(memberID, "memberID");
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        Call<Void> call = service.deleteDashboardsIDMembersID(memberID, dashboardID, null);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceOwner> getOwners(@Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return getOwners(dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<ResourceOwner> getOwners(@Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        Call<ResourceOwners> call = service.getDashboardsIDOwners(dashboardID, null);
-
-        return execute(call).getUsers();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceOwner addOwner(@Nonnull final User owner, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(owner, "owner");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return addOwner(owner.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ResourceOwner addOwner(@Nonnull final String ownerID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(ownerID, "ownerID");
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        AddResourceMemberRequestBody user = new AddResourceMemberRequestBody().id(ownerID);
-
-        Call<ResourceOwner> call = service.postDashboardsIDOwners(dashboardID, user, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteOwner(@Nonnull final User owner, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(owner, "owner");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        deleteOwner(owner.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteOwner(@Nonnull final String ownerID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(ownerID, "ownerID");
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        Call<Void> call = service.deleteDashboardsIDOwnersID(ownerID, dashboardID, null);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return getLabels(dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<Label> getLabels(@Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(dashboardID, "dashboardID");
-
-        Call<LabelsResponse> call = service.getDashboardsIDLabels(dashboardID, null);
-
-        return execute(call).getLabels();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final Label label, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return addLabel(label.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelResponse addLabel(@Nonnull final String labelID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        LabelMapping labelMapping = new LabelMapping().labelID(labelID);
-
-        Call<LabelResponse> call = service.postDashboardsIDLabels(dashboardID, labelMapping, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final Label label, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(label, "label");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        deleteLabel(label.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteLabel(@Nonnull final String labelID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNonEmpty(labelID, "labelID");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        Call<Void> call = service.deleteDashboardsIDLabelsID(dashboardID, labelID, null);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Cell addCell(@Nonnull final CreateCell createCell, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(createCell, "createCell");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return addCell(createCell, dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Cell addCell(@Nonnull final CreateCell createCell, @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(createCell, "createCell");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        Call<Cell> call = service.postDashboardsIDCells(dashboardID, createCell, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Dashboard replaceCells(@Nonnull final List<Cell> cells, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(cells, "cells");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return replaceCells(cells, dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Dashboard replaceCells(@Nonnull final List<Cell> cells, @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(cells, "cells");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        Call<Dashboard> call = service.putDashboardsIDCells(dashboardID, cells, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public Cell updateCell(@Nonnull final CellUpdate cellUpdate,
-                           @Nonnull final String cellID,
-                           @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(cellUpdate, "cellUpdate");
-        Arguments.checkNonEmpty(cellID, "cellID");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        Call<Cell> call = service.patchDashboardsIDCellsID(dashboardID, cellID, cellUpdate, null);
-
-        return execute(call);
+    public Cell updateCell(@Nonnull final CellUpdate cellUpdate, @Nonnull final String cellID, @Nonnull final String dashboardID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteCell(@Nonnull final Cell cell, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(cell, "cell");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        deleteCell(cell.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteCell(@Nonnull final String cellID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNonEmpty(cellID, "cellID");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        Call<Void> call = service.deleteDashboardsIDCellsID(dashboardID, cellID, null);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public View addCellView(@Nonnull final View view, @Nonnull final Cell cell, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(view, "view");
-        Arguments.checkNotNull(cell, "cell");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return addCellView(view, cell.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public View addCellView(@Nonnull final View view, @Nonnull final String cellID, final @Nonnull String dashboardID) {
-
-        Arguments.checkNotNull(view, "view");
-        Arguments.checkNonEmpty(cellID, "cellID");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        return updateCellView(view, cellID, dashboardID);
+    public View addCellView(@Nonnull final View view, @Nonnull final String cellID, @Nonnull final String dashboardID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public View updateCellView(@Nonnull final View view, @Nonnull final Cell cell, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(view, "view");
-        Arguments.checkNotNull(cell, "cell");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return updateCellView(view, cell.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public View updateCellView(@Nonnull final View view,
-                               @Nonnull final String cellID,
-                               @Nonnull final String dashboardID) {
-
-        Arguments.checkNotNull(view, "view");
-        Arguments.checkNonEmpty(cellID, "cellID");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        Call<View> call = service.patchDashboardsIDCellsIDView(dashboardID, cellID, view, null);
-
-        return execute(call);
+    public View updateCellView(@Nonnull final View view, @Nonnull final String cellID, @Nonnull final String dashboardID) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public View getCellView(@Nonnull final Cell cell, @Nonnull final Dashboard dashboard) {
-
-        Arguments.checkNotNull(cell, "cell");
-        Arguments.checkNotNull(dashboard, "dashboard");
-
-        return getCellView(cell.getId(), dashboard.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public View getCellView(@Nonnull final String cellID, @Nonnull final String dashboardID) {
-
-        Arguments.checkNonEmpty(cellID, "cellID");
-        Arguments.checkNonEmpty(dashboardID, "dashboardID");
-
-        Call<View> call = service.getDashboardsIDCellsIDView(dashboardID, cellID, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

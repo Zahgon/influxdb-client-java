@@ -22,45 +22,22 @@
 package example;
 
 import java.time.Instant;
-
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;
 import com.influxdb.client.reactive.InfluxDBClientReactive;
 import com.influxdb.client.reactive.InfluxDBClientReactiveFactory;
 import com.influxdb.client.reactive.QueryReactiveApi;
-
 import io.reactivex.rxjava3.core.Flowable;
 import org.reactivestreams.Publisher;
 
 public class InfluxDB2ReactiveExamplePojo {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) {
-
-        InfluxDBClientReactive influxDBClient = InfluxDBClientReactiveFactory.create("http://localhost:8086", token, org);
-        //
-        // Query data
-        //
-        String flux = "from(bucket:\"my-bucket\") |> range(start: 0) |> filter(fn: (r) => r._measurement == \"temperature\")";
-
-        QueryReactiveApi queryApi = influxDBClient.getQueryReactiveApi();
-
-        Publisher<Temperature> query = queryApi.query(flux, Temperature.class);
-        Flowable.fromPublisher(query)
-                //
-                // Take first 10 records
-                //
-                .take(10)
-                .subscribe(temperature -> {
-                    //
-                    // The callback to consume a FluxRecord mapped to POJO.
-                    //
-                    System.out.println(temperature.location + ": " + temperature.value + " at " + temperature.time);
-                });
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Measurement(name = "temperature")

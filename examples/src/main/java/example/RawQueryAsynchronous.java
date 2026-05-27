@@ -28,31 +28,10 @@ import com.influxdb.client.QueryApi;
 public class RawQueryAsynchronous {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) throws Exception {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org);
-
-        //
-        // Query data
-        //
-        String flux = "from(bucket:\"my-bucket\") |> range(start: 0)";
-
-        QueryApi queryApi = influxDBClient.getQueryApi();
-
-        queryApi.queryRaw(flux, (cancellable, line) -> {
-
-            //
-            // The callback to consume a line of CSV response
-            //
-            // cancelable - object has the cancel method to stop asynchronous query
-            //
-            System.out.println("Response: " + line);
-        });
-
-        Thread.sleep(5_000);
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

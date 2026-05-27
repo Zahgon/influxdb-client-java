@@ -28,23 +28,10 @@ import com.influxdb.client.QueryApi;
 public class RawQuery {
 
     private static char[] token = "my-token".toCharArray();
+
     private static String org = "my-org";
 
     public static void main(final String[] args) {
-
-        InfluxDBClient influxDBClient = InfluxDBClientFactory.create("http://localhost:8086", token, org);
-
-        //
-        // Query data
-        //
-        String flux = "from(bucket:\"my-bucket\") |> range(start: 0)";
-
-        QueryApi queryApi = influxDBClient.getQueryApi();
-
-        String csv = queryApi.queryRaw(flux);
-
-        System.out.println("CSV response: " + csv);
-
-        influxDBClient.close();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

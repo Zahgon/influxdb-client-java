@@ -24,13 +24,10 @@ package com.influxdb.client;
 import javax.annotation.Nonnull;
 import javax.annotation.concurrent.NotThreadSafe;
 import javax.annotation.concurrent.ThreadSafe;
-
 import com.influxdb.utils.Arguments;
-
 import io.reactivex.rxjava3.core.BackpressureOverflowStrategy;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.schedulers.Schedulers;
-
 
 /**
  * WriteOptions are used to configure writes the data point into InfluxDB 2.x.
@@ -56,15 +53,25 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 public final class WriteOptions implements WriteApi.RetryOptions {
 
     public static final int DEFAULT_BATCH_SIZE = 1000;
+
     public static final int DEFAULT_FLUSH_INTERVAL = 1000;
+
     public static final int DEFAULT_JITTER_INTERVAL = 0;
+
     public static final int DEFAULT_RETRY_INTERVAL = 5000;
+
     public static final int DEFAULT_MAX_RETRIES = 5;
+
     public static final int DEFAULT_MAX_RETRY_DELAY = 125_000;
+
     public static final int DEFAULT_MAX_RETRY_TIME = 180_000;
+
     public static final int DEFAULT_EXPONENTIAL_BASE = 2;
+
     public static final int DEFAULT_BUFFER_LIMIT = 10000;
+
     public static final int DEFAULT_CONCAT_MAP_PREFETCH = 2;
+
     public static final boolean DEFAULT_CAPTURE_BACKPRESSURE_DATA = false;
 
     /**
@@ -73,17 +80,29 @@ public final class WriteOptions implements WriteApi.RetryOptions {
     public static final WriteOptions DEFAULTS = WriteOptions.builder().build();
 
     private final int batchSize;
+
     private final int flushInterval;
+
     private final int jitterInterval;
+
     private final int retryInterval;
+
     private final int maxRetries;
+
     private final int maxRetryDelay;
+
     private final int maxRetryTime;
+
     private final int exponentialBase;
+
     private final int bufferLimit;
+
     private final int concatMapPrefetch;
+
     private final Scheduler writeScheduler;
+
     private final BackpressureOverflowStrategy backpressureStrategy;
+
     private final boolean captureBackpressureData;
 
     /**
@@ -91,7 +110,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      * @see WriteOptions.Builder#batchSize(int)
      */
     public int getBatchSize() {
-        return batchSize;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -99,7 +118,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      * @see WriteOptions.Builder#flushInterval(int) (int)
      */
     public int getFlushInterval() {
-        return flushInterval;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -108,7 +127,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Override
     public int getJitterInterval() {
-        return jitterInterval;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -121,7 +140,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Override
     public int getRetryInterval() {
-        return retryInterval;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -132,7 +151,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Override
     public int getMaxRetries() {
-        return maxRetries;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -143,7 +162,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Override
     public int getMaxRetryDelay() {
-        return maxRetryDelay;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -153,7 +172,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      * @see WriteOptions.Builder#maxRetryTime(int)
      */
     public int getMaxRetryTime() {
-        return maxRetryTime;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -166,7 +185,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Override
     public int getExponentialBase() {
-        return exponentialBase;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -174,7 +193,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      * @see WriteOptions.Builder#bufferLimit(int)
      */
     public int getBufferLimit() {
-        return bufferLimit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -185,7 +204,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      * @see WriteOptions.Builder#concatMapPrefetch(int)
      */
     public int getConcatMapPrefetch() {
-        return concatMapPrefetch;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -194,7 +213,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Nonnull
     public Scheduler getWriteScheduler() {
-        return writeScheduler;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -203,7 +222,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Nonnull
     public BackpressureOverflowStrategy getBackpressureStrategy() {
-        return backpressureStrategy;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -211,13 +230,11 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      * @see WriteOptions.Builder#captureBackpressureData(boolean)
      */
     public boolean getCaptureBackpressureData() {
-        return captureBackpressureData;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     private WriteOptions(@Nonnull final Builder builder) {
-
         Arguments.checkNotNull(builder, "WriteOptions.Builder");
-
         batchSize = builder.batchSize;
         flushInterval = builder.flushInterval;
         jitterInterval = builder.jitterInterval;
@@ -240,7 +257,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
      */
     @Nonnull
     public static WriteOptions.Builder builder() {
-        return new WriteOptions.Builder();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -250,17 +267,29 @@ public final class WriteOptions implements WriteApi.RetryOptions {
     public static class Builder {
 
         private int batchSize = DEFAULT_BATCH_SIZE;
+
         private int flushInterval = DEFAULT_FLUSH_INTERVAL;
+
         private int jitterInterval = DEFAULT_JITTER_INTERVAL;
+
         private int retryInterval = DEFAULT_RETRY_INTERVAL;
+
         private int maxRetries = DEFAULT_MAX_RETRIES;
+
         private int maxRetryDelay = DEFAULT_MAX_RETRY_DELAY;
+
         private int maxRetryTime = DEFAULT_MAX_RETRY_TIME;
+
         private int exponentialBase = DEFAULT_EXPONENTIAL_BASE;
+
         private int bufferLimit = DEFAULT_BUFFER_LIMIT;
+
         private int concatMapPrefetch = DEFAULT_CONCAT_MAP_PREFETCH;
+
         private Scheduler writeScheduler = Schedulers.newThread();
+
         private BackpressureOverflowStrategy backpressureStrategy = BackpressureOverflowStrategy.DROP_OLDEST;
+
         private boolean captureBackpressureData = DEFAULT_CAPTURE_BACKPRESSURE_DATA;
 
         /**
@@ -271,9 +300,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder batchSize(final int batchSize) {
-            Arguments.checkPositiveNumber(batchSize, "batchSize");
-            this.batchSize = batchSize;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -284,9 +311,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder flushInterval(final int flushInterval) {
-            Arguments.checkPositiveNumber(flushInterval, "flushInterval");
-            this.flushInterval = flushInterval;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -299,9 +324,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder jitterInterval(final int jitterInterval) {
-            Arguments.checkNotNegativeNumber(jitterInterval, "jitterInterval");
-            this.jitterInterval = jitterInterval;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -316,9 +339,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder retryInterval(final int retryInterval) {
-            Arguments.checkPositiveNumber(retryInterval, "retryInterval");
-            this.retryInterval = retryInterval;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -329,9 +350,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder maxRetries(final int maxRetries) {
-            Arguments.checkPositiveNumber(maxRetries, "maxRetries");
-            this.maxRetries = maxRetries;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -342,9 +361,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder maxRetryDelay(final int maxRetryDelay) {
-            Arguments.checkPositiveNumber(maxRetryDelay, "maxRetryDelay");
-            this.maxRetryDelay = maxRetryDelay;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -355,9 +372,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder maxRetryTime(final int maxRetryTime) {
-            Arguments.checkPositiveNumber(maxRetryTime, "maxRetryTime");
-            this.maxRetryTime = maxRetryTime;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -368,11 +383,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder exponentialBase(final int exponentialBase) {
-            if (exponentialBase < 2) {
-                throw new IllegalArgumentException("Expecting a number >= 2 for exponentialBase");
-            }
-            this.exponentialBase = exponentialBase;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -385,9 +396,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder bufferLimit(final int bufferLimit) {
-            Arguments.checkPositiveNumber(bufferLimit, "bufferLimit");
-            this.bufferLimit = bufferLimit;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -401,9 +410,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder concatMapPrefetch(final int concatMapPrefetch) {
-            Arguments.checkPositiveNumber(concatMapPrefetch, "concatMapPrefetch");
-            this.concatMapPrefetch = concatMapPrefetch;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -415,11 +422,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder writeScheduler(@Nonnull final Scheduler writeScheduler) {
-
-            Arguments.checkNotNull(writeScheduler, "Write scheduler");
-
-            this.writeScheduler = writeScheduler;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -431,9 +434,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder backpressureStrategy(@Nonnull final BackpressureOverflowStrategy backpressureStrategy) {
-            Arguments.checkNotNull(backpressureStrategy, "Backpressure Overflow Strategy");
-            this.backpressureStrategy = backpressureStrategy;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -451,8 +452,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public Builder captureBackpressureData(final boolean captureBackpressureData) {
-            this.captureBackpressureData = captureBackpressureData;
-            return this;
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
 
         /**
@@ -462,8 +462,7 @@ public final class WriteOptions implements WriteApi.RetryOptions {
          */
         @Nonnull
         public WriteOptions build() {
-
-            return new WriteOptions(this);
+            throw new UnsupportedOperationException("STUB: not implemented");
         }
     }
 }

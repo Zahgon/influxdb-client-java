@@ -70,65 +70,64 @@ public class BucketsQuery {
 
     @Nullable
     public Integer getOffset() {
-        return offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOffset(@Nullable final Integer offset) {
-        this.offset = offset;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public Integer getLimit() {
-        return limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setLimit(@Nullable final Integer limit) {
-        this.limit = limit;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getAfter() {
-        return after;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setAfter(@Nullable final String after) {
-        this.after = after;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getOrg() {
-        return org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOrg(@Nullable final String org) {
-        this.org = org;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getOrgID() {
-        return orgID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setOrgID(@Nullable final String orgID) {
-        this.orgID = orgID;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getName() {
-        return name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setName(@Nullable final String name) {
-        this.name = name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     public String getId() {
-        return id;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     public void setId(@Nullable final String id) {
-        this.id = id;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 }

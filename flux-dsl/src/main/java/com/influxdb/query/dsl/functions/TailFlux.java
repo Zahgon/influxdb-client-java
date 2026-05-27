@@ -22,7 +22,6 @@
 package com.influxdb.query.dsl.functions;
 
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.utils.Arguments;
 
@@ -48,6 +47,7 @@ import com.influxdb.utils.Arguments;
  * @author Jakub Bednar (14/12/2020 10:20)
  */
 public final class TailFlux extends AbstractParametrizedFlux {
+
     public TailFlux(@Nonnull final Flux flux) {
         super(flux);
     }
@@ -55,7 +55,7 @@ public final class TailFlux extends AbstractParametrizedFlux {
     @Nonnull
     @Override
     protected String operatorName() {
-        return "tail";
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -64,12 +64,7 @@ public final class TailFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public TailFlux withN(final int numberOfResults) {
-
-        Arguments.checkPositiveNumber(numberOfResults, "Number of results");
-
-        this.withPropertyValue("n", numberOfResults);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -78,11 +73,6 @@ public final class TailFlux extends AbstractParametrizedFlux {
      */
     @Nonnull
     public TailFlux withOffset(final int offset) {
-
-        Arguments.checkNotNegativeNumber(offset, "The number of records to skip");
-
-        this.withPropertyValue("offset", offset);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

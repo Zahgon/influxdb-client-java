@@ -25,7 +25,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
-
 import com.influxdb.client.UsersApi;
 import com.influxdb.client.domain.PasswordResetBody;
 import com.influxdb.client.domain.PostUser;
@@ -34,7 +33,6 @@ import com.influxdb.client.domain.Users;
 import com.influxdb.client.service.UsersService;
 import com.influxdb.internal.AbstractRestClient;
 import com.influxdb.utils.Arguments;
-
 import okhttp3.Credentials;
 import retrofit2.Call;
 
@@ -48,190 +46,91 @@ final class UsersApiImpl extends AbstractRestClient implements UsersApi {
     private final UsersService service;
 
     UsersApiImpl(@Nonnull final UsersService service) {
-
         Arguments.checkNotNull(service, "service");
-
         this.service = service;
     }
 
     @Nonnull
     @Override
     public User findUserByID(@Nonnull final String userID) {
-
-        Arguments.checkNonEmpty(userID, "User ID");
-
-        Call<User> user = service.getUsersID(userID, null);
-
-        return execute(user);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public List<User> findUsers() {
-
-        Call<Users> usersCall = service.getUsers(null, null, null, null, null, null);
-
-        Users users = execute(usersCall);
-        LOG.log(Level.FINEST, "findUsers found: {0}", users);
-
-        return users.getUsers();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public User createUser(@Nonnull final String name) {
-
-        Arguments.checkNonEmpty(name, "User name");
-
-        User user = new User();
-        user.setName(name);
-
-        return createUser(user);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public User createUser(@Nonnull final User user) {
-
-        Arguments.checkNotNull(user, "User");
-
-        PostUser request = new PostUser()
-                .oauthID(user.getOauthID())
-                .name(user.getName())
-                .status(PostUser.StatusEnum.fromValue(user.getStatus().getValue()));
-
-        Call<User> call = service.postUsers(request, null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public User updateUser(@Nonnull final User user) {
-
-        Arguments.checkNotNull(user, "User");
-
-        PostUser request = new PostUser()
-                .oauthID(user.getOauthID())
-                .name(user.getName())
-                .status(PostUser.StatusEnum.fromValue(user.getStatus().getValue()));
-
-        Call<User> userCall = service.patchUsersID(user.getId(), request, null);
-
-        return execute(userCall);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void updateUserPassword(@Nonnull final User user,
-                                   @Nonnull final String oldPassword,
-                                   @Nonnull final String newPassword) {
-
-        Arguments.checkNotNull(user, "User");
-        Arguments.checkNotNull(oldPassword, "old password");
-        Arguments.checkNotNull(newPassword, "new password");
-
-        updateUserPassword(user.getId(), user.getName(), oldPassword, newPassword);
+    public void updateUserPassword(@Nonnull final User user, @Nonnull final String oldPassword, @Nonnull final String newPassword) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void updateUserPassword(@Nonnull final String userID,
-                                   @Nonnull final String oldPassword,
-                                   @Nonnull final String newPassword) {
-
-        Arguments.checkNotNull(userID, "User ID");
-        Arguments.checkNotNull(oldPassword, "old password");
-        Arguments.checkNotNull(newPassword, "new password");
-
-        Call<User> userByID = service.getUsersID(userID, null);
-        User user = execute(userByID);
-
-        updateUserPassword(userID, user.getName(), oldPassword, newPassword);
+    public void updateUserPassword(@Nonnull final String userID, @Nonnull final String oldPassword, @Nonnull final String newPassword) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteUser(@Nonnull final User user) {
-
-        Arguments.checkNotNull(user, "User");
-
-        deleteUser(user.getId());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void deleteUser(@Nonnull final String userID) {
-
-        Arguments.checkNonEmpty(userID, "User ID");
-
-        Call<Void> call = service.deleteUsersID(userID, null);
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public User cloneUser(@Nonnull final String clonedName, @Nonnull final String userID) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNonEmpty(userID, "userID");
-
-        User user = findUserByID(userID);
-
-        return cloneUser(clonedName, user);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public User cloneUser(@Nonnull final String clonedName, @Nonnull final User user) {
-
-        Arguments.checkNonEmpty(clonedName, "clonedName");
-        Arguments.checkNotNull(user, "User");
-
-        User cloned = new User();
-        cloned.setName(clonedName);
-
-        return createUser(cloned);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public User me() {
-
-        Call<User> call = service.getMe(null);
-
-        return execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void meUpdatePassword(@Nonnull final String oldPassword, @Nonnull final String newPassword) {
-
-        Arguments.checkNotNull(oldPassword, "old password");
-        Arguments.checkNotNull(newPassword, "new password");
-
-        User user = me();
-
-        String credentials = Credentials
-                .basic(user.getName(), oldPassword);
-
-        PasswordResetBody passwordResetBody = new PasswordResetBody().password(newPassword);
-
-        Call<Void> call = service.putMePassword(passwordResetBody, null, credentials);
-
-        execute(call);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private void updateUserPassword(@Nonnull final String userID,
-                                    @Nonnull final String userName,
-                                    @Nonnull final String oldPassword,
-                                    @Nonnull final String newPassword) {
-
+    private void updateUserPassword(@Nonnull final String userID, @Nonnull final String userName, @Nonnull final String oldPassword, @Nonnull final String newPassword) {
         Arguments.checkNotNull(userID, "User ID");
         Arguments.checkNotNull(userName, "Username");
         Arguments.checkNotNull(oldPassword, "old password");
         Arguments.checkNotNull(newPassword, "new password");
-
         String credentials = Credentials.basic(userName, oldPassword);
-
         PasswordResetBody resetBody = new PasswordResetBody().password(newPassword);
         Call<Void> call = service.postUsersIDPassword(userID, resetBody, null, credentials);
-
         execute(call);
     }
 }

@@ -27,7 +27,6 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.Cancellable;
 import com.influxdb.LogLevel;
 import com.influxdb.client.flux.FluxClient;
@@ -39,7 +38,6 @@ import com.influxdb.query.FluxTable;
 import com.influxdb.query.internal.FluxCsvParser.FluxResponseConsumer;
 import com.influxdb.query.internal.FluxCsvParser.FluxResponseConsumerTable;
 import com.influxdb.utils.Arguments;
-
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -54,355 +52,145 @@ public class FluxApiImpl extends AbstractQueryApi implements FluxClient {
     private final FluxService fluxService;
 
     private final HttpLoggingInterceptor loggingInterceptor;
+
     private final OkHttpClient okHttpClient;
 
     public FluxApiImpl(@Nonnull final FluxConnectionOptions options) {
-
         Arguments.checkNotNull(options, "options");
-
         this.loggingInterceptor = new HttpLoggingInterceptor();
-
         String logLevelParam = options.getParameters().get("logLevel");
-
         if (logLevelParam == null) {
             this.loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.NONE);
         } else {
             this.loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.valueOf(logLevelParam));
         }
-
-        this.okHttpClient = options.getOkHttpClient()
-                .addInterceptor(new UserAgentInterceptor("java"))
-                .addInterceptor(this.loggingInterceptor)
-                .build();
-
-        Retrofit.Builder serviceBuilder = new Retrofit.Builder()
-                .baseUrl(options.getUrl())
-                .client(this.okHttpClient);
-
-        this.fluxService = serviceBuilder
-                .build()
-                .create(FluxService.class);
+        this.okHttpClient = options.getOkHttpClient().addInterceptor(new UserAgentInterceptor("java")).addInterceptor(this.loggingInterceptor).build();
+        Retrofit.Builder serviceBuilder = new Retrofit.Builder().baseUrl(options.getUrl()).client(this.okHttpClient);
+        this.fluxService = serviceBuilder.build().create(FluxService.class);
     }
 
     @Nonnull
     @Override
     public List<FluxTable> query(@Nonnull final String query) {
-
-        Arguments.checkNonEmpty(query, "query");
-
-        FluxResponseConsumerTable consumer = fluxCsvParser.new FluxResponseConsumerTable();
-
-        query(query, DEFAULT_DIALECT, consumer, ERROR_CONSUMER, EMPTY_ACTION, false);
-
-        return consumer.getTables();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public <M> List<M> query(@Nonnull final String query, @Nonnull final Class<M> measurementType) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(measurementType, "measurementType");
-
-        List<M> measurements = new ArrayList<>();
-
-        FluxResponseConsumer consumer = new FluxResponseConsumer() {
-
-            @Override
-            public void accept(final int index,
-                               @Nonnull final Cancellable cancellable,
-                               @Nonnull final FluxTable table) {
-
-            }
-
-            @Override
-            public void accept(final int index,
-                               @Nonnull final Cancellable cancellable,
-                               @Nonnull final FluxRecord record) {
-
-                measurements.add(resultMapper.toPOJO(record, measurementType));
-            }
-        };
-
-        query(query, DEFAULT_DIALECT, consumer, ERROR_CONSUMER, EMPTY_ACTION, false);
-
-        return measurements;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public void query(@Nonnull final String query, @Nonnull final BiConsumer<Cancellable, FluxRecord> onNext) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onNext, "onNext");
-
-        query(query, onNext, ERROR_CONSUMER);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public <M> void query(@Nonnull final String query,
-                          @Nonnull final Class<M> measurementType,
-                          @Nonnull final BiConsumer<Cancellable, M> onNext) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onNext, "onNext");
-        Arguments.checkNotNull(measurementType, "measurementType");
-
-        query(query, measurementType, onNext, ERROR_CONSUMER);
+    public <M> void query(@Nonnull final String query, @Nonnull final Class<M> measurementType, @Nonnull final BiConsumer<Cancellable, M> onNext) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void query(@Nonnull final String query,
-                      @Nonnull final BiConsumer<Cancellable, FluxRecord> onNext,
-                      @Nonnull final Consumer<? super Throwable> onError) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onNext, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-
-        query(query, onNext, onError, EMPTY_ACTION);
+    public void query(@Nonnull final String query, @Nonnull final BiConsumer<Cancellable, FluxRecord> onNext, @Nonnull final Consumer<? super Throwable> onError) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public <M> void query(@Nonnull final String query,
-                          @Nonnull final Class<M> measurementType,
-                          @Nonnull final BiConsumer<Cancellable, M> onNext,
-                          @Nonnull final Consumer<? super Throwable> onError) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onNext, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-        Arguments.checkNotNull(measurementType, "measurementType");
-
-        query(query, measurementType, onNext, onError, EMPTY_ACTION);
+    public <M> void query(@Nonnull final String query, @Nonnull final Class<M> measurementType, @Nonnull final BiConsumer<Cancellable, M> onNext, @Nonnull final Consumer<? super Throwable> onError) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void query(@Nonnull final String query,
-                      @Nonnull final BiConsumer<Cancellable, FluxRecord> onNext,
-                      @Nonnull final Consumer<? super Throwable> onError,
-                      @Nonnull final Runnable onComplete) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onNext, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-        Arguments.checkNotNull(onComplete, "onComplete");
-
-        FluxResponseConsumer consumer = new FluxResponseConsumer() {
-
-            @Override
-            public void accept(final int index,
-                               @Nonnull final Cancellable cancellable,
-                               @Nonnull final FluxTable table) {
-            }
-
-            @Override
-            public void accept(final int index,
-                               @Nonnull final Cancellable cancellable,
-                               @Nonnull final FluxRecord record) {
-                onNext.accept(cancellable, record);
-            }
-        };
-
-        query(query, DEFAULT_DIALECT, consumer, onError, onComplete, true);
+    public void query(@Nonnull final String query, @Nonnull final BiConsumer<Cancellable, FluxRecord> onNext, @Nonnull final Consumer<? super Throwable> onError, @Nonnull final Runnable onComplete) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-
     @Override
-    public <M> void query(@Nonnull final String query,
-                          @Nonnull final Class<M> measurementType,
-                          @Nonnull final BiConsumer<Cancellable, M> onNext,
-                          @Nonnull final Consumer<? super Throwable> onError,
-                          @Nonnull final Runnable onComplete) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onNext, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-        Arguments.checkNotNull(onComplete, "onComplete");
-        Arguments.checkNotNull(measurementType, "measurementType");
-
-
-        FluxResponseConsumer consumer = new FluxResponseConsumer() {
-
-            @Override
-            public void accept(final int index,
-                               @Nonnull final Cancellable cancellable,
-                               @Nonnull final FluxTable table) {
-
-            }
-
-            @Override
-            public void accept(final int index,
-                               @Nonnull final Cancellable cancellable,
-                               @Nonnull final FluxRecord record) {
-
-                onNext.accept(cancellable, resultMapper.toPOJO(record, measurementType));
-
-            }
-        };
-
-        query(query, DEFAULT_DIALECT, consumer, onError, onComplete, true);
-
+    public <M> void query(@Nonnull final String query, @Nonnull final Class<M> measurementType, @Nonnull final BiConsumer<Cancellable, M> onNext, @Nonnull final Consumer<? super Throwable> onError, @Nonnull final Runnable onComplete) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public String queryRaw(@Nonnull final String query) {
-
-        Arguments.checkNonEmpty(query, "query");
-
-        return queryRaw(query, (String) null);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public String queryRaw(@Nonnull final String query, @Nullable final String dialect) {
-
-        Arguments.checkNonEmpty(query, "query");
-
-        List<String> rows = new ArrayList<>();
-
-        BiConsumer<Cancellable, String> consumer = (cancellable, row) -> rows.add(row);
-
-        queryRaw(query, dialect, consumer, ERROR_CONSUMER, EMPTY_ACTION, false);
-
-        return String.join("\n", rows);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void queryRaw(@Nonnull final String query,
-                         @Nonnull final BiConsumer<Cancellable, String> onResponse) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onResponse, "onNext");
-
-        queryRaw(query, null, onResponse);
+    public void queryRaw(@Nonnull final String query, @Nonnull final BiConsumer<Cancellable, String> onResponse) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void queryRaw(@Nonnull final String query,
-                         @Nullable final String dialect,
-                         @Nonnull final BiConsumer<Cancellable, String> onNext) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onNext, "onNext");
-
-        queryRaw(query, dialect, onNext, ERROR_CONSUMER);
+    public void queryRaw(@Nonnull final String query, @Nullable final String dialect, @Nonnull final BiConsumer<Cancellable, String> onNext) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void queryRaw(@Nonnull final String query,
-                         @Nonnull final BiConsumer<Cancellable, String> onResponse,
-                         @Nonnull final Consumer<? super Throwable> onError) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onResponse, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-
-        queryRaw(query, onResponse, onError, EMPTY_ACTION);
+    public void queryRaw(@Nonnull final String query, @Nonnull final BiConsumer<Cancellable, String> onResponse, @Nonnull final Consumer<? super Throwable> onError) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void queryRaw(@Nonnull final String query,
-                         @Nullable final String dialect,
-                         @Nonnull final BiConsumer<Cancellable, String> onResponse,
-                         @Nonnull final Consumer<? super Throwable> onError) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onResponse, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-
-        queryRaw(query, dialect, onResponse, onError, EMPTY_ACTION);
+    public void queryRaw(@Nonnull final String query, @Nullable final String dialect, @Nonnull final BiConsumer<Cancellable, String> onResponse, @Nonnull final Consumer<? super Throwable> onError) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void queryRaw(@Nonnull final String query,
-                         @Nonnull final BiConsumer<Cancellable, String> onResponse,
-                         @Nonnull final Consumer<? super Throwable> onError,
-                         @Nonnull final Runnable onComplete) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onResponse, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-        Arguments.checkNotNull(onComplete, "onComplete");
-
-        queryRaw(query, null, onResponse, onError, onComplete);
+    public void queryRaw(@Nonnull final String query, @Nonnull final BiConsumer<Cancellable, String> onResponse, @Nonnull final Consumer<? super Throwable> onError, @Nonnull final Runnable onComplete) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
-    public void queryRaw(@Nonnull final String query,
-                         @Nullable final String dialect,
-                         @Nonnull final BiConsumer<Cancellable, String> onResponse,
-                         @Nonnull final Consumer<? super Throwable> onError,
-                         @Nonnull final Runnable onComplete) {
-
-        Arguments.checkNonEmpty(query, "query");
-        Arguments.checkNotNull(onResponse, "onNext");
-        Arguments.checkNotNull(onError, "onError");
-        Arguments.checkNotNull(onComplete, "onComplete");
-
-        queryRaw(query, dialect, onResponse, onError, onComplete, true);
+    public void queryRaw(@Nonnull final String query, @Nullable final String dialect, @Nonnull final BiConsumer<Cancellable, String> onResponse, @Nonnull final Consumer<? super Throwable> onError, @Nonnull final Runnable onComplete) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Boolean ping() {
-
-        return ping(fluxService.ping());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     @Nonnull
     public String version() {
-
-        return version(fluxService.ping());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LogLevel getLogLevel() {
-        return getLogLevel(this.loggingInterceptor);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public FluxClient setLogLevel(@Nonnull final LogLevel logLevel) {
-
-        Arguments.checkNotNull(logLevel, "LogLevel");
-
-        setLogLevel(this.loggingInterceptor, logLevel);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
      * Closes the client, initiates shutdown, no new running calls are accepted during shutdown.
      */
     public void close() {
-        okHttpClient.connectionPool().evictAll();
-        okHttpClient.dispatcher().executorService().shutdown();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
-    private void query(@Nonnull final String query,
-                       @Nonnull final String dialect,
-                       @Nonnull final FluxResponseConsumer responseConsumer,
-                       @Nonnull final Consumer<? super Throwable> onError,
-                       @Nonnull final Runnable onComplete,
-                       @Nonnull final Boolean asynchronously) {
-
+    private void query(@Nonnull final String query, @Nonnull final String dialect, @Nonnull final FluxResponseConsumer responseConsumer, @Nonnull final Consumer<? super Throwable> onError, @Nonnull final Runnable onComplete, @Nonnull final Boolean asynchronously) {
         Call<ResponseBody> queryCall = fluxService.query(createBody(dialect, query));
-
         query(queryCall, responseConsumer, onError, onComplete, asynchronously);
     }
 
-    private void queryRaw(@Nonnull final String query,
-                          @Nullable final String dialect,
-                          @Nonnull final BiConsumer<Cancellable, String> onResponse,
-                          @Nonnull final Consumer<? super Throwable> onError,
-                          @Nonnull final Runnable onComplete,
-                          @Nonnull final Boolean asynchronously) {
-
+    private void queryRaw(@Nonnull final String query, @Nullable final String dialect, @Nonnull final BiConsumer<Cancellable, String> onResponse, @Nonnull final Consumer<? super Throwable> onError, @Nonnull final Runnable onComplete, @Nonnull final Boolean asynchronously) {
         Call<ResponseBody> queryCall = fluxService.query(createBody(dialect, query));
-
         queryRaw(queryCall, onResponse, onError, onComplete, asynchronously);
     }
 }

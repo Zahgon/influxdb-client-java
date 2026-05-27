@@ -28,54 +28,11 @@ import com.influxdb.client.WriteApiBlocking;
 import com.influxdb.client.domain.WritePrecision;
 import com.influxdb.query.FluxRecord;
 import com.influxdb.query.FluxTable;
-
 import java.util.List;
 
 public class RecordRowExample {
 
     public static void main(final String[] args) throws Exception {
-
-        final char[] token = "my-token".toCharArray();
-        final String org = "my-org";
-        final String bucket = "my-bucket";
-
-        try (InfluxDBClient client = InfluxDBClientFactory.create("http://localhost:9999", token, org, bucket)) {
-            //
-            // Prepare Data
-            //
-            WriteApiBlocking writeApi = client.getWriteApiBlocking();
-            for (int i = 1; i <= 5; i++)
-                writeApi.writeRecord(WritePrecision.NS, String.format("point,table=my-table result=%d", i));
-
-            //
-            // Query data
-            //
-            String fluxQuery = String.format("from(bucket: \"%s\")\n", bucket)
-                    + " |> range(start: -1m)"
-                    + " |> filter(fn: (r) => (r[\"_measurement\"] == \"point\"))"
-                    + " |> pivot(rowKey:[\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")";
-
-            QueryApi queryApi = client.getQueryApi();
-
-            //
-            // Query data
-            //
-            List<FluxTable> tables = queryApi.query(fluxQuery);
-            System.out.println("--------------------------------- FluxRecord.getValues() --------------------------------");
-            for (FluxTable fluxTable : tables) {
-                List<FluxRecord> records = fluxTable.getRecords();
-                for (FluxRecord fluxRecord : records) {
-                    System.out.println(fluxRecord.getValues());
-                }
-            }
-
-            System.out.println("---------------------------------- FluxRecord.getRow() ----------------------------------");
-            for (FluxTable fluxTable : tables) {
-                List<FluxRecord> records = fluxTable.getRecords();
-                for (FluxRecord fluxRecord : records) {
-                    System.out.println(fluxRecord.getRow());
-                }
-            }
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -25,7 +25,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.LogLevel;
 import com.influxdb.client.AuthorizationsApi;
 import com.influxdb.client.BucketsApi;
@@ -80,7 +79,6 @@ import com.influxdb.client.service.WriteService;
 import com.influxdb.exceptions.InfluxException;
 import com.influxdb.exceptions.UnprocessableEntityException;
 import com.influxdb.utils.Arguments;
-
 import retrofit2.Call;
 
 /**
@@ -91,13 +89,11 @@ public final class InfluxDBClientImpl extends AbstractInfluxDBClient implements 
     private static final Logger LOG = Logger.getLogger(InfluxDBClientImpl.class.getName());
 
     private final SetupService setupService;
+
     private final ReadyService readyService;
 
-
     public InfluxDBClientImpl(@Nonnull final InfluxDBClientOptions options) {
-
         super(options, "java");
-
         setupService = retrofit.create(SetupService.class);
         readyService = retrofit.create(ReadyService.class);
     }
@@ -105,253 +101,210 @@ public final class InfluxDBClientImpl extends AbstractInfluxDBClient implements 
     @Nonnull
     @Override
     public QueryApi getQueryApi() {
-        return new QueryApiImpl(retrofit.create(QueryService.class), options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public WriteApi getWriteApi() {
-        return makeWriteApi();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public WriteApi getWriteApi(@Nonnull final WriteOptions writeOptions) {
-
-        Arguments.checkNotNull(writeOptions, "WriteOptions");
-
-        return makeWriteApi(writeOptions);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public WriteApi makeWriteApi() {
-        return makeWriteApi(WriteOptions.DEFAULTS);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     @SuppressWarnings("MagicNumber")
     public WriteApi makeWriteApi(@Nonnull final WriteOptions writeOptions) {
-        Arguments.checkNotNull(writeOptions, "WriteOptions");
-
-        if (autoCloseables.size() >= 10) {
-            String format = "There is already created %d instances of 'WriteApi'. "
-                    + "The 'WriteApi' is suppose to run as a singleton and should be reused across threads. "
-                    + "Use 'WriteApiBlocking` if you would like to use one-time ingesting.";
-            LOG.warning(String.format(format, autoCloseables.size()));
-        }
-
-        return new WriteApiImpl(writeOptions, retrofit.create(WriteService.class), options, autoCloseables);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public WriteApiBlocking getWriteApiBlocking() {
-        return new WriteApiBlockingImpl(retrofit.create(WriteService.class), options);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public AuthorizationsApi getAuthorizationsApi() {
-        return new AuthorizationsApiImpl(retrofit.create(AuthorizationsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public BucketsApi getBucketsApi() {
-        return new BucketsApiImpl(retrofit.create(BucketsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public OrganizationsApi getOrganizationsApi() {
-        return new OrganizationsApiImpl(
-                retrofit.create(OrganizationsService.class),
-                retrofit.create(SecretsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public SourcesApi getSourcesApi() {
-        return new SourcesApiImpl(retrofit.create(SourcesService.class), this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public TasksApi getTasksApi() {
-        return new TasksApiImpl(retrofit.create(TasksService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public UsersApi getUsersApi() {
-        return new UsersApiImpl(retrofit.create(UsersService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ScraperTargetsApi getScraperTargetsApi() {
-        return new ScraperTargetsApiImpl(retrofit.create(ScraperTargetsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public TelegrafsApi getTelegrafsApi() {
-        return new TelegrafsApiImpl(retrofit.create(TelegrafsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LabelsApi getLabelsApi() {
-        return new LabelsApiImpl(retrofit.create(LabelsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public VariablesApi getVariablesApi() {
-        return new VariablesApiImpl(retrofit.create(VariablesService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public DashboardsApi getDashboardsApi() {
-        return new DashboardsApiImpl(retrofit.create(DashboardsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public ChecksApi getChecksApi() {
-        return new ChecksApiImpl(retrofit.create(ChecksService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public NotificationEndpointsApi getNotificationEndpointsApi() {
-        return new NotificationEndpointsApiImpl(retrofit.create(NotificationEndpointsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public NotificationRulesApi getNotificationRulesApi() {
-        return new NotificationRulesApiImpl(retrofit.create(NotificationRulesService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public DeleteApi getDeleteApi() {
-        return new DeleteApiImpl(retrofit.create(DeleteService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InvokableScriptsApi getInvokableScriptsApi() {
-        return new InvokableScriptsApiImpl(retrofit.create(InvokableScriptsService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InfluxQLQueryApi getInfluxQLQueryApi() {
-        return new InfluxQLQueryApiImpl(getService(InfluxQLQueryService.class));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public <S> S getService(@Nonnull final Class<S> service) {
-
-        Arguments.checkNotNull(service, "service");
-
-        return retrofit.create(service);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public HealthCheck health() {
-
-        return health(healthService.getHealth(null));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Boolean ping() {
-        return ping(pingService.getPing());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public String version() {
-        return version(pingService.getPing());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nullable
     @Override
     public Ready ready() {
-        Call<Ready> call = readyService.getReady(null);
-        try {
-            return execute(call);
-        } catch (InfluxException e) {
-            LOG.log(Level.WARNING, "The exception occurs during check instance readiness", e);
-            return null;
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
-    public OnboardingResponse onBoarding(@Nonnull final OnboardingRequest onboarding)
-            throws UnprocessableEntityException {
-
-        Arguments.checkNotNull(onboarding, "onboarding");
-
-        Call<OnboardingResponse> call = setupService.postSetup(onboarding, null);
-
-        return execute(call);
+    public OnboardingResponse onBoarding(@Nonnull final OnboardingRequest onboarding) throws UnprocessableEntityException {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public Boolean isOnboardingAllowed() {
-
-        IsOnboarding isOnboarding = execute(setupService.getSetup(null));
-
-        return isOnboarding.getAllowed();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public LogLevel getLogLevel() {
-        return getLogLevel(this.loggingInterceptor);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InfluxDBClient setLogLevel(@Nonnull final LogLevel logLevel) {
-
-        setLogLevel(this.loggingInterceptor, logLevel);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InfluxDBClient enableGzip() {
-
-        this.gzipInterceptor.enableGzip();
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Nonnull
     @Override
     public InfluxDBClient disableGzip() {
-
-        this.gzipInterceptor.disableGzip();
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public boolean isGzipEnabled() {
-
-        return this.gzipInterceptor.isEnabledGzip();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

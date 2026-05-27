@@ -22,24 +22,13 @@
 package example;
 
 import java.time.temporal.ChronoUnit;
-
 import com.influxdb.query.dsl.Flux;
 import com.influxdb.query.dsl.functions.restriction.Restrictions;
 
 @SuppressWarnings("CheckStyle")
 public class FluxDslExample {
+
     public static void main(String[] args) {
-
-        Flux sampleFlux = Flux.from("telegraf")
-            .filter(
-                Restrictions.and(
-                    Restrictions.measurement().equal("cpu"),
-                    Restrictions.field().equal("usage_system"))
-            )
-            .range(-1L, ChronoUnit.DAYS)
-            .sample(5, 1);
-
-        System.out.println(sampleFlux.toString());
-
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

@@ -23,7 +23,6 @@ package com.influxdb.query.dsl.functions;
 
 import java.util.Map;
 import javax.annotation.Nonnull;
-
 import com.influxdb.query.dsl.IsVariableAssignment;
 import com.influxdb.query.dsl.utils.ImportUtils;
 
@@ -61,25 +60,17 @@ public abstract class AbstractFunctionCallFlux extends AbstractParametrizedFlux 
     @Nonnull
     @Override
     public String getVariableName() {
-        return name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     @Nonnull
     @Override
     protected String operatorName() {
-        return name;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString(@Nonnull final Map<String, Object> parameters, final boolean prependImports) {
-        StringBuilder builder = new StringBuilder();
-
-        if (prependImports) {
-            builder.append(ImportUtils.getImportsString(this));
-        }
-        appendActual(parameters, builder);
-
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }

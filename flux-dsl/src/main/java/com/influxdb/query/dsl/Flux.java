@@ -31,7 +31,6 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import com.influxdb.query.dsl.functions.AbstractFunctionCallFlux;
 import com.influxdb.query.dsl.functions.AbstractFunctionFlux;
 import com.influxdb.query.dsl.functions.AbstractParametrizedFlux;
@@ -154,10 +153,11 @@ import com.influxdb.utils.Arguments;
  *
  * @author Jakub Bednar (bednar@github) (22/06/2018 10:16)
  */
-@SuppressWarnings({"FileLength"})
+@SuppressWarnings({ "FileLength" })
 public abstract class Flux implements HasImports, Expression {
 
     protected FunctionsParameters functionsParameters = FunctionsParameters.of();
+
     protected Set<String> imports;
 
     /**
@@ -168,9 +168,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public static FromFlux from(@Nonnull final String bucket) {
-        Arguments.checkNonEmpty(bucket, "Bucket name");
-
-        return new FromFlux().withBucket(bucket);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -182,12 +180,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public static FromFlux from(@Nonnull final String bucket, @Nonnull final Collection<String> hosts) {
-        Arguments.checkNonEmpty(bucket, "Bucket name");
-        Arguments.checkNotNull(hosts, "Hosts are required");
-
-        return new FromFlux()
-                .withBucket(bucket)
-                .withHosts(hosts);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -199,12 +192,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public static FromFlux from(@Nonnull final String bucket, @Nonnull final String[] hosts) {
-        Arguments.checkNonEmpty(bucket, "Database name");
-        Arguments.checkNotNull(hosts, "Hosts are required");
-
-        return new FromFlux()
-                .withBucket(bucket)
-                .withHosts(hosts);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -226,7 +214,7 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link AggregateWindow}
      */
     public final AggregateWindow aggregateWindow() {
-        return new AggregateWindow(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -251,14 +239,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link AggregateWindow}
      */
     @Nonnull
-    public final AggregateWindow aggregateWindow(@Nonnull final Long every,
-                                                 @Nonnull final ChronoUnit everyUnit,
-                                                 @Nonnull final String namedFunction) {
-
-        Arguments.checkNotNull(every, "Every is required");
-        Arguments.checkNotNull(everyUnit, "Every ChronoUnit is required");
-
-        return new AggregateWindow(this).withEvery(every, everyUnit).withAggregateFunction(namedFunction);
+    public final AggregateWindow aggregateWindow(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit, @Nonnull final String namedFunction) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -268,7 +250,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public static ArrayFromFlux arrayFrom() {
-        return new ArrayFromFlux();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -280,7 +262,7 @@ public abstract class Flux implements HasImports, Expression {
     @SafeVarargs
     @Nonnull
     public static ArrayFromFlux arrayFrom(@Nonnull final Map<String, Object>... rows) {
-        return arrayFrom().withRow(rows);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -302,8 +284,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public static JoinFlux join() {
-
-        return new JoinFlux();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -318,18 +299,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link JoinFlux}
      */
     @Nonnull
-    public static JoinFlux join(@Nonnull final String name1,
-                                @Nonnull final Flux table1,
-                                @Nonnull final String name2,
-                                @Nonnull final Flux table2,
-                                @Nonnull final String tag,
-                                @Nonnull final String method) {
-
-        return new JoinFlux()
-                .withTable(name1, table1)
-                .withTable(name2, table2)
-                .withOn(tag)
-                .withMethod(method);
+    public static JoinFlux join(@Nonnull final String name1, @Nonnull final Flux table1, @Nonnull final String name2, @Nonnull final Flux table2, @Nonnull final String tag, @Nonnull final String method) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -349,7 +320,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final KeepFlux keep() {
-        return new KeepFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -360,7 +331,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final KeepFlux keep(@Nonnull final Collection<String> columns) {
-        return new KeepFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -371,7 +342,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final KeepFlux keep(@Nonnull final String[] columns) {
-        return new KeepFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -383,7 +354,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final KeepFlux keep(@Nonnull final String function) {
-        return new KeepFlux(this).withFunction(function);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -393,7 +364,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ColumnsFlux columns() {
-        return new ColumnsFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -404,7 +375,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ColumnsFlux columns(@Nonnull final String column) {
-        return new ColumnsFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -414,7 +385,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CountFlux count() {
-        return new CountFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -425,8 +396,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CountFlux count(@Nonnull final String column) {
-        return new CountFlux(this)
-                .withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -448,7 +418,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CovarianceFlux covariance() {
-        return new CovarianceFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -459,7 +429,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CovarianceFlux covariance(@Nonnull final Collection<String> columns) {
-        return new CovarianceFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -470,7 +440,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CovarianceFlux covariance(@Nonnull final String[] columns) {
-        return new CovarianceFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -482,7 +452,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CovarianceFlux covariance(@Nonnull final Collection<String> columns, final boolean pearsonr) {
-        return new CovarianceFlux(this).withColumns(columns).withPearsonr(pearsonr);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -494,7 +464,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CovarianceFlux covariance(@Nonnull final String[] columns, final boolean pearsonr) {
-        return new CovarianceFlux(this).withColumns(columns).withPearsonr(pearsonr);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -505,9 +475,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link CovarianceFlux}
      */
     @Nonnull
-    public final CovarianceFlux covariance(@Nonnull final Collection<String> columns,
-                                           @Nonnull final String valueDst) {
-        return new CovarianceFlux(this).withColumns(columns).withValueDst(valueDst);
+    public final CovarianceFlux covariance(@Nonnull final Collection<String> columns, @Nonnull final String valueDst) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -518,24 +487,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link CovarianceFlux}
      */
     @Nonnull
-    public final CovarianceFlux covariance(@Nonnull final String[] columns,
-                                           @Nonnull final String valueDst) {
-        return new CovarianceFlux(this).withColumns(columns).withValueDst(valueDst);
-    }
-
-    /**
-     * Covariance computes the covariance between two columns.
-     *
-     * @param columns  list of columns on which to compute the covariance. Exactly two columns must be provided.
-     * @param pearsonr indicates whether the result should be normalized to be the Pearson R coefficient
-     * @param valueDst column into which the result will be placed.
-     * @return {@link CovarianceFlux}
-     */
-    @Nonnull
-    public final CovarianceFlux covariance(@Nonnull final Collection<String> columns,
-                                           final boolean pearsonr,
-                                           @Nonnull final String valueDst) {
-        return new CovarianceFlux(this).withColumns(columns).withPearsonr(pearsonr).withValueDst(valueDst);
+    public final CovarianceFlux covariance(@Nonnull final String[] columns, @Nonnull final String valueDst) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -547,10 +500,21 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link CovarianceFlux}
      */
     @Nonnull
-    public final CovarianceFlux covariance(@Nonnull final String[] columns,
-                                           final boolean pearsonr,
-                                           @Nonnull final String valueDst) {
-        return new CovarianceFlux(this).withColumns(columns).withPearsonr(pearsonr).withValueDst(valueDst);
+    public final CovarianceFlux covariance(@Nonnull final Collection<String> columns, final boolean pearsonr, @Nonnull final String valueDst) {
+        throw new UnsupportedOperationException("STUB: not implemented");
+    }
+
+    /**
+     * Covariance computes the covariance between two columns.
+     *
+     * @param columns  list of columns on which to compute the covariance. Exactly two columns must be provided.
+     * @param pearsonr indicates whether the result should be normalized to be the Pearson R coefficient
+     * @param valueDst column into which the result will be placed.
+     * @return {@link CovarianceFlux}
+     */
+    @Nonnull
+    public final CovarianceFlux covariance(@Nonnull final String[] columns, final boolean pearsonr, @Nonnull final String valueDst) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -570,7 +534,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CumulativeSumFlux cumulativeSum() {
-        return new CumulativeSumFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -581,7 +545,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CumulativeSumFlux cumulativeSum(@Nonnull final String[] columns) {
-        return new CumulativeSumFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -592,7 +556,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final CumulativeSumFlux cumulativeSum(@Nonnull final Collection<String> columns) {
-        return new CumulativeSumFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -614,7 +578,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DerivativeFlux derivative() {
-        return new DerivativeFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -626,7 +590,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DerivativeFlux derivative(@Nonnull final Long duration, @Nonnull final ChronoUnit unit) {
-        return new DerivativeFlux(this).withUnit(duration, unit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -647,7 +611,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DifferenceFlux difference() {
-        return new DifferenceFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -658,7 +622,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DifferenceFlux difference(final boolean nonNegative) {
-        return new DifferenceFlux(this).withNonNegative(nonNegative);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -669,7 +633,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DifferenceFlux difference(@Nonnull final Collection<String> columns) {
-        return new DifferenceFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -680,7 +644,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DifferenceFlux difference(@Nonnull final String[] columns) {
-        return new DifferenceFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -692,7 +656,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DifferenceFlux difference(@Nonnull final Collection<String> columns, final boolean nonNegative) {
-        return new DifferenceFlux(this).withColumns(columns).withNonNegative(nonNegative);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -704,7 +668,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DifferenceFlux difference(@Nonnull final String[] columns, final boolean nonNegative) {
-        return new DifferenceFlux(this).withColumns(columns).withNonNegative(nonNegative);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -723,7 +687,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DistinctFlux distinct() {
-        return new DistinctFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -734,7 +698,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DistinctFlux distinct(@Nonnull final String column) {
-        return new DistinctFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -754,7 +718,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DropFlux drop() {
-        return new DropFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -765,7 +729,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DropFlux drop(@Nonnull final Collection<String> columns) {
-        return new DropFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -776,7 +740,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DropFlux drop(@Nonnull final String[] columns) {
-        return new DropFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -788,7 +752,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DropFlux drop(@Nonnull final String function) {
-        return new DropFlux(this).withFunction(function);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -808,7 +772,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DuplicateFlux duplicate() {
-        return new DuplicateFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -830,7 +794,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final DuplicateFlux duplicate(@Nonnull final String column, @Nonnull final String as) {
-        return new DuplicateFlux(this).withColumn(column).withAs(as);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -842,7 +806,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ElapsedFlux elapsed(@Nonnull final TimeInterval unit) {
-        return new ElapsedFlux(this).withDuration(unit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -855,7 +819,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ElapsedFlux elapsed(@Nonnull final int count, @Nonnull final ChronoUnit unit) {
-        return new ElapsedFlux(this).withDuration(new TimeInterval((long) count, unit));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -868,7 +832,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ElapsedFlux elapsed(@Nonnull final ChronoUnit unit) {
-        return new ElapsedFlux(this).withDuration(new TimeInterval(1L, unit));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -880,7 +844,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ElapsedFlux elapsed() {
-        return new ElapsedFlux(this).withDuration(new TimeInterval(1L, ChronoUnit.MILLIS));
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -898,7 +862,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final FillFlux fill() {
-        return new FillFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -909,7 +873,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final FillFlux fill(@Nonnull final Object value) {
-        return new FillFlux(this).withValue(value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -928,7 +892,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final FilterFlux filter() {
-        return new FilterFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -939,10 +903,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final FilterFlux filter(@Nonnull final Restrictions restrictions) {
-
-        Arguments.checkNotNull(restrictions, "Restrictions are required");
-
-        return new FilterFlux(this).withRestrictions(restrictions);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -952,7 +913,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final FirstFlux first() {
-        return new FirstFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -974,8 +935,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final GroupFlux group() {
-
-        return new GroupFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -986,9 +946,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final GroupFlux groupBy(@Nonnull final String groupBy) {
-        Arguments.checkNotNull(groupBy, "GroupBy Columns are required");
-
-        return new GroupFlux(this).withBy(groupBy);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -999,9 +957,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final GroupFlux groupBy(@Nonnull final Collection<String> groupBy) {
-        Arguments.checkNotNull(groupBy, "GroupBy Columns are required");
-
-        return new GroupFlux(this).withBy(groupBy);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1012,9 +968,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final GroupFlux groupBy(@Nonnull final String[] groupBy) {
-        Arguments.checkNotNull(groupBy, "GroupBy Columns are required");
-
-        return new GroupFlux(this).withBy(groupBy);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1025,9 +979,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final GroupFlux groupExcept(@Nonnull final Collection<String> except) {
-        Arguments.checkNotNull(except, "GroupBy Except Columns are required");
-
-        return new GroupFlux(this).withExcept(except);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1038,9 +990,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final GroupFlux groupExcept(@Nonnull final String except) {
-        Arguments.checkNotNull(except, "GroupBy Except Column are required");
-
-        return new GroupFlux(this).withExcept(except);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1051,9 +1001,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final GroupFlux groupExcept(@Nonnull final String[] except) {
-        Arguments.checkNotNull(except, "GroupBy Except Columns are required");
-
-        return new GroupFlux(this).withExcept(except);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1071,8 +1019,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final IntegralFlux integral() {
-
-        return new IntegralFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1084,11 +1031,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final IntegralFlux integral(@Nonnull final Long duration, @Nonnull final ChronoUnit unit) {
-
-        Arguments.checkNotNull(duration, "Duration is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        return new IntegralFlux(this).withUnit(duration, unit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1107,7 +1050,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final InterpolateLinearFlux interpolateLinear() {
-        return new InterpolateLinearFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1120,10 +1063,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final InterpolateLinearFlux interpolateLinear(@Nonnull final Long duration, @Nonnull final ChronoUnit unit) {
-        Arguments.checkNotNull(duration, "Duration is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        return new InterpolateLinearFlux(this).withEvery(duration, unit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1133,7 +1073,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final LastFlux last() {
-        return new LastFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1144,8 +1084,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final LastFlux last(@Nonnull final String column) {
-        return new LastFlux(this)
-                .withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1164,8 +1103,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final LimitFlux limit() {
-
-        return new LimitFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1176,8 +1114,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final LimitFlux limit(final int numberOfResults) {
-
-        return new LimitFlux(this).withN(numberOfResults);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1189,8 +1126,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final LimitFlux limit(final int numberOfResults, final int offset) {
-
-        return new LimitFlux(this).withN(numberOfResults).withOffset(offset);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1208,8 +1144,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MapFlux map() {
-
-        return new MapFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1220,8 +1155,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MapFlux map(@Nonnull final String function) {
-
-        return new MapFlux(this).withFunction(function);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1231,7 +1165,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MaxFlux max() {
-        return new MaxFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1242,7 +1176,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MaxFlux max(@Nonnull final String column) {
-        return new MaxFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1252,7 +1186,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MeanFlux mean() {
-        return new MeanFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1263,7 +1197,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MeanFlux mean(final String column) {
-        return new MeanFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1273,7 +1207,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MinFlux min() {
-        return new MinFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1284,7 +1218,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final MinFlux min(@Nonnull final String column) {
-        return new MinFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1309,7 +1243,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final QuantileFlux quantile() {
-        return new QuantileFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1320,9 +1254,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final QuantileFlux quantile(@Nonnull final Float quantile) {
-
-        return new QuantileFlux(this)
-                .withQuantile(quantile);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1333,12 +1265,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link QuantileFlux}
      */
     @Nonnull
-    public final QuantileFlux quantile(@Nonnull final Float quantile,
-                                       @Nonnull final QuantileFlux.MethodType method) {
-
-        return new QuantileFlux(this)
-                .withQuantile(quantile)
-                .withMethod(method);
+    public final QuantileFlux quantile(@Nonnull final Float quantile, @Nonnull final QuantileFlux.MethodType method) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1350,14 +1278,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link QuantileFlux}
      */
     @Nonnull
-    public final QuantileFlux quantile(@Nonnull final Float quantile,
-                                       @Nonnull final QuantileFlux.MethodType method,
-                                       @Nonnull final Float compression) {
-
-        return new QuantileFlux(this)
-                .withQuantile(quantile)
-                .withMethod(method)
-                .withCompression(compression);
+    public final QuantileFlux quantile(@Nonnull final Float quantile, @Nonnull final QuantileFlux.MethodType method, @Nonnull final Float compression) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1370,16 +1292,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link QuantileFlux}
      */
     @Nonnull
-    public final QuantileFlux quantile(@Nonnull final String column,
-                                       @Nonnull final Float quantile,
-                                       @Nonnull final QuantileFlux.MethodType method,
-                                       @Nonnull final Float compression) {
-
-        return new QuantileFlux(this)
-                .withColumn(column)
-                .withQuantile(quantile)
-                .withMethod(method)
-                .withCompression(compression);
+    public final QuantileFlux quantile(@Nonnull final String column, @Nonnull final Float quantile, @Nonnull final QuantileFlux.MethodType method, @Nonnull final Float compression) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1403,7 +1317,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final PivotFlux pivot() {
-        return new PivotFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1416,11 +1330,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link PivotFlux}
      */
     @Nonnull
-    public final PivotFlux pivot(@Nonnull final String[] rowKey,
-                                 @Nonnull final String[] columnKey,
-                                 @Nonnull final String valueColumn) {
-
-        return new PivotFlux(this).withRowKey(rowKey).withColumnKey(columnKey).withValueColumn(valueColumn);
+    public final PivotFlux pivot(@Nonnull final String[] rowKey, @Nonnull final String[] columnKey, @Nonnull final String valueColumn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1433,11 +1344,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link PivotFlux}
      */
     @Nonnull
-    public final PivotFlux pivot(@Nonnull final Collection<String> rowKey,
-                                 @Nonnull final Collection<String> columnKey,
-                                 @Nonnull final String valueColumn) {
-
-        return new PivotFlux(this).withRowKey(rowKey).withColumnKey(columnKey).withValueColumn(valueColumn);
+    public final PivotFlux pivot(@Nonnull final Collection<String> rowKey, @Nonnull final Collection<String> columnKey, @Nonnull final String valueColumn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1459,8 +1367,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RangeFlux range() {
-
-        return new RangeFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1471,9 +1378,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RangeFlux range(@Nonnull final Instant start) {
-        Arguments.checkNotNull(start, "Start is required");
-
-        return new RangeFlux(this).withStart(start);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1485,10 +1390,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RangeFlux range(@Nonnull final Instant start, @Nonnull final Instant stop) {
-        Arguments.checkNotNull(start, "Start is required");
-        Arguments.checkNotNull(stop, "Stop is required");
-
-        return new RangeFlux(this).withStart(start).withStop(stop);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1500,10 +1402,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RangeFlux range(@Nonnull final Long start, @Nonnull final ChronoUnit unit) {
-        Arguments.checkNotNull(start, "Start is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        return new RangeFlux(this).withStart(start, unit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1516,11 +1415,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RangeFlux range(@Nonnull final Long start, @Nonnull final Long stop, @Nonnull final ChronoUnit unit) {
-        Arguments.checkNotNull(start, "Start is required");
-        Arguments.checkNotNull(stop, "Stop is required");
-        Arguments.checkNotNull(unit, "ChronoUnit is required");
-
-        return new RangeFlux(this).withStart(start, unit).withStop(stop, unit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1532,7 +1427,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RangeFlux range(final Long start, final Long stop) {
-        return new RangeFlux(this).withStart(start).withStop(stop);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1543,7 +1438,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RangeFlux range(final Long start) {
-        return new RangeFlux(this).withStart(start);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1559,7 +1454,7 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ReduceFlux}
      */
     public final ReduceFlux reduce() {
-        return new ReduceFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1570,7 +1465,7 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ReduceFlux}
      */
     public final ReduceFlux reduce(@Nonnull final String function, @Nonnull final String identity) {
-        return new ReduceFlux(this).withFunction(function).withIdentity(identity);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1590,7 +1485,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RenameFlux rename() {
-        return new RenameFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1601,7 +1496,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RenameFlux rename(@Nonnull final Map<String, String> columns) {
-        return new RenameFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1613,7 +1508,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final RenameFlux rename(@Nonnull final String function) {
-        return new RenameFlux(this).withFunction(function);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1633,8 +1528,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SampleFlux sample() {
-
-        return new SampleFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1645,9 +1539,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SampleFlux sample(final int n) {
-
-        return new SampleFlux(this)
-                .withN(n);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1659,14 +1551,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SampleFlux sample(final int n, final int pos) {
-
-        if (pos >= n) {
-            throw new IllegalArgumentException("pos must be less than n");
-        }
-
-        return new SampleFlux(this)
-                .withN(n)
-                .withPos(pos);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1685,7 +1570,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SetFlux set() {
-        return new SetFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1697,7 +1582,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SetFlux set(@Nonnull final String key, @Nonnull final String value) {
-        return new SetFlux(this).withKeyValue(key, value);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1718,7 +1603,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final TimeShiftFlux timeShift() {
-        return new TimeShiftFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1729,10 +1614,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link TimeShiftFlux}
      */
     @Nonnull
-    public final TimeShiftFlux timeShift(@Nonnull final Long amount,
-                                         @Nonnull final ChronoUnit unit) {
-
-        return new TimeShiftFlux(this).withDuration(amount, unit);
+    public final TimeShiftFlux timeShift(@Nonnull final Long amount, @Nonnull final ChronoUnit unit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1744,11 +1627,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link TimeShiftFlux}
      */
     @Nonnull
-    public final TimeShiftFlux timeShift(@Nonnull final Long amount,
-                                         @Nonnull final ChronoUnit unit,
-                                         @Nonnull final String[] columns) {
-
-        return new TimeShiftFlux(this).withDuration(amount, unit).withColumns(columns);
+    public final TimeShiftFlux timeShift(@Nonnull final Long amount, @Nonnull final ChronoUnit unit, @Nonnull final String[] columns) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1760,11 +1640,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link TimeShiftFlux}
      */
     @Nonnull
-    public final TimeShiftFlux timeShift(@Nonnull final Long amount,
-                                         @Nonnull final ChronoUnit unit,
-                                         @Nonnull final Collection<String> columns) {
-
-        return new TimeShiftFlux(this).withDuration(amount, unit).withColumns(columns);
+    public final TimeShiftFlux timeShift(@Nonnull final Long amount, @Nonnull final ChronoUnit unit, @Nonnull final Collection<String> columns) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1774,7 +1651,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SkewFlux skew() {
-        return new SkewFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1785,7 +1662,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SkewFlux skew(@Nonnull final String column) {
-        return new SkewFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1795,7 +1672,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SortFlux sort() {
-        return new SortFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1806,7 +1683,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SortFlux sort(final boolean desc) {
-        return new SortFlux(this).withDesc(desc);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1817,9 +1694,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SortFlux sort(@Nonnull final String[] columns) {
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        return new SortFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1830,9 +1705,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SortFlux sort(@Nonnull final Collection<String> columns) {
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        return new SortFlux(this).withColumns(columns);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1844,11 +1717,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SortFlux sort(@Nonnull final String[] columns, final boolean desc) {
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        return new SortFlux(this)
-                .withColumns(columns)
-                .withDesc(desc);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1860,11 +1729,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SortFlux sort(@Nonnull final Collection<String> columns, final boolean desc) {
-        Arguments.checkNotNull(columns, "Columns are required");
-
-        return new SortFlux(this)
-                .withColumns(columns)
-                .withDesc(desc);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1874,7 +1739,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SpreadFlux spread() {
-        return new SpreadFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1885,7 +1750,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SpreadFlux spread(@Nonnull final String column) {
-        return new SpreadFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1895,7 +1760,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final StddevFlux stddev() {
-        return new StddevFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1906,7 +1771,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final StddevFlux stddev(@Nonnull final String column) {
-        return new StddevFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1916,7 +1781,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SumFlux sum() {
-        return new SumFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1927,7 +1792,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final SumFlux sum(@Nonnull final String column) {
-        return new SumFlux(this).withColumn(column);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1946,8 +1811,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final TailFlux tail() {
-
-        return new TailFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1958,8 +1822,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final TailFlux tail(final int numberOfResults) {
-
-        return new TailFlux(this).withN(numberOfResults);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -1971,8 +1834,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final TailFlux tail(final int numberOfResults, final int offset) {
-
-        return new TailFlux(this).withN(numberOfResults).withOffset(offset);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2000,7 +1862,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToFlux to() {
-        return new ToFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2011,9 +1873,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToFlux to(@Nonnull final String bucket) {
-
-        return new ToFlux(this)
-                .withBucket(bucket);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2024,12 +1884,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ToFlux}
      */
     @Nonnull
-    public final ToFlux to(@Nonnull final String bucket,
-                           @Nonnull final String org) {
-
-        return new ToFlux(this)
-                .withBucket(bucket)
-                .withOrg(org);
+    public final ToFlux to(@Nonnull final String bucket, @Nonnull final String org) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2041,14 +1897,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ToFlux}
      */
     @Nonnull
-    public final ToFlux to(@Nonnull final String bucket,
-                           @Nonnull final String org,
-                           @Nonnull final String fieldFn) {
-
-        return new ToFlux(this)
-                .withBucket(bucket)
-                .withOrg(org)
-                .withFieldFunction(fieldFn);
+    public final ToFlux to(@Nonnull final String bucket, @Nonnull final String org, @Nonnull final String fieldFn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2061,16 +1911,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ToFlux}
      */
     @Nonnull
-    public final ToFlux to(@Nonnull final String bucket,
-                           @Nonnull final String org,
-                           @Nonnull final String[] tagColumns,
-                           @Nonnull final String fieldFn) {
-
-        return new ToFlux(this)
-                .withBucket(bucket)
-                .withOrg(org)
-                .withTagColumns(tagColumns)
-                .withFieldFunction(fieldFn);
+    public final ToFlux to(@Nonnull final String bucket, @Nonnull final String org, @Nonnull final String[] tagColumns, @Nonnull final String fieldFn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2083,16 +1925,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ToFlux}
      */
     @Nonnull
-    public final ToFlux to(@Nonnull final String bucket,
-                           @Nonnull final String org,
-                           @Nonnull final Collection<String> tagColumns,
-                           @Nonnull final String fieldFn) {
-
-        return new ToFlux(this)
-                .withBucket(bucket)
-                .withOrg(org)
-                .withTagColumns(tagColumns)
-                .withFieldFunction(fieldFn);
+    public final ToFlux to(@Nonnull final String bucket, @Nonnull final String org, @Nonnull final Collection<String> tagColumns, @Nonnull final String fieldFn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2108,22 +1942,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ToFlux}
      */
     @Nonnull
-    public final ToFlux to(@Nonnull final String bucket,
-                           @Nonnull final String org,
-                           @Nonnull final String host,
-                           @Nonnull final String token,
-                           @Nonnull final String timeColumn,
-                           @Nonnull final String[] tagColumns,
-                           @Nonnull final String fieldFn) {
-
-        return new ToFlux(this)
-                .withBucket(bucket)
-                .withOrg(org)
-                .withHost(host)
-                .withToken(token)
-                .withTimeColumn(timeColumn)
-                .withTagColumns(tagColumns)
-                .withFieldFunction(fieldFn);
+    public final ToFlux to(@Nonnull final String bucket, @Nonnull final String org, @Nonnull final String host, @Nonnull final String token, @Nonnull final String timeColumn, @Nonnull final String[] tagColumns, @Nonnull final String fieldFn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2139,22 +1959,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link ToFlux}
      */
     @Nonnull
-    public final ToFlux to(@Nonnull final String bucket,
-                           @Nonnull final String org,
-                           @Nonnull final String host,
-                           @Nonnull final String token,
-                           @Nonnull final String timeColumn,
-                           @Nonnull final Collection<String> tagColumns,
-                           @Nonnull final String fieldFn) {
-
-        return new ToFlux(this)
-                .withBucket(bucket)
-                .withOrg(org)
-                .withHost(host)
-                .withToken(token)
-                .withTimeColumn(timeColumn)
-                .withTagColumns(tagColumns)
-                .withFieldFunction(fieldFn);
+    public final ToFlux to(@Nonnull final String bucket, @Nonnull final String org, @Nonnull final String host, @Nonnull final String token, @Nonnull final String timeColumn, @Nonnull final Collection<String> tagColumns, @Nonnull final String fieldFn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2164,7 +1970,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToBoolFlux toBool() {
-        return new ToBoolFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2174,7 +1980,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToIntFlux toInt() {
-        return new ToIntFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2184,7 +1990,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToFloatFlux toFloat() {
-        return new ToFloatFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2194,7 +2000,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToDurationFlux toDuration() {
-        return new ToDurationFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2204,7 +2010,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToStringFlux toStringConvert() {
-        return new ToStringFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2214,7 +2020,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToTimeFlux toTime() {
-        return new ToTimeFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2224,7 +2030,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ToUIntFlux toUInt() {
-        return new ToUIntFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2235,9 +2041,8 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final TruncateTimeColumnFlux truncateTimeColumn(@Nonnull final ChronoUnit unit) {
-        return new TruncateTimeColumnFlux(this).withUnit(unit);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
-
 
     /**
      * Merges two or more input streams into a single output stream.
@@ -2246,8 +2051,7 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link UnionFlux}
      */
     public static UnionFlux union(@Nonnull final Flux... tables) {
-        return new UnionFlux()
-                .withTables(tables);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2272,7 +2076,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final WindowFlux window() {
-        return new WindowFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2283,13 +2087,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link WindowFlux}
      */
     @Nonnull
-    public final WindowFlux window(@Nonnull final Long every,
-                                   @Nonnull final ChronoUnit everyUnit) {
-
-        Arguments.checkNotNull(every, "Every is required");
-        Arguments.checkNotNull(everyUnit, "Every ChronoUnit is required");
-
-        return new WindowFlux(this).withEvery(every, everyUnit);
+    public final WindowFlux window(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2302,20 +2101,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link WindowFlux}
      */
     @Nonnull
-    public final WindowFlux window(@Nonnull final Long every,
-                                   @Nonnull final ChronoUnit everyUnit,
-                                   @Nonnull final Long period,
-                                   @Nonnull final ChronoUnit periodUnit) {
-
-        Arguments.checkNotNull(every, "Every is required");
-        Arguments.checkNotNull(everyUnit, "Every ChronoUnit is required");
-
-        Arguments.checkNotNull(period, "Period is required");
-        Arguments.checkNotNull(periodUnit, "Period ChronoUnit is required");
-
-        return new WindowFlux(this)
-                .withEvery(every, everyUnit)
-                .withPeriod(period, periodUnit);
+    public final WindowFlux window(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit, @Nonnull final Long period, @Nonnull final ChronoUnit periodUnit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2329,16 +2116,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link WindowFlux}
      */
     @Nonnull
-    public final WindowFlux window(@Nonnull final Long every,
-                                   @Nonnull final ChronoUnit everyUnit,
-                                   @Nonnull final Long period,
-                                   @Nonnull final ChronoUnit periodUnit,
-                                   @Nonnull final Instant offset) {
-
-        return new WindowFlux(this)
-                .withEvery(every, everyUnit)
-                .withPeriod(period, periodUnit)
-                .withOffset(offset);
+    public final WindowFlux window(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit, @Nonnull final Long period, @Nonnull final ChronoUnit periodUnit, @Nonnull final Instant offset) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2353,17 +2132,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link WindowFlux}
      */
     @Nonnull
-    public final WindowFlux window(@Nonnull final Long every,
-                                   @Nonnull final ChronoUnit everyUnit,
-                                   @Nonnull final Long period,
-                                   @Nonnull final ChronoUnit periodUnit,
-                                   @Nonnull final Long offset,
-                                   @Nonnull final ChronoUnit offsetUnit) {
-
-        return new WindowFlux(this)
-                .withEvery(every, everyUnit)
-                .withPeriod(period, periodUnit)
-                .withOffset(offset, offsetUnit);
+    public final WindowFlux window(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit, @Nonnull final Long period, @Nonnull final ChronoUnit periodUnit, @Nonnull final Long offset, @Nonnull final ChronoUnit offsetUnit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2381,24 +2151,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link WindowFlux}
      */
     @Nonnull
-    public final WindowFlux window(@Nonnull final Long every,
-                                   @Nonnull final ChronoUnit everyUnit,
-                                   @Nonnull final Long period,
-                                   @Nonnull final ChronoUnit periodUnit,
-                                   @Nonnull final Long offset,
-                                   @Nonnull final ChronoUnit offsetUnit,
-                                   @Nonnull final String timeColumn,
-                                   @Nonnull final String startColumn,
-                                   @Nonnull final String stopColumn) {
-
-        return new WindowFlux(this)
-                .withEvery(every, everyUnit)
-                .withPeriod(period, periodUnit)
-                .withOffset(offset, offsetUnit)
-                .withTimeColumn(timeColumn)
-                .withStartColumn(startColumn)
-                .withStopCol(stopColumn);
-
+    public final WindowFlux window(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit, @Nonnull final Long period, @Nonnull final ChronoUnit periodUnit, @Nonnull final Long offset, @Nonnull final ChronoUnit offsetUnit, @Nonnull final String timeColumn, @Nonnull final String startColumn, @Nonnull final String stopColumn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2415,22 +2169,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return {@link WindowFlux}
      */
     @Nonnull
-    public final WindowFlux window(@Nonnull final Long every,
-                                   @Nonnull final ChronoUnit everyUnit,
-                                   @Nonnull final Long period,
-                                   @Nonnull final ChronoUnit periodUnit,
-                                   @Nonnull final Instant offset,
-                                   @Nonnull final String timeColumn,
-                                   @Nonnull final String startColumn,
-                                   @Nonnull final String stopColumn) {
-
-        return new WindowFlux(this)
-                .withEvery(every, everyUnit)
-                .withPeriod(period, periodUnit)
-                .withOffset(offset)
-                .withTimeColumn(timeColumn)
-                .withStartColumn(startColumn)
-                .withStopCol(stopColumn);
+    public final WindowFlux window(@Nonnull final Long every, @Nonnull final ChronoUnit everyUnit, @Nonnull final Long period, @Nonnull final ChronoUnit periodUnit, @Nonnull final Instant offset, @Nonnull final String timeColumn, @Nonnull final String startColumn, @Nonnull final String stopColumn) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2449,7 +2189,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final YieldFlux yield() {
-        return new YieldFlux(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2460,7 +2200,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final YieldFlux yield(@Nonnull final String name) {
-        return new YieldFlux(this).withName(name);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2471,10 +2211,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final ExpressionFlux expression(@Nonnull final String expression) {
-
-        Arguments.checkNonEmpty(expression, "Expression");
-
-        return new ExpressionFlux(this, expression);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2494,14 +2231,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final <F extends AbstractParametrizedFlux> F function(@Nonnull final Class<F> type) {
-
-        Arguments.checkNotNull(type, "Function type");
-
-        try {
-            return type.getConstructor(Flux.class).newInstance(this);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2553,7 +2283,7 @@ public abstract class Flux implements HasImports, Expression {
      * @return the invocation
      */
     public <CALL extends AbstractFunctionCallFlux> CALL withPipedFunction(final AbstractFunctionFlux<CALL> fun) {
-        return fun.invokePiped(this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2582,7 +2312,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final Flux withPropertyNamed(@Nonnull final String property) {
-        return withPropertyNamed(property, property);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2607,13 +2337,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final Flux withPropertyNamed(@Nonnull final String fluxName, @Nonnull final String namedProperty) {
-
-        Arguments.checkNonEmpty(fluxName, "Flux property name");
-        Arguments.checkNonEmpty(namedProperty, "Named property");
-
-        this.functionsParameters.putPropertyNamed(fluxName, namedProperty);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2633,12 +2357,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final Flux withPropertyValue(@Nonnull final String propertyName, @Nullable final Object value) {
-
-        Arguments.checkNonEmpty(propertyName, "Flux property name");
-
-        this.functionsParameters.putPropertyValue(propertyName, value);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2657,12 +2376,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final Flux withFunction(@Nonnull final String functionName, @Nullable final Object function) {
-
-        Arguments.checkNonEmpty(functionName, "functionName");
-
-        this.functionsParameters.putFunctionValue(functionName, function);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2685,13 +2399,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final Flux withFunctionNamed(@Nonnull final String functionName, @Nonnull final String namedProperty) {
-
-        Arguments.checkNonEmpty(functionName, "functionName");
-        Arguments.checkNonEmpty(namedProperty, "namedProperty");
-
-        this.functionsParameters.putFunctionNamed(functionName, namedProperty);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2711,15 +2419,8 @@ public abstract class Flux implements HasImports, Expression {
      * @return a current function
      */
     @Nonnull
-    public final Flux withPropertyValue(@Nonnull final String property,
-                                        @Nullable final Long amount,
-                                        @Nullable final ChronoUnit unit) {
-
-        Arguments.checkNonEmpty(property, "Flux property name");
-
-        this.functionsParameters.putPropertyValue(property, amount, unit);
-
-        return this;
+    public final Flux withPropertyValue(@Nonnull final String property, @Nullable final Long amount, @Nullable final ChronoUnit unit) {
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2739,12 +2440,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public final Flux withPropertyValueEscaped(@Nonnull final String property, @Nullable final String value) {
-
-        Arguments.checkNonEmpty(property, "Flux property name");
-
-        this.functionsParameters.putPropertyValueString(property, value);
-
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2753,8 +2449,7 @@ public abstract class Flux implements HasImports, Expression {
      * @param parameters named parameters for Flux query
      * @param builder    Flux query chaing
      */
-    public abstract void appendActual(@Nonnull final Map<String, Object> parameters,
-                                      @Nonnull final StringBuilder builder);
+    public abstract void appendActual(@Nonnull final Map<String, Object> parameters, @Nonnull final StringBuilder builder);
 
     /**
      * Create the Flux query that can be executed by FluxService.
@@ -2764,7 +2459,7 @@ public abstract class Flux implements HasImports, Expression {
     @Nonnull
     @Override
     public String toString() {
-        return toString(new HashMap<>());
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2775,22 +2470,12 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Nonnull
     public String toString(@Nonnull final Map<String, Object> parameters) {
-        return toString(parameters, true);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     @Override
     public String toString(@Nonnull final Map<String, Object> parameters, final boolean prependImports) {
-        Arguments.checkNotNull(parameters, "Parameters are required");
-
-        StringBuilder builder = new StringBuilder();
-
-        if (prependImports) {
-            builder.append(ImportUtils.getImportsString(this));
-        }
-
-        appendActual(parameters, builder);
-
-        return builder.toString();
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2802,7 +2487,7 @@ public abstract class Flux implements HasImports, Expression {
      * @see Expressions
      */
     public VariableAssignment asVariable(final String name) {
-        return new VariableAssignment(name, this);
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2810,9 +2495,7 @@ public abstract class Flux implements HasImports, Expression {
      */
     @Override
     public Set<String> getImports() {
-        Set<String> collectedImports = new TreeSet<>();
-        collectImports(collectedImports);
-        return collectedImports;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2821,9 +2504,7 @@ public abstract class Flux implements HasImports, Expression {
      * @param collectedImports a set to be filled by the used imports
      */
     public void collectImports(@Nonnull final Set<String> collectedImports) {
-        if (imports != null) {
-            collectedImports.addAll(imports);
-        }
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 
     /**
@@ -2833,10 +2514,6 @@ public abstract class Flux implements HasImports, Expression {
      * @return this
      */
     protected Flux addImport(final String pImport) {
-        if (imports == null) {
-            imports = new HashSet<>();
-        }
-        imports.add(pImport);
-        return this;
+        throw new UnsupportedOperationException("STUB: not implemented");
     }
 }
